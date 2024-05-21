@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Creature" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAgCAAACGAAAgAAAQAQADIAAgAGAAAQg=</HashCode>
+      <FileName>Creature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ally" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Creature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Monster" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAFBgAAAAAAAAAAgAAiAAAAAA=</HashCode>
+      <FileName>Creature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bellAndRabbit" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAABAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Creature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Turtle" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Creature_stage2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rabbit" Collapsed="true">
+    <Position X="16.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Creature_stage2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bell" Collapsed="true">
+    <Position X="18.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Creature_stage2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAgCAAAAAEAAIAAAICAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Creature_stage3.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Magpie" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgCAgAAAEAAAAACAAEAAAAAAAAAAAQA=</HashCode>
+      <FileName>Creature_stage3.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stage3" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABAAAAAAQAAAAAAAAAAAAABgAAAQAAAA=</HashCode>
+      <FileName>Phase_stage3.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Dandelion" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgCAAEAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Creature_stage1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DogPoop" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAhCAAAAAEAAAAAAAAAAQBAAAEAEAAQA=</HashCode>
+      <FileName>Creature_stage1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chick" Collapsed="true">
+    <Position X="11.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAggAAAAAAgCAIAAAEAAAAAAAAAAAAAAAAAAAAQg=</HashCode>
+      <FileName>Creature_stage1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sparrow" Collapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgCAAAAAEAAAAAAAAAAAAAAAAAAAAQg=</HashCode>
+      <FileName>Creature_stage1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stage1" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEQAAIBAAAAAAQAEBAAAAAAAAIABgAAAEAgAA=</HashCode>
+      <FileName>Phase_stage1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Node" Collapsed="true">
+    <Position X="21" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Creature_stage3.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Direction" Collapsed="true">
+    <Position X="21" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAICAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Phase_stage1.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
