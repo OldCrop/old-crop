@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Stage3">
-      <UniqueIdentifier>{48163944-55b5-42a5-97d6-74bffd621e84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Stage3">
-      <UniqueIdentifier>{8aee09a6-b119-44cb-b518-00ce83e1414e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h">
@@ -31,21 +25,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Creature_stage3.h">
-      <Filter>헤더 파일\Stage3</Filter>
-    </ClInclude>
-    <ClInclude Include="Phase_stage3.h">
-      <Filter>헤더 파일\Stage3</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Creature_stage3.cpp">
-      <Filter>소스 파일\Stage3</Filter>
-    </ClCompile>
-    <ClCompile Include="Phase_stage3.cpp">
-      <Filter>소스 파일\Stage3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
