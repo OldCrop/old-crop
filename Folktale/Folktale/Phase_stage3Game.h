@@ -65,4 +65,10 @@ private:
 	SDL_Texture* heartHalf_texture; // the SDL_Texture 
 	SDL_Texture* heartOne_texture; // the SDL_Texture 
 	SDL_Rect heart_destination_rect; // for destination
+
+    //음향 
+    Mix_Music* background_music;
+    Mix_Chunk* bell_sound;
+    Mix_Chunk* hit_sound;
+
 };

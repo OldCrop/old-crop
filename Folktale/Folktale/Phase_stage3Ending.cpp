@@ -37,7 +37,7 @@ Phase_stage3Ending::Phase_stage3Ending() {
 
 
     button = false;
-    endingPhaseStartTime = 0;
+    endingPhaseStartTime = SDL_GetTicks();;
     buttonPushed = 0; //0이면 버튼 안누름, 1이면 retry버튼 누름, 2이면 home버튼 누름
     pageCheck = 0;
 }
@@ -136,7 +136,7 @@ void Phase_stage3Ending::Reset() {
     button = false;
     buttonPushed = 0; //0이면 버튼 안누름, 1이면 retry버튼 누름, 2이면 home버튼 누름
     pageCheck = 0;
-    ///endingPhaseStartTime = 0;
+    endingPhaseStartTime = 0;
 }
 
 Phase_stage3Ending::~Phase_stage3Ending() {

@@ -18,7 +18,7 @@ Stage3::Stage3() {
     //c. 구렁이 생성
     snake = new Snake(0, 0, 1, 100, 10, magpie->getX(),magpie->getY());
     //d. 폭탄 생성
-    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20,50,75));
+    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20,50,75,0));
 
     ////2. 텍스쳐 가져오기
     //a. 종 텍스쳐
@@ -98,6 +98,33 @@ Stage3::Stage3() {
     heart_destination_rect.w = GRID;
     heart_destination_rect.h = GRID;
 
+    //음악 가져오기
+    background_music = Mix_LoadMUS("../../Resource/background.mp3");
+    if (!background_music)
+    {
+        printf(" %s\n", Mix_GetError());
+        // this might be a critical error...
+    }
+    Mix_VolumeMusic(128);
+
+    bell_sound = Mix_LoadWAV("../../Resource/bell.wav");
+    if (!bell_sound)
+    {
+        printf(" %s\n", Mix_GetError());
+        // this might be a critical error...
+    }
+    Mix_VolumeChunk(bell_sound, 128);
+    
+    hit_sound = Mix_LoadWAV("../../Resource/hit.wav");
+    if (!hit_sound)
+    {
+        printf(" %s\n", Mix_GetError());
+        // this might be a critical error...
+    }
+    Mix_VolumeChunk(hit_sound, 100);
+
+   
+
     //2. 기타 세팅
     f_state = STOP;//방향키 안 누름
     stop = true; //정지 상황으로 초기화
@@ -153,6 +180,7 @@ void Stage3::HandleEvents() {
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
+                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
 
             }
@@ -163,7 +191,8 @@ void Stage3::HandleEvents() {
                 
                 if (stage3_status == 0) {
                     stage3_status = 1;
-                    stage3_startTime = SDL_GetTicks();
+                    stage3_startTime = SDL_GetTicks(); 
+                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
             }
             else if (event.key.keysym.sym == SDLK_UP) {
@@ -173,6 +202,7 @@ void Stage3::HandleEvents() {
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
+                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
             }
             else if (event.key.keysym.sym == SDLK_DOWN) {
@@ -182,11 +212,13 @@ void Stage3::HandleEvents() {
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
+                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
             }
             else if (event.key.keysym.sym == SDLK_SPACE) {
                 game_result = 5; //엔딩으로 건너뛰기
                 g_current_game_phase = PHASE_ENDING;
+
             }
             break;
 
@@ -231,7 +263,6 @@ void Stage3::Update() {
     if (stage3_status == 0 || stage3_status==2) //키 대기 혹은 일시정지
         return;
 
-    int currentTime = SDL_GetTicks();
 
     //1. 까치
     //1.1 까치 좌표 업데이트
@@ -292,27 +323,36 @@ void Stage3::Update() {
     
 
     //3. 폭탄 업데이트
-    // 게임시작 후 30초마다 bomb 추가
-    
-    if((currentTime - lastBombTime) % 7500 == 0) {
+    // 게임시작 후 20초마다 bomb 추가 -> 랜덤하게 터지는 애랑 까치 쫓아오는 애
+    int currentTime = SDL_GetTicks();
+    if((currentTime - lastBombTime) >=20000) {
         // bomb을 추가하는 코드를 여기에 작성합니다.
-        uniform_int_distribution<int> distribution(-10, 10);
-        bombList.push_back(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20,50, 75));
+        uniform_int_distribution<int> distribution(0, 1);
+        bombList.push_back(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20, 50, 75, distribution(generator)));
         lastBombTime = currentTime;
 
     }
+    int i = 0;
     for (const auto& bomb : bombList) {
+        //cout<<i << ": checkCount: " << bomb->getCheckCount() << endl;
         if (bomb->getCheckCount() >= bomb->getLastCount())
             bomb->setCheckCount(bomb->getStartCount()); //재설정
         bomb->setCheckCount(bomb->getCheckCount() + 1); //카운트 개수 증가
-        bomb->move(magpie->getX(), magpie->getY()); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
-
+        if (bomb->getType() == 1) {
+            uniform_int_distribution<int> distributionX(1, screenWidth / GRID - 2);
+            uniform_int_distribution<int> distributionY(1, screenHeight / GRID - 2);
+            bomb->move(distributionX(generator), distributionY(generator)); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
+        }
+        else
+            bomb->move(magpie->getX(), magpie->getY()); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
+        i++;
     }
 
     //3. 충돌 확인
     //3.1 종 개수 확인
     if (magpie->isCollidingBell(bell)) {//bell이랑 부딪혔다면
         bell->setCount(bell->getCount() + 1); //count개수 하나 증가
+        Mix_PlayChannel(3, bell_sound, 0);
         bell->spawn();//종 위치 갱신
     }
 
@@ -320,6 +360,7 @@ void Stage3::Update() {
     //3.2 구렁이 충돌 확인
     if (magpie->isCollidingSnake(snake)) { //snake랑 부딪혔다면 hp 깎임
         magpie->GetAttackted(snake->getAttackPower());//데미지 받음
+        Mix_PlayChannel(4, hit_sound, 0);
     }
     
 
@@ -328,6 +369,7 @@ void Stage3::Update() {
         if (bomb->getCheckCount() >= bomb->getMiddleCount() && bomb->getCheckCount() < bomb->getLastCount()) {
             if (magpie->isCollidingBomb(bomb)) {
                 magpie->GetAttackted(bomb->getAttackPower());
+                Mix_PlayChannel(-1, hit_sound, 0);
             }
         }
     }
@@ -357,11 +399,10 @@ void Stage3::Render() {
     
     // 붉은 배경 오퍼시티 조절
     if (stage3_status == 1) {
-        int time = SDL_GetTicks();
+        int time = SDL_GetTicks() - stage3_startTime;
         if (time < 60000) { // 1분 동안 점차 붉어짐
-            alpha=time/60000.0*255;
-            //cout << alpha << endl;
-            if (alpha>70)
+            alpha = time / 60000.0 * 255;
+            if (alpha > 70)
                 alpha = 70;
         }
     }
@@ -546,7 +587,7 @@ void Stage3::Reset() {
     //c. 구렁이 생성
     snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY());
     //d. 폭탄 생성
-    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20, 50, 75));
+    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20, 50, 75,0));
 
 
     //2. 기타 세팅
@@ -563,6 +604,8 @@ void Stage3::Reset() {
     lastSpeedUpTime = 0;
     alpha = 0;
     stage3_status = 0;
+    //SDL_SetTextureAlphaMod(red_texture, alpha);
+    //
 }
 
 
@@ -577,6 +620,13 @@ Stage3::~Stage3() {
     SDL_DestroyTexture(heartZero_texture);
     SDL_DestroyTexture(heartHalf_texture);
     SDL_DestroyTexture(heartOne_texture);
+    SDL_DestroyTexture(bombAfter_texture);
+    SDL_DestroyTexture(red_texture);
+    //음악 해제
+    Mix_FreeMusic(background_music);
+    Mix_FreeChunk(bell_sound);
+    Mix_FreeChunk(hit_sound);
+
 
 
     //객체 해제

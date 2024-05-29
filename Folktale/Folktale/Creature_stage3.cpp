@@ -125,8 +125,8 @@ Snake::~Snake() {
 
 //폭탄 메서드 구현 --------------------------------------------------------------------------------------
 //구렁이 메서드 구현 -------------------------------------------------------------------------------
-Bomb::Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY, int startCount, int middleCount, int lastCount) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
-    
+Bomb::Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY, int startCount, int middleCount, int lastCount, int type) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
+    cout << "bomb init" << endl;
     //checkCount가 6이 되는 순간 !을 출력하고 충돌여부 확인 및 어택 
     //checkCount가 0이 되는 순간부터 깜빡거릴거임 -> 0부터 5까지 필요한데 짝수면 출력 홀수면 미출력? 출력
     checkCount = -20; 
@@ -134,7 +134,7 @@ Bomb::Bomb(int x, int y, int speed, double health, int attackPower, int tX, int 
     this->middleCount = middleCount;
     this->lastCount = lastCount;
 
-
+    this->type = type;
     //데미지 영역 저장
     int k_y = -1;
     int k_x = -1;
@@ -169,7 +169,6 @@ void Bomb::move(int newX, int newY) {
         int k_y = -1;
         int k_x = -1;
         for (int i = 1;i <= 9;i++) {
-
             bombRange[i - 1].x = newX + k_x;
             bombRange[i - 1].y = newY + k_y;
 
@@ -180,8 +179,8 @@ void Bomb::move(int newX, int newY) {
                 k_x += 1;
             }
         }
+
     }
-    
 }
 
 

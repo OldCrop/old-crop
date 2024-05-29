@@ -21,6 +21,13 @@ int game_result = 0;
 int main(int argc, char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
+
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+
     // Initializing SDL library
     g_window = SDL_CreateWindow("STAGE3", 100, 100, 1080, 720, 0);
     g_renderer = SDL_CreateRenderer(g_window, -1, 0);
@@ -77,6 +84,7 @@ int main(int argc, char* argv[])
 
     SDL_DestroyRenderer(g_renderer);
     SDL_DestroyWindow(g_window);
+    Mix_CloseAudio();
     SDL_Quit();
 
     return 0;

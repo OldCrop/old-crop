@@ -74,8 +74,9 @@ private:
     int startCount;
     int middleCount;
     int lastCount;
+    int type;
 public:
-	Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY,int startCount,int middleCount,int lastCount);
+	Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY,int startCount,int middleCount,int lastCount,int type);
 	~Bomb();
 	virtual void Draw();
 	virtual void GetAttackted(int damage);
@@ -98,6 +99,9 @@ public:
     }
     int getLastCount() {
         return lastCount;
+    }
+    int getType() {
+        return type;
     }
 
 	bombAttack* getBombRange() {
