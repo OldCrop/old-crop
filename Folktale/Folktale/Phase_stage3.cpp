@@ -8,8 +8,8 @@ extern default_random_engine generator;
 Stage3::Stage3() {
     //1. 객체 생성
     //a. 종 생성
-    uniform_int_distribution<int> distributionX(0, screenWidth/GRID-1);
-    uniform_int_distribution<int> distributionY(1, screenHeight/GRID-1);
+    uniform_int_distribution<int> distributionX(1, screenWidth/GRID-2);
+    uniform_int_distribution<int> distributionY(1, screenHeight/GRID-2);
 
 
     bell = new Bell(distributionX(generator), distributionY(generator), 0, 0);
@@ -18,7 +18,7 @@ Stage3::Stage3() {
     //c. 구렁이 생성
     snake = new Snake(0, 0, 1, 100, 10, magpie->getX(),magpie->getY());
     //d. 폭탄 생성
-    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY()));
+    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20,50,75));
 
     ////2. 텍스쳐 가져오기
     //a. 종 텍스쳐
@@ -78,6 +78,9 @@ Stage3::Stage3() {
     bg_destination_rect.w = screenWidth-GRID*2;
     bg_destination_rect.h = screenHeight-GRID*2;
 
+    temp_sheet_surface = IMG_Load("../../Resource/red.png");
+    red_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
+    SDL_FreeSurface(temp_sheet_surface);//해제 필수
 
     //하트 텍스처
     temp_sheet_surface = IMG_Load("../../Resource/heartZero.png");
@@ -107,6 +110,14 @@ Stage3::Stage3() {
     flip = SDL_FLIP_HORIZONTAL;
 
     lastSpeedUpTime = 0;
+    stage3_startTime = 0;
+    lastBombTime=0;
+
+    stage3_status = 0;
+
+    alpha = 0;
+
+    
 }
 
 
@@ -121,36 +132,64 @@ void Stage3::HandleEvents() {
             break;
 
         case SDL_KEYDOWN:
+            
+            if (event.key.keysym.sym == SDLK_ESCAPE) {
+                if (stage3_status == 1) {//게인 진행 중이었으면 일시중지로
+                    stage3_status = 2;
+                }
+                else if (stage3_status == 2) {//일시정지였으면 게임 중으로
+                    stage3_status = 1;
+                }
+            }
+            if(stage3_status==2){
+                break;
+            }
+            /////////////방향키 조작
 
             if (event.key.keysym.sym == SDLK_LEFT) {
                 f_state = LEFT; //현재 눌린 값이 LEFT
                 f_list[f_state] = true;
                 stop = false;
+                if (stage3_status == 0) {
+                    stage3_status = 1;
+                    stage3_startTime = SDL_GetTicks();
+                }
 
             }
             else if (event.key.keysym.sym == SDLK_RIGHT) {
                 f_state = RIGHT;
                 f_list[f_state] = true;
                 stop = false;
-
+                
+                if (stage3_status == 0) {
+                    stage3_status = 1;
+                    stage3_startTime = SDL_GetTicks();
+                }
             }
             else if (event.key.keysym.sym == SDLK_UP) {
                 f_state =UP;
                 f_list[f_state] = true;
                 stop = false;
-
+                if (stage3_status == 0) {
+                    stage3_status = 1;
+                    stage3_startTime = SDL_GetTicks();
+                }
             }
             else if (event.key.keysym.sym == SDLK_DOWN) {
                 f_state = DOWN;
                 f_list[f_state] = true;
                 stop = false;
-
+                if (stage3_status == 0) {
+                    stage3_status = 1;
+                    stage3_startTime = SDL_GetTicks();
+                }
             }
             else if (event.key.keysym.sym == SDLK_SPACE) {
                 game_result = 5; //엔딩으로 건너뛰기
                 g_current_game_phase = PHASE_ENDING;
             }
             break;
+
         case SDL_KEYUP:
 
             if (event.key.keysym.sym == SDLK_LEFT) {
@@ -189,6 +228,11 @@ void Stage3::HandleEvents() {
     }
 }
 void Stage3::Update() {
+    if (stage3_status == 0 || stage3_status==2) //키 대기 혹은 일시정지
+        return;
+
+    int currentTime = SDL_GetTicks();
+
     //1. 까치
     //1.1 까치 좌표 업데이트
     int x = magpie->getX();
@@ -212,20 +256,21 @@ void Stage3::Update() {
     }
 
     //1.2 까치 좌표 범위
-    if (x > screenWidth/GRID-1) { 
-        x = screenWidth / GRID - 1;
+    if (x > screenWidth/GRID-2) { 
+        x = 1;
     }
-    else if (x < 0) {
-        x = 0;
+    else if (x < 1) {
+        x = screenWidth / GRID - 2;
     }
-    if (y > screenHeight/ GRID - 1) {
-        y = screenHeight / GRID - 1;
+    if (y > screenHeight/ GRID - 2) {
+        y = 1;
     }
     else if (y < 1) {
-        y = 1;
+        y = screenHeight / GRID - 2;
     }
     //1.3 까치 이동
     magpie->move(x, y);   
+
     //1.4 까치 무적 시간 업데이트
     if (magpie->getInvincible() && SDL_GetTicks() - magpie->getLastDamageTime() >= 2000) {
         magpie->setInvincible(false);
@@ -247,11 +292,21 @@ void Stage3::Update() {
     
 
     //3. 폭탄 업데이트
+    // 게임시작 후 30초마다 bomb 추가
+    
+    if((currentTime - lastBombTime) % 7500 == 0) {
+        // bomb을 추가하는 코드를 여기에 작성합니다.
+        uniform_int_distribution<int> distribution(-10, 10);
+        bombList.push_back(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20,50, 75));
+        lastBombTime = currentTime;
+
+    }
     for (const auto& bomb : bombList) {
-        if (bomb->getCheckCount() >= 75)
-            bomb->setCheckCount(-20); //재설정
+        if (bomb->getCheckCount() >= bomb->getLastCount())
+            bomb->setCheckCount(bomb->getStartCount()); //재설정
         bomb->setCheckCount(bomb->getCheckCount() + 1); //카운트 개수 증가
         bomb->move(magpie->getX(), magpie->getY()); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
+
     }
 
     //3. 충돌 확인
@@ -270,7 +325,7 @@ void Stage3::Update() {
 
     //3.3 폭탄 충돌 확인
     for(const auto& bomb:bombList){
-        if (bomb->getCheckCount() >= 50 && bomb->getCheckCount() < 75) {
+        if (bomb->getCheckCount() >= bomb->getMiddleCount() && bomb->getCheckCount() < bomb->getLastCount()) {
             if (magpie->isCollidingBomb(bomb)) {
                 magpie->GetAttackted(bomb->getAttackPower());
             }
@@ -299,24 +354,18 @@ void Stage3::Render() {
     // <windows.h>에서 제공하는 함수를 사용한다
     
     //// 1.2. 배경 그리기
-   
-    int time = SDL_GetTicks();
-    int r = 200, g = 200, b = 200;
-    if (time < 60000) { // 1분 동안 점차 밝아짐 => 새벽에서 아침으로 변화
-        r = time/240+50; // 1분 동안 255에서 0으로 감소
-        if (r > 255)
-            r = 255;
+    
+    // 붉은 배경 오퍼시티 조절
+    if (stage3_status == 1) {
+        int time = SDL_GetTicks();
+        if (time < 60000) { // 1분 동안 점차 붉어짐
+            alpha=time/60000.0*255;
+            //cout << alpha << endl;
+            if (alpha>70)
+                alpha = 70;
+        }
     }
-    else { // 1분이 지나면 다시 새벽으로
-        r = 200; // 새벽 색상
-    }
-    SDL_SetTextureColorMod(bg_texture, r, g, b);
-    SDL_SetTextureColorMod(snakeHead_texture, r, g, b);
-    SDL_SetTextureColorMod(snakeBody_texture, r, g, b);
-    SDL_SetTextureColorMod(snakeTail_texture, r, g, b);
-    SDL_SetTextureColorMod(bombAfter_texture, r, g, b);
-    SDL_SetTextureColorMod(magpie_texture, r, g, b);
-    SDL_SetTextureColorMod(bell_texture, r, g, b);
+    
     SDL_RenderCopy(g_renderer, bg_texture, NULL, &bg_destination_rect);
 
 
@@ -330,7 +379,7 @@ void Stage3::Render() {
     for (const auto& bomb : bombList) {
         int b_count = bomb->getCheckCount();
         //카운트가 50보다 작고 0 이상인데 짝수면 ? 출력
-        if (b_count < 50 && b_count >= 0) {
+        if (b_count < bomb->getMiddleCount() && b_count >= 0) {
             if (b_count % 2 == 0) {
                 bell_destination_rect.x = bomb->getBombRange()[4].x * GRID;
                 bell_destination_rect.y = bomb->getBombRange()[4].y * GRID;
@@ -341,10 +390,10 @@ void Stage3::Render() {
         }
 
         //카운트가 100에서 150 사이면 !출력
-        else if (b_count >= 50 && b_count < 75) {
+        else if (b_count >= bomb->getMiddleCount() && b_count < bomb->getLastCount()) {
             bombAttack* b = bomb->getBombRange();
 
-            if (b_count % 3 == 0) { // 51 54 57 60 63 66 69 72일 때 실행
+            if (b_count % 3 == 0) { 
                 int i = (b_count / 3) % 17;
                 bomb_source_rect.x = 32 * i; // 0 32 64 
             }
@@ -473,6 +522,8 @@ void Stage3::Render() {
 
     //// 3. 프레임 완성.
     // std::cout으로 출력한 내용 중, 아직 화면에 표시되 않고 버퍼에 남아 있는 것이 있다면, 모두 화면에 출력되도록 한다.
+    SDL_SetTextureAlphaMod(red_texture, alpha);
+    SDL_RenderCopy(g_renderer, red_texture, NULL, &bg_destination_rect);
     SDL_RenderPresent(g_renderer);
     
 }
@@ -487,15 +538,15 @@ void Stage3::Reset() {
     bombList.clear();
 
     //a. 종 생성
-    uniform_int_distribution<int> distributionX(0, screenWidth / GRID - 1);
-    uniform_int_distribution<int> distributionY(1, screenHeight / GRID - 1);
+    uniform_int_distribution<int> distributionX(1, screenWidth / GRID - 2);
+    uniform_int_distribution<int> distributionY(1, screenHeight / GRID - 2);
     bell = new Bell(distributionX(generator), distributionY(generator), 0, 0);
     //b. 까치 생성
     magpie = new Magpie(3, 3, 1, 50, 0); //(0,0)에서 시작, speed는 1,hp는 100으로 설정
     //c. 구렁이 생성
     snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY());
     //d. 폭탄 생성
-    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY()));
+    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20, 50, 75));
 
 
     //2. 기타 세팅
@@ -510,7 +561,8 @@ void Stage3::Reset() {
     flip = SDL_FLIP_HORIZONTAL;
 
     lastSpeedUpTime = 0;
-
+    alpha = 0;
+    stage3_status = 0;
 }
 
 

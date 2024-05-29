@@ -71,8 +71,11 @@ class Bomb : public Monster
 private:
 	int checkCount;
 	bombAttack bombRange[9];
+    int startCount;
+    int middleCount;
+    int lastCount;
 public:
-	Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY);
+	Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY,int startCount,int middleCount,int lastCount);
 	~Bomb();
 	virtual void Draw();
 	virtual void GetAttackted(int damage);
@@ -86,6 +89,16 @@ public:
 	void setCheckCount(int a) {
 		this->checkCount = a;
 	}
+
+    int getStartCount() {
+        return startCount;
+    }
+    int getMiddleCount() {
+        return middleCount;
+    }
+    int getLastCount() {
+        return lastCount;
+    }
 
 	bombAttack* getBombRange() {
 		return bombRange;
@@ -107,7 +120,7 @@ public:
     virtual void GetAttackted(int damage);
     virtual void move(int newX, int newY);
     virtual void spawn();
-  
+
 };
 
 //까치

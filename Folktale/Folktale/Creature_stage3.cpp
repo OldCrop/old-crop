@@ -79,8 +79,8 @@ void Snake::move(int magpieX, int magpieY) { //newX와 newY는 사용하지 않�
     }
 
     // 맵 범위 검증
-    if (newHeadX < 0 || newHeadX >= screenWidth / GRID //맵 너비 검증
-        || newHeadY < 1 || newHeadY >= screenHeight / GRID ||isNodeInList(newHeadX,newHeadY))//맵 높이 검증)
+    if (newHeadX < 1 || newHeadX >= screenWidth / GRID-1 //맵 너비 검증
+        || newHeadY < 1 || newHeadY >= screenHeight / GRID-1 ||isNodeInList(newHeadX,newHeadY))//맵 높이 검증)
     {
         if (dSnake == RIGHT || dSnake == LEFT) {
             newHeadX = sx;
@@ -125,14 +125,17 @@ Snake::~Snake() {
 
 //폭탄 메서드 구현 --------------------------------------------------------------------------------------
 //구렁이 메서드 구현 -------------------------------------------------------------------------------
-Bomb::Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
+Bomb::Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY, int startCount, int middleCount, int lastCount) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
     
     //checkCount가 6이 되는 순간 !을 출력하고 충돌여부 확인 및 어택 
     //checkCount가 0이 되는 순간부터 깜빡거릴거임 -> 0부터 5까지 필요한데 짝수면 출력 홀수면 미출력? 출력
     checkCount = -20; 
+    this->startCount = startCount;
+    this->middleCount = middleCount;
+    this->lastCount = lastCount;
 
-    
 
+    //데미지 영역 저장
     int k_y = -1;
     int k_x = -1;
     for (int i = 1;i <= 9;i++) {
@@ -295,8 +298,8 @@ void Bell::move(int newX, int newY) {
     //Bell의 좌표는 움직이지 않음
 }
 void Bell::spawn() {
-    uniform_int_distribution<int> distributionX(0, screenWidth/GRID-1);
-    uniform_int_distribution<int> distributionY(0, screenHeight/GRID-1);
+    uniform_int_distribution<int> distributionX(1, screenWidth/GRID-2);
+    uniform_int_distribution<int> distributionY(1, screenHeight/GRID-2);
  
     if (this->getIsFace()) { //만약 까치를 만났다면
         //종을 한번에 화면에 뿌릴거면 외부에서 Bell 객체 배열을 만드는게 더 효율적

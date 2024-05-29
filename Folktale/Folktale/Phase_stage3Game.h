@@ -20,6 +20,12 @@ private:
 	SDL_RendererFlip flip;
 
     int lastSpeedUpTime;
+    int stage3_startTime;
+    int lastBombTime;
+
+    //아무키나 누르면 시작
+    int stage3_status; //0이면 키 대기 상태, 1이면 게임 중, 2면 게임 일시정지
+    int alpha;
 
 public:
 	Stage3();
@@ -47,6 +53,7 @@ private:
 	//배경 텍스쳐
 	SDL_Texture* bg_texture; // the SDL_Texture 
 	SDL_Rect bg_destination_rect; // for destination
+    SDL_Texture* red_texture; // the SDL_Texture 
 
 	//폭탄 텍스쳐
 	SDL_Texture* bombAfter_texture;
