@@ -1,20 +1,15 @@
-﻿#pragma once
-
+#pragma once
 #include "Creature_stage3.h"
+#include "STAGE3.h"
 
-extern bool g_flag_running;
-extern SDL_Window* g_window;
-extern SDL_Renderer* g_renderer;
 
-extern int screenWidth, screenHeight;
-
-class Stage3
+class Stage3 : public PhaseInterface
 {
 private:
     Bell* bell;
     Magpie* magpie;
     Snake* snake;
-	Bomb* bomb;
+	list<Bomb*> bombList;
 	
 	//방향키 조작 변수들
 	bool f_list[4];
@@ -22,9 +17,9 @@ private:
 	bool stop;//정지 정보
 
 	//승패 확인 변수
-	int game_result;
-
 	SDL_RendererFlip flip;
+
+    int lastSpeedUpTime;
 
 public:
 	Stage3();
@@ -35,9 +30,6 @@ public:
 	void Render();
 	void Reset();
 
-	int getResult() {
-		return this->game_result;
-	}
 
 private:
 	//종 텍스쳐 

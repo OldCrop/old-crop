@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 #include "Creature.h"
 #include <list>
 #include <random>
-#include <iostream>
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+//#include <SDL.h>
+//#include <SDL_image.h>
+//#include <SDL_ttf.h>
+#include "STAGE3.h"
 #define SNAKESIZE 15
 #define GRID 40
 
@@ -15,8 +15,6 @@ using namespace std;
 //여기서 정의한 전역 변수는 phase_stage3, main에서 사용 가능
 enum DIRECTION { LEFT, RIGHT, UP, DOWN, STOP };
 
-extern int screenWidth;
-extern int screenHeight;
 
 
 //구렁이 연결리스트 노드
@@ -35,6 +33,7 @@ private:
 	list<Node*> snakeList;
     DIRECTION dSnake;
 	int moveCounter;
+    int n; // n번의 게임 루프마다 한 번씩 움직이도록 변경
 
 public:
 	Snake(int x, int y, int speed, double health, int attackPower, int tX, int tY);
@@ -52,6 +51,12 @@ public:
 	DIRECTION getSnakeDirection() {
 		return dSnake;
 	}
+    int getN() {
+        return n;
+    }
+    void setN(int n) {
+        this->n = n;
+    }
 
 };
 
