@@ -126,7 +126,7 @@ Snake::~Snake() {
 //폭탄 메서드 구현 --------------------------------------------------------------------------------------
 //구렁이 메서드 구현 -------------------------------------------------------------------------------
 Bomb::Bomb(int x, int y, int speed, double health, int attackPower, int tX, int tY, int startCount, int middleCount, int lastCount, int type) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
-    cout << "bomb init" << endl;
+    //cout << "bomb init" << endl;
     //checkCount가 6이 되는 순간 !을 출력하고 충돌여부 확인 및 어택 
     //checkCount가 0이 되는 순간부터 깜빡거릴거임 -> 0부터 5까지 필요한데 짝수면 출력 홀수면 미출력? 출력
     checkCount = -20; 
@@ -200,6 +200,7 @@ Magpie::Magpie(int x, int y, int speed, double health, int attackPower) :Ally(x,
     invincible = false;
     countBell = 0;
     lastDamageTime = 0;
+    Mix_VolumeChunk(hit_sound, 100);
 }
 
 void Magpie::Draw() { //얘는 뭐하는 함수지
@@ -209,7 +210,7 @@ void Magpie::Draw() { //얘는 뭐하는 함수지
 void Magpie::GetAttackted(int damage) { 
 	//까치 데미지 받기 -> damage=구렁이 attackPower가져오기
     if (invincible) return; // 무적 상태일 경우
-
+    Mix_PlayChannel(-1, hit_sound, 0);
 	double hp = getHealth(); //현재 까치의 hp 가져오기
 	hp -= damage; 
 	if (hp < 0) //만약 죽었으면 0으로 설정
@@ -257,6 +258,8 @@ bool Magpie::isCollidingBell(Bell* bell) {
     if ((this->getX() == bell->getX()) && (this->getY() == bell->getY())) {//충돌조건
         is = true; 
         bell->setIsFace(!bell->getIsFace()); // setIsFace 메서드 호출
+        bell->setLastEatenTime(SDL_GetTicks()); // 마지막으로 먹은 시간 설정
+        bell->setXY(0, 0); //화면에서 사라지도록 설정
     }
 
     return is;
@@ -285,6 +288,7 @@ bool Magpie::isCollidingBomb(Bomb* bomb) {
 //종 구현부 -----------------------------------------------------------------------------
 
 Bell::Bell(int x, int y, int speed, double health): bellAndRabbit(x,y,speed,health){
+     lastEatenTime = 0;
 }
 
 void Bell::Draw() {

@@ -2,7 +2,7 @@
 #include "Phase_stage3Game.h"
 #include "Phase_stage3Intro.h"
 #include "Phase_stage3Ending.h"
-#include "STAGE3.h"
+#include "STAGE.h"
 
 /////////////////////////////////////////////////
 // Declaration
@@ -13,15 +13,18 @@ Uint32 g_last_time_ms;
 int screenWidth, screenHeight;
 int g_current_game_phase;
 int g_prev_game_phase;
-int game_result = 0;
+int game_result;
 
-
+SDL_Texture* fame_texture;
+SDL_Rect frame_destination;
+TTF_Font* font;
 
 
 int main(int argc, char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
+    
 
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
     {
@@ -34,17 +37,18 @@ int main(int argc, char* argv[])
     SDL_GetWindowSize(g_window, &screenWidth, &screenHeight);//크기 지정
 
     SDL_SetRenderDrawColor(g_renderer, 0, 0, 0, 255);
-    // 윈도우를 드로우 색상으로 채웁니다.
-    //SDL_RenderClear(g_renderer);
+   
+    //frame 텍스쳐
+    fame_texture = SDL_CreateTextureFromSurface(g_renderer, IMG_Load("../../Resources/frame.png"));
+    frame_destination = { 0,0,screenWidth,screenHeight };
+    font = TTF_OpenFont("../../Resources/PF.ttf", 100);
 
     g_flag_running = true;
 
-    //stage객체 생성
-
-    Stage3* stage3=new Stage3();
-
     g_last_time_ms = SDL_GetTicks();
+    game_result = 0;
 
+    //페이즈 생성
     PhaseInterface* game_phases[3];
 
     game_phases[0] = new Phase_stage3Intro;
@@ -53,6 +57,8 @@ int main(int argc, char* argv[])
 
     g_current_game_phase = PHASE_INTRO;
     g_prev_game_phase = PHASE_INTRO;
+
+    game_phases[g_prev_game_phase]->Reset(); //추가했더염,,, 노래때문에
 
     while (g_flag_running)
     {
@@ -66,6 +72,7 @@ int main(int argc, char* argv[])
         }
         if (g_prev_game_phase != g_current_game_phase) {
             game_phases[g_prev_game_phase]->Reset();
+            game_phases[g_current_game_phase]->Reset(); //추가했더염,,,노래링 시간 때문에
         }
         g_prev_game_phase = g_current_game_phase;
         game_phases[g_current_game_phase]->HandleEvents();

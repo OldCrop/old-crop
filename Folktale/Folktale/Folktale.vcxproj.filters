@@ -42,7 +42,7 @@
     <ClInclude Include="Phase_stage3Ending.h">
       <Filter>헤더 파일\Stage3</Filter>
     </ClInclude>
-    <ClInclude Include="STAGE3.h">
+    <ClInclude Include="STAGE.h">
       <Filter>헤더 파일\Stage3</Filter>
     </ClInclude>
   </ItemGroup>

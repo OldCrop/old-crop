@@ -5,7 +5,7 @@
 //#include <SDL.h>
 //#include <SDL_image.h>
 //#include <SDL_ttf.h>
-#include "STAGE3.h"
+#include "STAGE.h"
 #define SNAKESIZE 15
 #define GRID 40
 
@@ -14,6 +14,7 @@ using namespace std;
 //ui 적용 시 값 얻어와서 할당하기
 //여기서 정의한 전역 변수는 phase_stage3, main에서 사용 가능
 enum DIRECTION { LEFT, RIGHT, UP, DOWN, STOP };
+
 
 
 
@@ -116,6 +117,7 @@ class Bell : public bellAndRabbit
 {
 private:
     //부모 객체에 있는 필드만으로 사용
+    int lastEatenTime; //마지막으로 먹힌 시간
 public:
     Bell(int x, int y, int speed, double health);
     ~Bell();
@@ -125,6 +127,13 @@ public:
     virtual void move(int newX, int newY);
     virtual void spawn();
 
+    //getter setter
+    int getLastEatenTime() {
+        return lastEatenTime;
+    }
+    void setLastEatenTime(int time) {
+        lastEatenTime = time;
+    }
 };
 
 //까치
@@ -135,9 +144,15 @@ private:
 	bool invincible;
 	int lastDamageTime;
 	int countBell;
+   
+    Mix_Chunk* hit_sound = Mix_LoadWAV("../../Resources/hit.wav");
+    
 
 public:
 	Magpie(int x, int y, int speed, double health, int attackPower);
+    ~Magpie() {
+        Mix_FreeChunk(hit_sound);
+    }
 	virtual void Draw();
 	virtual void GetAttackted(int damage);
 	virtual void move(int newX, int newY);

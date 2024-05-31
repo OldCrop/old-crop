@@ -1,7 +1,7 @@
 #pragma once
-
-#include "STAGE3.h"
+#include "STAGE.h"
 #define GRID 40
+
 
 
 class Phase_stage3Intro : public PhaseInterface {
@@ -15,6 +15,7 @@ private:
     SDL_Texture* third_intro_texture;
     
    // SDL_Rect intro_destination;
+    Mix_Music* background_music;
 
     int count;
 

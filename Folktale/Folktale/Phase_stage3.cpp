@@ -1,9 +1,24 @@
 #include "Phase_stage3Game.h"
 #include <Windows.h>
 #include <iomanip>
+#include <string>
 
 extern default_random_engine generator;
 
+void Stage3::UpdateScoreTexture()
+{
+    if (myBell_ != 0)
+    {
+        SDL_DestroyTexture(myBell_);		// !!!중요!!!  이미 생성되어있는 texture 가 있으면 반드시 메모리에서 지워야한다. !!!
+        myBell_ = 0;
+    }
+
+    std::string str = std::to_string(bell->getCount());
+    SDL_Surface* tmp_surface = TTF_RenderText_Blended(font, str.c_str(), { 255,255,255 });
+
+    myBell_ = SDL_CreateTextureFromSurface(g_renderer, tmp_surface);
+    SDL_FreeSurface(tmp_surface);
+}
 
 Stage3::Stage3() {
     //1. 객체 생성
@@ -22,7 +37,7 @@ Stage3::Stage3() {
 
     ////2. 텍스쳐 가져오기
     //a. 종 텍스쳐
-    SDL_Surface* temp_sheet_surface = IMG_Load("../../Resource/bell.png");
+    SDL_Surface* temp_sheet_surface = IMG_Load("../../Resources/bell.png");
     bell_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
     bell_destination_rect.x = bell->getX();
@@ -31,7 +46,7 @@ Stage3::Stage3() {
     bell_destination_rect.h = GRID;
 
     //b. 까치 텍스쳐
-    temp_sheet_surface = IMG_Load("../../Resource/magpie.png");
+    temp_sheet_surface = IMG_Load("../../Resources/magpie.png");
     magpie_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
     magpie_destination_rect.x = magpie->getX()*GRID;
@@ -41,7 +56,7 @@ Stage3::Stage3() {
 
     
     //c. 구렁이 텍스쳐
-    temp_sheet_surface = IMG_Load("../../Resource/snakeHead.png");;
+    temp_sheet_surface = IMG_Load("../../Resources/snakeHead.png");
     snakeHead_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
     snake_destination_rect.x = snake->getSnakeList().front()->sX;
@@ -49,16 +64,16 @@ Stage3::Stage3() {
     snake_destination_rect.w = GRID;
     snake_destination_rect.h = GRID;
 
-    temp_sheet_surface = IMG_Load("../../Resource/snakeBody.png");
+    temp_sheet_surface = IMG_Load("../../Resources/snakeBody.png");
     snakeBody_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
-    temp_sheet_surface = IMG_Load("../../Resource/snakeTail.png");
+    temp_sheet_surface = IMG_Load("../../Resources/snakeTail.png");
     snakeTail_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
 
    
     //폭탄 텍스쳐 
-    temp_sheet_surface  = IMG_Load("../../Resource/bombAfter.png");
+    temp_sheet_surface  = IMG_Load("../../Resources/bombAfter.png");
     bombAfter_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
     bomb_source_rect.x = 0;
@@ -70,7 +85,7 @@ Stage3::Stage3() {
     bomb_destination_rect.h = GRID*3;
 
     //d. 배경 텍스쳐
-    temp_sheet_surface = IMG_Load("../../Resource/background.png");
+    temp_sheet_surface = IMG_Load("../../Resources/background.png");
     bg_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
     bg_destination_rect.x = GRID;
@@ -78,52 +93,72 @@ Stage3::Stage3() {
     bg_destination_rect.w = screenWidth-GRID*2;
     bg_destination_rect.h = screenHeight-GRID*2;
 
-    temp_sheet_surface = IMG_Load("../../Resource/red.png");
+    temp_sheet_surface = IMG_Load("../../Resources/red.png");
     red_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
 
+    temp_sheet_surface = IMG_Load("../../Resources/wait.png");
+    wait_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
+    SDL_FreeSurface(temp_sheet_surface);//해제 필수
+
     //하트 텍스처
-    temp_sheet_surface = IMG_Load("../../Resource/heartZero.png");
+    temp_sheet_surface = IMG_Load("../../Resources/heartZero.png");
     heartZero_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
 
-    temp_sheet_surface = IMG_Load("../../Resource/heartHalf.png");
+    temp_sheet_surface = IMG_Load("../../Resources/heartHalf.png");
     heartHalf_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
 
-    temp_sheet_surface = IMG_Load("../../Resource/heartOne.png");
+    temp_sheet_surface = IMG_Load("../../Resources/heartOne.png");
     heartOne_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);//해제 필수
 
-    heart_destination_rect.w = GRID;
-    heart_destination_rect.h = GRID;
+    heart_destination_rect.w = GRID - 15;
+    heart_destination_rect.h = GRID - 15;
+
+    //버튼 텍스쳐
+    temp_sheet_surface = IMG_Load("../../Resources/continue.png");
+    button_continue = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
+    SDL_FreeSurface(temp_sheet_surface);//해제 필수
+    continue_destination_rect={ 490,270,100,100 };
+
+    temp_sheet_surface = IMG_Load("../../Resources/main.png");
+    button_main = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
+    SDL_FreeSurface(temp_sheet_surface);//해제 필수
+   
+    main_destination_rect = { 490,370,100,100 };
+
+
+
+    //글씨 텍스쳐 만들기,,
+    myBell_destination.x = screenWidth-GRID*2;
+    myBell_destination.y = GRID+5;
+    myBell_destination.w = GRID-10;
+    myBell_destination.h = GRID-5;
+
+    ready_texture= SDL_CreateTextureFromSurface(g_renderer, TTF_RenderText_Blended(font, "READY", { 255,255,255 }));
+
+    readyCount_destination.x = screenWidth / 2 - 100;
+    readyCount_destination.y = screenHeight / 2 - 50;
+    readyCount_destination.w = 200;
+    readyCount_destination.h = 100;
+
 
     //음악 가져오기
-    background_music = Mix_LoadMUS("../../Resource/background.mp3");
-    if (!background_music)
-    {
-        printf(" %s\n", Mix_GetError());
-        // this might be a critical error...
-    }
-    Mix_VolumeMusic(128);
+    background_music = Mix_LoadMUS("../../Resources/stage3.mp3");
+    Mix_VolumeMusic(90);
 
-    bell_sound = Mix_LoadWAV("../../Resource/bell.wav");
-    if (!bell_sound)
-    {
-        printf(" %s\n", Mix_GetError());
-        // this might be a critical error...
-    }
+    bell_sound = Mix_LoadWAV("../../Resources/bell.wav");
     Mix_VolumeChunk(bell_sound, 128);
-    
-    hit_sound = Mix_LoadWAV("../../Resource/hit.wav");
-    if (!hit_sound)
-    {
-        printf(" %s\n", Mix_GetError());
-        // this might be a critical error...
-    }
-    Mix_VolumeChunk(hit_sound, 100);
-
    
+
+    bombPrev_sound = Mix_LoadWAV("../../Resources/bomb_prev.wav");
+    Mix_VolumeChunk(bombPrev_sound, 128);
+    bombAfter_sound = Mix_LoadWAV("../../Resources/bomb_After.wav");
+    Mix_VolumeChunk(bombAfter_sound, 90);
+    button_sound = Mix_LoadWAV("../../Resources/pauseSound.wav");
+    Mix_VolumeChunk(button_sound, 128);
 
     //2. 기타 세팅
     f_state = STOP;//방향키 안 누름
@@ -132,7 +167,7 @@ Stage3::Stage3() {
     for (int i = 0; i < f_state; i++) {//0은 좌측, ...
         f_list[i] = false;
     }
-    game_result = 0;//1-> 승리, 2-> 패배
+   
 
     flip = SDL_FLIP_HORIZONTAL;
 
@@ -144,7 +179,11 @@ Stage3::Stage3() {
 
     alpha = 0;
 
-    
+    pauseStartTime = 0;
+    totalPauseTime = 0;
+    totalPauseTime_2 = 0;
+    UpdateScoreTexture();
+
 }
 
 
@@ -159,16 +198,21 @@ void Stage3::HandleEvents() {
             break;
 
         case SDL_KEYDOWN:
-            
+
             if (event.key.keysym.sym == SDLK_ESCAPE) {
                 if (stage3_status == 1) {//게인 진행 중이었으면 일시중지로
                     stage3_status = 2;
+                    pauseStartTime = SDL_GetTicks();
+                    totalPauseTime = 0;
+
+                    Mix_PauseMusic(); // 배경음악 일시정지
+                    for (int i = 0; i < MIX_CHANNELS; i++) {
+                        Mix_Pause(i); // 모든 채널의 사운드 일시정지
+                    }
                 }
-                else if (stage3_status == 2) {//일시정지였으면 게임 중으로
-                    stage3_status = 1;
-                }
+                
             }
-            if(stage3_status==2){
+            if (stage3_status == 2) {//일시정지 상태면 키 입력 받지 않음
                 break;
             }
             /////////////방향키 조작
@@ -180,7 +224,8 @@ void Stage3::HandleEvents() {
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
-                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
+                    lastBombTime = SDL_GetTicks();
+                   /// Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
 
             }
@@ -188,21 +233,23 @@ void Stage3::HandleEvents() {
                 f_state = RIGHT;
                 f_list[f_state] = true;
                 stop = false;
-                
+
                 if (stage3_status == 0) {
                     stage3_status = 1;
-                    stage3_startTime = SDL_GetTicks(); 
-                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
+                    stage3_startTime = SDL_GetTicks();
+                    lastBombTime = SDL_GetTicks();
+                    ///Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
             }
             else if (event.key.keysym.sym == SDLK_UP) {
-                f_state =UP;
+                f_state = UP;
                 f_list[f_state] = true;
                 stop = false;
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
-                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
+                    lastBombTime = SDL_GetTicks();
+                    
                 }
             }
             else if (event.key.keysym.sym == SDLK_DOWN) {
@@ -212,14 +259,11 @@ void Stage3::HandleEvents() {
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
-                    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
+                    lastBombTime = SDL_GetTicks();
+                    //Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
             }
-            else if (event.key.keysym.sym == SDLK_SPACE) {
-                game_result = 5; //엔딩으로 건너뛰기
-                g_current_game_phase = PHASE_ENDING;
-
-            }
+            
             break;
 
         case SDL_KEYUP:
@@ -256,11 +300,50 @@ void Stage3::HandleEvents() {
 
             break;
 
+        case SDL_MOUSEBUTTONDOWN:
+
+            if (event.button.button == SDL_BUTTON_LEFT)
+            {
+                if (stage3_status == 2) {//일시정지 상태라면
+
+                    int mouse_x = event.button.x;
+                    int mouse_y = event.button.y;
+
+                    if (mouse_x >= continue_destination_rect.x && mouse_x <= continue_destination_rect.x + continue_destination_rect.w &&
+                        mouse_y >= continue_destination_rect.y && mouse_y <= continue_destination_rect.y + continue_destination_rect.h
+                        )//계속하기 버튼 누름
+                    {
+                        Mix_PlayChannel(-1, button_sound, 0);//효과음 출력
+
+                        stage3_status = 1;
+                        totalPauseTime = SDL_GetTicks() - pauseStartTime;
+                        totalPauseTime_2 += totalPauseTime;
+                        Mix_ResumeMusic(); // 배경음악 재생 재개
+                        for (int i = 0; i < MIX_CHANNELS; i++) {
+                            Mix_Resume(i); // 모든 채널의 사운드 재생 재개
+                        }
+                    }
+                    else if (mouse_x >= main_destination_rect.x && mouse_x <= main_destination_rect.x + main_destination_rect.w &&
+                        mouse_y >= main_destination_rect.y && mouse_y <= main_destination_rect.y + main_destination_rect.h
+                        )//메인으로 버튼 누름
+                    {
+                        Mix_PlayChannel(-1, button_sound, 0);//효과음 출력
+                        g_current_game_phase = PHASE_INTRO;
+                        game_result = 0;
+                        if (Mix_PlayingMusic()) {
+                            Mix_HaltMusic();
+                        }
+                    }
+                }
+
+            }
+            break;
         }
     }
 }
 void Stage3::Update() {
-    if (stage3_status == 0 || stage3_status==2) //키 대기 혹은 일시정지
+    
+    if (stage3_status == 0 || stage3_status == 2) //키 대기 혹은 일시정지  == stage3_status == 2
         return;
 
 
@@ -303,7 +386,7 @@ void Stage3::Update() {
     magpie->move(x, y);   
 
     //1.4 까치 무적 시간 업데이트
-    if (magpie->getInvincible() && SDL_GetTicks() - magpie->getLastDamageTime() >= 2000) {
+    if (magpie->getInvincible() && (SDL_GetTicks() - magpie->getLastDamageTime() >= 2000)) {
         magpie->setInvincible(false);
     }
     
@@ -312,7 +395,7 @@ void Stage3::Update() {
     //구렁이 속도 조절
     int time = SDL_GetTicks();
     if (snake->getN() >5 && time-lastSpeedUpTime > 10000) {
-        cout<<snake->getN()<<endl;
+        //cout<<snake->getN()<<endl;
         snake->setN(snake->getN()-1);
         // 속도 증가 시간 업데이트
         // 속도 증가 시간 업데이트
@@ -324,62 +407,80 @@ void Stage3::Update() {
 
     //3. 폭탄 업데이트
     // 게임시작 후 20초마다 bomb 추가 -> 랜덤하게 터지는 애랑 까치 쫓아오는 애
-    int currentTime = SDL_GetTicks();
-    if((currentTime - lastBombTime) >=20000) {
+    int currentTime = SDL_GetTicks()-totalPauseTime;
+    if ((currentTime - lastBombTime) >= 7000 && bombList.size() < 10) {
         // bomb을 추가하는 코드를 여기에 작성합니다.
-        uniform_int_distribution<int> distribution(0, 1);
+        uniform_int_distribution<int> distribution(0, 2);
         bombList.push_back(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20, 50, 75, distribution(generator)));
         lastBombTime = currentTime;
 
     }
-    int i = 0;
+
     for (const auto& bomb : bombList) {
         //cout<<i << ": checkCount: " << bomb->getCheckCount() << endl;
         if (bomb->getCheckCount() >= bomb->getLastCount())
             bomb->setCheckCount(bomb->getStartCount()); //재설정
         bomb->setCheckCount(bomb->getCheckCount() + 1); //카운트 개수 증가
         if (bomb->getType() == 1) {
+            bomb->move(magpie->getX(), magpie->getY()); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
+        }
+        else {
             uniform_int_distribution<int> distributionX(1, screenWidth / GRID - 2);
             uniform_int_distribution<int> distributionY(1, screenHeight / GRID - 2);
             bomb->move(distributionX(generator), distributionY(generator)); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
         }
-        else
-            bomb->move(magpie->getX(), magpie->getY()); //타겟 좌표 변경 -> 0 이하일 때만 값 변경됨
-        i++;
+            
+        
     }
 
     //3. 충돌 확인
-    //3.1 종 개수 확인
+    //3.1 종 충돌 확인
     if (magpie->isCollidingBell(bell)) {//bell이랑 부딪혔다면
         bell->setCount(bell->getCount() + 1); //count개수 하나 증가
         Mix_PlayChannel(3, bell_sound, 0);
-        bell->spawn();//종 위치 갱신
+        
     }
-
+    //5초가 지났다면 종 위치 갱신
+    int current = SDL_GetTicks()-totalPauseTime;
+    if (current - bell->getLastEatenTime() > 5000) { // 5초가 지났다면
+        bell->spawn();//종 위치 갱신
+        bell->setLastEatenTime(current); // 재생성 시간 초기화
+    }
 
     //3.2 구렁이 충돌 확인
     if (magpie->isCollidingSnake(snake)) { //snake랑 부딪혔다면 hp 깎임
+        //Mix_PlayChannel(-1, hit_sound, 0);
         magpie->GetAttackted(snake->getAttackPower());//데미지 받음
-        Mix_PlayChannel(4, hit_sound, 0);
+        
     }
     
 
-    //3.3 폭탄 충돌 확인
+    //3.3 폭탄 충돌 확인 + 음향 출력
     for(const auto& bomb:bombList){
+        //충돌 확인
         if (bomb->getCheckCount() >= bomb->getMiddleCount() && bomb->getCheckCount() < bomb->getLastCount()) {
             if (magpie->isCollidingBomb(bomb)) {
                 magpie->GetAttackted(bomb->getAttackPower());
-                Mix_PlayChannel(-1, hit_sound, 0);
+                //Mix_PlayChannel(-1, hit_sound, 0);
             }
         }
-    }
+        //음향 출력
+        int b_count = bomb->getCheckCount();
+        //카운트가 50이면 타임시작
+        if (b_count == 0) {
+            Mix_PlayChannel(-1, bombPrev_sound, 0);
+        }
+        else if(b_count== bomb->getMiddleCount()){
+            Mix_PlayChannel(-1, bombAfter_sound, 0);
+        }
 
+    }
+   
 
     //4. 종료 조건 확인
     if (bell->getCount() == 5) {//종 5개 모았으면 
         game_result = 1; //승리
         g_current_game_phase = PHASE_ENDING;
-        
         
     }
 
@@ -399,7 +500,7 @@ void Stage3::Render() {
     
     // 붉은 배경 오퍼시티 조절
     if (stage3_status == 1) {
-        int time = SDL_GetTicks() - stage3_startTime;
+        int time = SDL_GetTicks() - stage3_startTime - totalPauseTime_2;
         if (time < 60000) { // 1분 동안 점차 붉어짐
             alpha = time / 60000.0 * 255;
             if (alpha > 70)
@@ -427,6 +528,7 @@ void Stage3::Render() {
                 SDL_SetTextureColorMod(bell_texture, 200, 50, 50);
                 SDL_RenderCopy(g_renderer, bell_texture, NULL, &bell_destination_rect);
                 SDL_SetTextureColorMod(bell_texture, 255, 255, 255);
+               
             }
         }
 
@@ -443,6 +545,7 @@ void Stage3::Render() {
             bomb_destination_rect.y = b[0].y * GRID;
 
             SDL_RenderCopy(g_renderer, bombAfter_texture, &bomb_source_rect, &bomb_destination_rect);
+           
         }
     }
 
@@ -515,15 +618,19 @@ void Stage3::Render() {
     magpie_destination_rect.y = magpie->getY() * GRID;
 
     // 까치 렌더링
+    if (magpie->getInvincible()) {
+        SDL_SetTextureColorMod(magpie_texture, 255, 120, 120); // 빨간색으로 변경
+    }
+    else {
+        SDL_SetTextureColorMod(magpie_texture, 255, 255, 255); // 원래 색상으로 변경
+    }
     if (!magpie->getInvincible() || SDL_GetTicks() % 500 < 250) { // 무적 상태가 아니거나 0.25초 간격으로 깜빡거림
         SDL_RenderCopyEx(g_renderer, magpie_texture, NULL, &magpie_destination_rect, 0, NULL, flip);
     }
 
 
-    //하트 출력
 
-    heart_destination_rect.w = GRID-15;
-    heart_destination_rect.h = GRID-15;
+    //하트 출력
     int hp = (int)magpie->getHealth();
 
     // 하트 렌더링
@@ -559,15 +666,40 @@ void Stage3::Render() {
     }
 
     //모은 종 개수 출력 -> 아직 안 함
-    
+    UpdateScoreTexture();
+    SDL_RenderCopy(g_renderer, myBell_, NULL, &myBell_destination);
+
 
     //// 3. 프레임 완성.
     // std::cout으로 출력한 내용 중, 아직 화면에 표시되 않고 버퍼에 남아 있는 것이 있다면, 모두 화면에 출력되도록 한다.
+    //붉은 이미지 적용
     SDL_SetTextureAlphaMod(red_texture, alpha);
     SDL_RenderCopy(g_renderer, red_texture, NULL, &bg_destination_rect);
+    SDL_RenderCopy(g_renderer, fame_texture, NULL, &frame_destination);
+
+    if (stage3_status != 1) {//일시정지 상태 혹은 대기 상태
+        SDL_RenderCopy(g_renderer, wait_texture, NULL, &bg_destination_rect);
+        switch (stage3_status)
+        {
+        case 0:
+            //대기 렌더
+            SDL_RenderCopy(g_renderer, ready_texture, NULL, &readyCount_destination);
+            break;
+        case 2:
+            //버튼 렌더
+
+            SDL_RenderCopy(g_renderer, button_continue, NULL, &continue_destination_rect);
+            SDL_RenderCopy(g_renderer, button_main, NULL, &main_destination_rect);
+            break;
+        default:
+            break;
+        }
+    }
     SDL_RenderPresent(g_renderer);
     
 }
+
+
 void Stage3::Reset() {
     //객체 초기화
     delete bell;
@@ -597,15 +729,26 @@ void Stage3::Reset() {
     for (int i = 0; i < f_state; i++) {//0은 좌측, ...
         f_list[i] = false;
     }
-    game_result = 0;//1-> 승리, 2-> 패배
+    //game_result = 0;//1-> 승리, 2-> 패배
 
     flip = SDL_FLIP_HORIZONTAL;
 
     lastSpeedUpTime = 0;
     alpha = 0;
     stage3_status = 0;
-    //SDL_SetTextureAlphaMod(red_texture, alpha);
-    //
+    
+    //음악 초기화
+  /*  Mix_HaltMusic();
+    Mix_HaltChannel(-1);*/
+    Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
+    
+
+    //일시정지 시간 초기화
+    totalPauseTime = 0;
+    stage3_startTime = 0;
+    lastBombTime = 0;
+    pauseStartTime = 0;
+    totalPauseTime_2 = 0;
 }
 
 
@@ -625,7 +768,13 @@ Stage3::~Stage3() {
     //음악 해제
     Mix_FreeMusic(background_music);
     Mix_FreeChunk(bell_sound);
-    Mix_FreeChunk(hit_sound);
+    //Mix_FreeChunk(hit_sound);
+    Mix_FreeChunk(bombPrev_sound);
+    Mix_FreeChunk(bombAfter_sound);
+    Mix_FreeChunk(button_sound);
+
+
+
 
 
 

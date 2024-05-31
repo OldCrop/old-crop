@@ -137,7 +137,7 @@
     <ClInclude Include="Phase_stage3Ending.h" />
     <ClInclude Include="Phase_stage3Game.h" />
     <ClInclude Include="Phase_stage3Intro.h" />
-    <ClInclude Include="STAGE3.h" />
+    <ClInclude Include="STAGE.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
