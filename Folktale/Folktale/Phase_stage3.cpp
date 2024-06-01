@@ -163,10 +163,8 @@ Stage3::Stage3() {
     //2. 기타 세팅
     f_state = STOP;//방향키 안 누름
     stop = true; //정지 상황으로 초기화
-    //모두 안 눌린 것으로 초기화 -> stop
-    for (int i = 0; i < f_state; i++) {//0은 좌측, ...
-        f_list[i] = false;
-    }
+    key_pushed.clear();//키 정보 초기화
+    
    
 
     flip = SDL_FLIP_HORIZONTAL;
@@ -219,7 +217,6 @@ void Stage3::HandleEvents() {
 
             if (event.key.keysym.sym == SDLK_LEFT) {
                 f_state = LEFT; //현재 눌린 값이 LEFT
-                f_list[f_state] = true;
                 stop = false;
                 if (stage3_status == 0) {
                     stage3_status = 1;
@@ -231,8 +228,9 @@ void Stage3::HandleEvents() {
             }
             else if (event.key.keysym.sym == SDLK_RIGHT) {
                 f_state = RIGHT;
-                f_list[f_state] = true;
+               
                 stop = false;
+            
 
                 if (stage3_status == 0) {
                     stage3_status = 1;
@@ -243,8 +241,10 @@ void Stage3::HandleEvents() {
             }
             else if (event.key.keysym.sym == SDLK_UP) {
                 f_state = UP;
-                f_list[f_state] = true;
+                
                 stop = false;
+                
+
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
@@ -254,8 +254,9 @@ void Stage3::HandleEvents() {
             }
             else if (event.key.keysym.sym == SDLK_DOWN) {
                 f_state = DOWN;
-                f_list[f_state] = true;
+                
                 stop = false;
+               
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
@@ -263,40 +264,34 @@ void Stage3::HandleEvents() {
                     //Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
                 }
             }
-            
+            if (std::find(key_pushed.begin(), key_pushed.end(), f_state) == key_pushed.end())
+                key_pushed.push_front(f_state);//눌린 키 정보 저장
+
             break;
 
         case SDL_KEYUP:
 
             if (event.key.keysym.sym == SDLK_LEFT) {
-                f_list[0] = false;
-
+                key_pushed.remove(LEFT);
             }
             else if (event.key.keysym.sym == SDLK_RIGHT) {
-                f_list[1] = false;
+                key_pushed.remove(RIGHT);
 
             }
             else if (event.key.keysym.sym == SDLK_UP) {
-                f_list[2] = false;
+                key_pushed.remove(UP);
 
             }
             else if (event.key.keysym.sym == SDLK_DOWN) {
-                f_list[3] = false;
+                key_pushed.remove(DOWN);
+                
+                
 
             }
 
-            //만약 up되지 않은 놈들이 있다면
-            if (f_list[0])
-                f_state = 0;
-            if (f_list[1])
-                f_state = 1;
-            if (f_list[2])
-                f_state = 2;
-            if (f_list[3])
-                f_state = 3;
+            if(key_pushed.empty())
+                stop = true;    
 
-            if (f_list[0] != true && f_list[1] != true && f_list[2] != true && f_list[3] != true)
-                stop = true;
 
             break;
 
@@ -342,7 +337,11 @@ void Stage3::HandleEvents() {
     }
 }
 void Stage3::Update() {
-    
+    /*cout << "방향키 : ";
+    for (int i : key_pushed) {
+        cout << i << " ";
+    }
+    cout << endl;*/
     if (stage3_status == 0 || stage3_status == 2) //키 대기 혹은 일시정지  == stage3_status == 2
         return;
 
@@ -352,18 +351,18 @@ void Stage3::Update() {
     int x = magpie->getX();
     int y = magpie->getY();
     if (!stop) { //정지가 아니라면 까치 이동
-        if (f_state == 0) { //좌측이동
+        if (key_pushed.front() == LEFT) { //좌측이동
             x -= 1;
             flip = SDL_FLIP_NONE;
         }
-        else if (f_state == 1) {//우측이동
+        else if (key_pushed.front() == RIGHT) {//우측이동
             x += 1;
             flip = SDL_FLIP_HORIZONTAL;
         }
-        else if (f_state == 2) {//위로 이동
+        else if (key_pushed.front() == UP) {//위로 이동
             y -= 1;
         }
-        else if (f_state == 3) {//아래로 이동
+        else if (key_pushed.front() == DOWN) {//아래로 이동
             y += 1;
         }
 
@@ -718,6 +717,7 @@ void Stage3::Reset() {
     magpie = new Magpie(3, 3, 1, 50, 0); //(0,0)에서 시작, speed는 1,hp는 100으로 설정
     //c. 구렁이 생성
     snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY());
+
     //d. 폭탄 생성
     bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(),-20, 50, 75,0));
 
@@ -725,21 +725,15 @@ void Stage3::Reset() {
     //2. 기타 세팅
     f_state = STOP;//방향키 안 누름
     stop = true; //정지 상황으로 초기화
-    //모두 안 눌린 것으로 초기화 -> stop
-    for (int i = 0; i < f_state; i++) {//0은 좌측, ...
-        f_list[i] = false;
-    }
-    //game_result = 0;//1-> 승리, 2-> 패배
-
+    key_pushed.clear();//키 정보 초기화
+   
     flip = SDL_FLIP_HORIZONTAL;
 
     lastSpeedUpTime = 0;
     alpha = 0;
     stage3_status = 0;
     
-    //음악 초기화
-  /*  Mix_HaltMusic();
-    Mix_HaltChannel(-1);*/
+    
     Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
     
 
@@ -765,16 +759,20 @@ Stage3::~Stage3() {
     SDL_DestroyTexture(heartOne_texture);
     SDL_DestroyTexture(bombAfter_texture);
     SDL_DestroyTexture(red_texture);
+    SDL_DestroyTexture(ready_texture);
+    SDL_DestroyTexture(wait_texture);
+    SDL_DestroyTexture(button_continue);
+    SDL_DestroyTexture(button_main);
+    SDL_DestroyTexture(myBell_);
+    
+
     //음악 해제
     Mix_FreeMusic(background_music);
     Mix_FreeChunk(bell_sound);
-    //Mix_FreeChunk(hit_sound);
+    
     Mix_FreeChunk(bombPrev_sound);
     Mix_FreeChunk(bombAfter_sound);
     Mix_FreeChunk(button_sound);
-
-
-
 
 
 
@@ -786,4 +784,5 @@ Stage3::~Stage3() {
         delete bomb;
     }
     bombList.clear();
+    
 }

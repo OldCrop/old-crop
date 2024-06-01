@@ -12,7 +12,7 @@ private:
 	list<Bomb*> bombList;
 	
 	//방향키 조작 변수들
-	bool f_list[4];
+	list<int> key_pushed;//눌린 키 정보 저장
 	int f_state;//현재 눌린 키 정보
 	bool stop;//정지 정보
 
