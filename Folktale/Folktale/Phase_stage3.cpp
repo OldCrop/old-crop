@@ -345,6 +345,7 @@ void Stage3::Update() {
     if (stage3_status == 0 || stage3_status == 2) //키 대기 혹은 일시정지  == stage3_status == 2
         return;
 
+    
 
     //1. 까치
     //1.1 까치 좌표 업데이트
@@ -475,19 +476,20 @@ void Stage3::Update() {
 
     }
    
-
     //4. 종료 조건 확인
     if (bell->getCount() == 5) {//종 5개 모았으면 
         game_result = 1; //승리
         g_current_game_phase = PHASE_ENDING;
-        
+        SDL_Delay(500);
     }
 
     if (magpie->getHealth() <= 0) {
         game_result = 2; //실패
-        g_current_game_phase=PHASE_ENDING;
-        
+        g_current_game_phase = PHASE_ENDING;
+        SDL_Delay(500);
     }
+
+    
 }
 void Stage3::Render() {
 
@@ -732,8 +734,11 @@ void Stage3::Reset() {
     lastSpeedUpTime = 0;
     alpha = 0;
     stage3_status = 0;
+
+    //음향 끄기
+    Mix_HaltChannel(-1);//모든 사운드 중지
     
-    
+    //음악 다시 시작
     Mix_FadeInMusic(background_music, -1, 2000);//노래 페이드인으로 바로 시작
     
 

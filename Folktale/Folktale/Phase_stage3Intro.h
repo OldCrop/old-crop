@@ -13,6 +13,7 @@ private:
     SDL_Texture* first_intro_texture;
     SDL_Texture* second_intro_texture;
     SDL_Texture* third_intro_texture;
+    SDL_Texture* fourth_intro_texture;
     
    // SDL_Rect intro_destination;
     Mix_Music* background_music;
