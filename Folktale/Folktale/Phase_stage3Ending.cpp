@@ -197,6 +197,7 @@ void Phase_stage3Ending::Reset() {
     
     endingPhaseStartTime = SDL_GetTicks();
     flag = true;
+    pageCheck = 0;
 
    // std::cout << "game_result : " << game_result << std::endl;  
     if (game_result == 1)

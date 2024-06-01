@@ -477,16 +477,18 @@ void Stage3::Update() {
     }
    
     //4. 종료 조건 확인
+    //엔딩페이즈 넘어가기 전 딜레이 주는거 지금 여기에 해놨는데
+    //합치고 나서 메인에서 prev랑 current 비교해서 해야 더 자연스러울 듯
     if (bell->getCount() == 5) {//종 5개 모았으면 
         game_result = 1; //승리
         g_current_game_phase = PHASE_ENDING;
-        SDL_Delay(500);
+        SDL_Delay(1000);
     }
 
     if (magpie->getHealth() <= 0) {
         game_result = 2; //실패
         g_current_game_phase = PHASE_ENDING;
-        SDL_Delay(500);
+        SDL_Delay(1000);
     }
 
     
