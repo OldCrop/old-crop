@@ -86,7 +86,9 @@ public:
     void setInvincible(bool invincible);
     bool getInvincible() const;
     //킬카운트 변수 게터세터
-    void setKillcount(int killcount);
+    void setKillcount(int killcount) {
+        this->killcount = killcount;
+    }
     int getKillcount() { return killcount; };
 };
 

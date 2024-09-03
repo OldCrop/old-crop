@@ -13,6 +13,8 @@ bool g_key_left = false;
 bool g_key_right = false;
 bool g_key_space = false;
 bool is_rock = false;
+bool is_hard;
+
 Direction g_direction = DOWN_;
 Uint32 FIRE_COOLDOWN = 500;  // 투사체 발사 쿨타임
 
@@ -56,13 +58,21 @@ Stage1::Stage1() {
     dogPoop->setProjectileSpeed(7);
     dogPoop->setProjectileDamage(10);
 
+
+
+
     if (dandelion != nullptr)
         delete dandelion;  // 포인터가 가리키는 메모리를 해제합니다.
 
     dandelion = new Dandelion(50, 50, 0, 100.0, 10);
     dandelion->setXY(SCREEN_WIDTH / 2 - 25, SCREEN_HEIGHT / 2 - 25);
     dandelion->setSpeed(0);
-    dandelion->setHealth(100.0);
+    if (is_hard) {
+        dandelion->setHealth(200.0);
+    }
+    else {
+        dandelion->setHealth(100.0);
+    }
 
     dogPoop->setInvincible(false);
 
@@ -224,6 +234,9 @@ Stage1::Stage1() {
     // 일시정지 버튼 효과음 로드
     stg1_pause_sound = Mix_LoadWAV("../../Resources/stage1/sounds/pauseSound.wav");
 
+    std::cout << dogPoop->getHealth() << std::endl;
+    std::cout << dogPoop->getKillcount() << std::endl;
+
 }
 
 void Stage1::HandleEvents() {
@@ -307,6 +320,7 @@ void Stage1::HandleEvents() {
 void Stage1::Update() {
     // 1.1. 키보드 입력에 따라 주인공의 위치를 변경한다.
     // 일시정지 상태인지 확인
+    std::cout << dogPoop->getHealth();
     if (g_is_paused) {
         //배경음 일시 중지
         Mix_PauseMusic();
@@ -554,15 +568,15 @@ void Stage1::Update() {
 void Stage1::Render() {
     // Clear the renderer
     if (SDL_RenderClear(g_renderer) != 0) {
-        std::cerr << "Error clearing renderer: " << SDL_GetError() << std::endl;
+      //  std::cerr << "Error clearing renderer: " << SDL_GetError() << std::endl;
     }
 
     // Render the background
     if (SDL_RenderCopy(g_renderer, bg_texture, &bg_source_rect, &bg_dest_rect) != 0) {
-        std::cerr << "Error rendering background: " << SDL_GetError() << std::endl;
+       // std::cerr << "Error rendering background: " << SDL_GetError() << std::endl;
     }
     else {
-        std::cout << "Background rendered successfully." << std::endl;
+      //  std::cout << "Background rendered successfully." << std::endl;
     }
 
     // Render the dandelion
@@ -584,10 +598,10 @@ void Stage1::Render() {
     }
 
     if (SDL_RenderCopy(g_renderer, currentTexture, &d_source_rect, &d_dest_rect) != 0) {
-        std::cerr << "Error rendering dandelion: " << SDL_GetError() << std::endl;
+       // std::cerr << "Error rendering dandelion: " << SDL_GetError() << std::endl;
     }
     else {
-        std::cout << "Dandelion rendered successfully." << std::endl;
+       // std::cout << "Dandelion rendered successfully." << std::endl;
     }
 
     // Render the items
@@ -598,10 +612,10 @@ void Stage1::Render() {
         i_dest_rect.x = item->getX();
         i_dest_rect.y = item->getY();
         if (SDL_RenderCopy(g_renderer, i_texture, &clip, &i_dest_rect) != 0) {
-            std::cerr << "Error rendering item: " << SDL_GetError() << std::endl;
+            //std::cerr << "Error rendering item: " << SDL_GetError() << std::endl;
         }
         else {
-            std::cout << "Item rendered successfully." << std::endl;
+           // /std::cout << "Item rendered successfully." << std::endl;
         }
         item->frameUpdate();
     }
@@ -648,10 +662,10 @@ void Stage1::Render() {
         }
 
         if (SDL_RenderCopyEx(g_renderer, currentMonsterTexture, currentMonsterRect, currentMonsterRect == &c_source_rect ? &c_dest_rect : &s_dest_rect, 0, NULL, SDL_FLIP_NONE) != 0) {
-            std::cerr << "Error rendering monster: " << SDL_GetError() << std::endl;
+            //std::cerr << "Error rendering monster: " << SDL_GetError() << std::endl;
         }
         else {
-            std::cout << "Monster rendered successfully." << std::endl;
+            //std::cout << "Monster rendered successfully." << std::endl;
         }
     }
 
@@ -662,10 +676,10 @@ void Stage1::Render() {
         SDL_Texture* projectileTexture = is_rock ? p_rock_texture : p_texture;
 
         if (SDL_RenderCopyEx(g_renderer, projectileTexture, &p_source_rect, &p_dest_rect, 0, NULL, SDL_FLIP_NONE) != 0) {
-            std::cerr << "Error rendering projectile: " << SDL_GetError() << std::endl;
+           // std::cerr << "Error rendering projectile: " << SDL_GetError() << std::endl;
         }
         else {
-            std::cout << "Projectile rendered successfully." << std::endl;
+           // std::cout << "Projectile rendered successfully." << std::endl;
         }
     }
 
@@ -677,19 +691,19 @@ void Stage1::Render() {
     SDL_Rect heart_rect = { 10, 10, 30, 30 }; // Example position and size of the heart
     for (int i = 0; i < dp_health / 20; ++i) {
         if (SDL_RenderCopy(g_renderer, h2_texture, NULL, &heart_rect) != 0) {
-            std::cerr << "Error rendering heart (full): " << SDL_GetError() << std::endl;
+            //std::cerr << "Error rendering heart (full): " << SDL_GetError() << std::endl;
         }
         else {
-            std::cout << "Heart (full) rendered successfully." << std::endl;
+            //std::cout << "Heart (full) rendered successfully." << std::endl;
         }
         heart_rect.x += 40; // Setting the gap between hearts
     }
     if (dp_health % 20 >= 10) {
         if (SDL_RenderCopy(g_renderer, h1_texture, NULL, &heart_rect) != 0) {
-            std::cerr << "Error rendering heart (half): " << SDL_GetError() << std::endl;
+            //std::cerr << "Error rendering heart (half): " << SDL_GetError() << std::endl;
         }
         else {
-            std::cout << "Heart (half) rendered successfully." << std::endl;
+            //std::cout << "Heart (half) rendered successfully." << std::endl;
         }
         heart_rect.x += 40;
     }
@@ -729,12 +743,28 @@ void Stage1::Reset() {
 
     if (dogPoop != nullptr)
         delete dogPoop;  // 포인터가 가리키는 메모리를 해제합니다.
-    dogPoop = new DogPoop(0, 10, 5, 100.0, 10, 1, 10, 0);
-    dogPoop->setXY(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2);
-    dogPoop->setSpeed(5);
-    dogPoop->setHealth(100.0);
-    dogPoop->setProjectileSpeed(7);
-    dogPoop->setProjectileDamage(10);
+
+    if (is_hard) { //is_hard 로 변경하기
+        //이지모드 일 경우 피가 2배 ( 변수명이 ISHARD임 )
+        dogPoop = new DogPoop(0, 10, 5, 200.0, 10, 1, 10, 10);
+        dogPoop->setXY(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2);
+        dogPoop->setSpeed(5);
+        dogPoop->setHealth(200.0);
+        dogPoop->setKillcount(16);
+        dogPoop->setHealth(100.0);
+        dogPoop->setProjectileSpeed(7);
+        dogPoop->setProjectileDamage(10);
+    }
+    else {
+        dogPoop = new DogPoop(0, 10, 5, 100.0, 10, 1, 10, 0);
+        dogPoop->setXY(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2);
+        dogPoop->setSpeed(5);
+        dogPoop->setHealth(200.0);
+        dogPoop->setKillcount(10);
+        dogPoop->setHealth(100.0);
+        dogPoop->setProjectileSpeed(7);
+        dogPoop->setProjectileDamage(10);
+    }
 
     if (dandelion != nullptr)
         delete dandelion;  // 포인터가 가리키는 메모리를 해제합니다.
@@ -742,7 +772,12 @@ void Stage1::Reset() {
     dandelion = new Dandelion(50, 50, 0, 100.0, 10);
     dandelion->setXY(SCREEN_WIDTH / 2 - 25, SCREEN_HEIGHT / 2 - 25);
     dandelion->setSpeed(0);
-    dandelion->setHealth(100.0);
+    if (is_hard) {
+        dandelion->setHealth(200.0);
+    }
+    else {
+        dandelion->setHealth(100.0);
+    }
 
     dogPoop->setInvincible(false);
 

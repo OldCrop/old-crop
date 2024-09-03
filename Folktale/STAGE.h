@@ -18,3 +18,4 @@ extern SDL_Renderer* g_renderer;
 extern int screenWidth, screenHeight;
 extern int game_result;
 
+extern bool is_hard;

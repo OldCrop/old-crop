@@ -165,6 +165,7 @@ extern bool g_key_space;
 extern Uint32 FIRE_COOLDOWN;  // 투사체 발사 쿨타임
 extern bool is_rock;
 
+
 enum Direction {
     UP_,
     DOWN_,
