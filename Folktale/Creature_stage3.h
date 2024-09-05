@@ -35,7 +35,7 @@ private:
     int n; // n번의 게임 루프마다 한 번씩 움직이도록 변경
 
 public:
-    Snake(int x, int y, int speed, double health, int attackPower, int tX, int tY);
+    Snake(int x, int y, int speed, double health, int attackPower, int tX, int tY,int n);
     ~Snake();
     virtual void Draw();
     virtual void GetAttackted(int damage);
@@ -142,12 +142,13 @@ private:
     bool invincible;
     int lastDamageTime;
     int countBell;
+    int n;
 
     Mix_Chunk* hit_sound = Mix_LoadWAV("../../Resources/hit.wav");
 
 
 public:
-    Magpie(int x, int y, int speed, double health, int attackPower);
+    Magpie(int x, int y, int speed, double health, int attackPower,int n);
     ~Magpie() {
         Mix_FreeChunk(hit_sound);
     }
@@ -179,6 +180,9 @@ public:
         countBell = count;
     }
 
+    int getN() {
+		return n;
+	}
 
 };
 
