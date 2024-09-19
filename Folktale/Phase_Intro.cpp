@@ -3,14 +3,15 @@
 
 Intro::Intro() :selected_stage{ false, false, false }
 {
+    is_hard = false;
     // For Texture
     SDL_Surface* introBG_surface = IMG_Load("../../Resources/main.png");
     texture_ = SDL_CreateTextureFromSurface(g_renderer, introBG_surface);
     SDL_FreeSurface(introBG_surface);
 
     SDL_QueryTexture(texture_, NULL, NULL, &source_rectangle_.w, &source_rectangle_.h);
-    source_rectangle_ = { 0, 0, source_rectangle_.w, source_rectangle_.h };
-    destination_rectangle_ = { 0, 0, 1080, 720 };
+    source_rectangle_ = { 0, 0, source_rectangle_.w, source_rectangle_.h };//잘라오는 거
+    destination_rectangle_ = { 0, 0, 1080, 720 };//그리는 거
 
     //강아지똥 스테이지
     SDL_Surface* stagePoop_surface = IMG_Load("../../Resources/Intro/stage1_icon.png");
@@ -85,6 +86,20 @@ Intro::Intro() :selected_stage{ false, false, false }
     frame_destination_rectangle2_ = { 88, 357, stageRabbit_source_rectangle_.w, stageRabbit_source_rectangle_.h };
     frame_destination_rectangle3_ = { 297, 357, stageSnake_source_rectangle_.w, stageSnake_source_rectangle_.h };
 
+    //Onoff 버튼 추가하기
+    SDL_Surface* hard_button_surface = IMG_Load("../../Resources/intro/exit_button");
+    hard_button_texture = SDL_CreateTextureFromSurface(g_renderer, hard_button_surface);
+    SDL_FreeSurface(hard_button_surface);
+
+    //SDL_QueryTexture(hard_button_texture, NULL, NULL, &hard_button_source_rectangle.w, &hard_button_source_rectangle.h);
+   // hard_button_dest_rectangle = { 0,0,hard_button_source_rectangle.w ,hard_button_source_rectangle.h };
+
+    SDL_QueryTexture(exit_button_texture_, NULL, NULL, &hard_button_source_rectangle.w, &hard_button_source_rectangle.h);
+    hard_button_source_rectangle = { 0, 0, 349, 109 };
+    hard_button_dest_rectangle = { 0, 0, hard_button_source_rectangle.w, hard_button_source_rectangle.h };
+
+
+
     //음악 로드
     click_start = Mix_LoadMUS("../../Resources/Intro/click_start.mp3");
     click_gallery = Mix_LoadMUS("../../Resources/Intro/click_gallery.mp3");
@@ -153,7 +168,10 @@ void Intro::Render()
         SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
         SDL_RenderDrawRect(g_renderer, &stageSnake_destination_rectangle_);
     }
-
+    //hard btn
+    SDL_RenderCopy(g_renderer, hard_button_texture, &hard_button_dest_rectangle, &hard_button_source_rectangle);
+    SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(g_renderer, &hard_button_dest_rectangle);
     SDL_RenderPresent(g_renderer); // draw to the screen
 }
 
@@ -171,10 +189,17 @@ void Intro::HandleEvents()
             break;
 
         case SDL_MOUSEBUTTONDOWN:
-
-            //stagePoop버튼을 누르고 Start버튼을 누르면 Stage1로 넘어감
+            
+            
             if (event.button.button == SDL_BUTTON_LEFT)
             {
+                if (event.button.x > hard_button_dest_rectangle.x && event.button.x < hard_button_dest_rectangle.x + hard_button_dest_rectangle.w &&
+                    event.button.y > hard_button_dest_rectangle.y && event.button.y < hard_button_dest_rectangle.y + hard_button_dest_rectangle.h)
+                {
+                    is_hard = !is_hard;
+                    std::cout << " is_hard is true" << std::endl;
+                }
+                //stagePoop버튼을 누르고 Start버튼을 누르면 Stage1로 넘어감
                 if (event.button.x > stagePoop_destination_rectangle_.x && event.button.x < stagePoop_destination_rectangle_.x + stagePoop_source_rectangle_.w &&
                     event.button.y > stagePoop_destination_rectangle_.y && event.button.y < stagePoop_destination_rectangle_.y + stagePoop_source_rectangle_.h)
                 {

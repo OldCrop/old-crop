@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.h"
+#include "STAGE.h"
 
 class Intro : public PhaseInterface
 {
@@ -22,6 +23,7 @@ private:
 	SDL_Texture* option_button_texture_; // the SDL_Texture
 	SDL_Texture* exit_button_texture_; // the SDL_Texture
 	SDL_Texture* frame_texture_;
+	SDL_Texture* hard_button_texture;
 
 	SDL_Rect source_rectangle_; // the rectangle for source image
 	SDL_Rect destination_rectangle_; // for destination
@@ -50,6 +52,9 @@ private:
 	SDL_Rect frame_destination_rectangle_;
 	SDL_Rect frame_destination_rectangle2_;
 	SDL_Rect frame_destination_rectangle3_;
+
+	SDL_Rect hard_button_dest_rectangle;
+	SDL_Rect hard_button_source_rectangle;
 
 	Mix_Music* click_start;
 	Mix_Music* click_gallery;
