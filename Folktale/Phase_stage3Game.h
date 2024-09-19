@@ -10,6 +10,7 @@ private:
     Magpie* magpie;
     Snake* snake;
     list<Bomb*> bombList;
+    int magpie_init_health;
 
     //방향키 조작 변수들
     list<int> key_pushed;//눌린 키 정보 저장

@@ -234,8 +234,8 @@ Stage1::Stage1() {
     // 일시정지 버튼 효과음 로드
     stg1_pause_sound = Mix_LoadWAV("../../Resources/stage1/sounds/pauseSound.wav");
 
-    std::cout << dogPoop->getHealth() << std::endl;
-    std::cout << dogPoop->getKillcount() << std::endl;
+    //std::cout << dogPoop->getHealth() << std::endl;
+    //std::cout << dogPoop->getKillcount() << std::endl;
 
 }
 
@@ -744,7 +744,7 @@ void Stage1::Reset() {
     if (dogPoop != nullptr)
         delete dogPoop;  // 포인터가 가리키는 메모리를 해제합니다.
 
-    if (is_hard) { //is_hard 로 변경하기
+    if (!is_hard) { //is_hard 로 변경하기
         //이지모드 일 경우 피가 2배 ( 변수명이 ISHARD임 )
         dogPoop = new DogPoop(0, 10, 5, 200.0, 10, 1, 10, 10);
         dogPoop->setXY(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2);
