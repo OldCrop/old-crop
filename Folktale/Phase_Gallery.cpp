@@ -3,7 +3,7 @@
 
 Gallery::Gallery()
 {
-    //¹è°æ ÀÌ¹ÌÁö ºÒ·¯¿À±â
+    //ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
     SDL_Surface* gallery_bg_surface = IMG_Load("../../Resources/main.png");
     gallery_bg_texture = SDL_CreateTextureFromSurface(g_renderer, gallery_bg_surface);
     SDL_FreeSurface(gallery_bg_surface);
@@ -11,7 +11,7 @@ Gallery::Gallery()
     gallery_bg_source_rect = { 0, 0, 1080, 720 };
     gallery_bg_destination_rect = { 0, 0, 1080, 720 };
 
-    //¿£µù º¸±â Àü ÀÌ¹ÌÁö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
     SDL_Surface* ending_before_surface = IMG_Load("../../Resources/gallery/ending_before.png");
     ending_before_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
 
@@ -48,7 +48,7 @@ Gallery::Gallery()
     frame31_destination_rect = { 625, 365, ending_before_source_rect.w, ending_before_source_rect.h };
     frame32_destination_rect = { 840, 365, ending_before_source_rect.w, ending_before_source_rect.h };
 
-    //stage1 ±Û¾¾ ¾²±â
+    //stage1 ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½
     SDL_Surface* stagetext_surface = IMG_Load("../../Resources/gallery/stage_txt.png");
     stagetext_texture = SDL_CreateTextureFromSurface(g_renderer, stagetext_surface);
     SDL_FreeSurface(stagetext_surface);
@@ -56,7 +56,7 @@ Gallery::Gallery()
     stagetext_source_rect = { 0, 0, stagetext_surface->w, stagetext_surface->h };
     stagetext_destination_rect = { 0, 0, stagetext_source_rect.w, stagetext_source_rect.h };
 
-    //¸ÞÀÎÀ¸·Î µ¹¾Æ°¡±â ¹öÆ°
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
     SDL_Surface* back_to_main_surface = IMG_Load("../../Resources/gallery/back_to_main.png");
     back_to_main_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_surface);
     SDL_FreeSurface(back_to_main_surface);
@@ -69,7 +69,8 @@ Gallery::Gallery()
     }
 
     click_main = Mix_LoadMUS("../../Resources/Intro/click_gallery.mp3");
-    click_sound = Mix_LoadWAV("../../Resources/Intro/pauseSound.wav");
+	gallery_bgm = Mix_LoadMUS("../../Resources/gallery/gallery_background_bgm.mp3");
+    click_sound = Mix_LoadWAV("../../Resources/gallery/gallery_to_ending.mp3");
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) {
         std::cerr << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
@@ -93,12 +94,16 @@ Gallery::~Gallery()
     SDL_DestroyTexture(stagetext_texture);
     SDL_DestroyTexture(back_to_main_texture);
 
+	Mix_FreeMusic(click_main);
+	Mix_FreeMusic(gallery_bgm);
+	Mix_FreeChunk(click_sound);
+	Mix_CloseAudio();
 }
 
 void Gallery::Update()
 {
 
-    //º» ¿£µù È®ÀÎ
+    //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     if (viewedEndings[0][0]) {
         SDL_Surface* ending11_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending1.png");
         SDL_Surface* ending11_resized_surface = SDL_CreateRGBSurface(0, ending11_destination_rect.w, ending11_destination_rect.h, 32, 0, 0, 0, 0);
@@ -265,7 +270,7 @@ void Gallery::HandleEvents()
             if (mouseX >= back_to_main_destination_rect.x && mouseX <= back_to_main_destination_rect.x + back_to_main_destination_rect.w &&
                 mouseY >= back_to_main_destination_rect.y && mouseY <= back_to_main_destination_rect.y + back_to_main_destination_rect.h)
             {
-                //ÀÌ¹ÌÁö º¯°æ
+                //ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 SDL_Surface* back_to_main_surface = IMG_Load("../../Resources/gallery/back_to_main_clicked.png");
                 back_to_main_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_surface);
                 SDL_FreeSurface(back_to_main_surface);
@@ -377,5 +382,7 @@ void Gallery::HandleEvents()
 
 void Gallery::Reset()
 {
-
+    Mix_HaltMusic();
+    Mix_HaltChannel(-1);
+    Mix_FadeInMusic(gallery_bgm, -1, 2000);
 }

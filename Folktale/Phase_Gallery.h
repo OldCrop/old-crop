@@ -88,4 +88,5 @@ private:
     Mix_Music* gallery_bgm;
     Mix_Chunk* click_sound;
     Mix_Music* click_main;
+    Mix_Music* gallery_to_ending;
 };

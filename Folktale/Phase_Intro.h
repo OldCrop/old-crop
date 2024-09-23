@@ -58,6 +58,7 @@ private:
 
 	Mix_Music* click_start;
 	Mix_Music* click_gallery;
+	Mix_Music* intro_bgm;
 	Mix_Chunk* pause_Sound;
 
 	bool selected_stage[3];

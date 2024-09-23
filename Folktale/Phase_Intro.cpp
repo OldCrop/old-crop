@@ -10,10 +10,10 @@ Intro::Intro() :selected_stage{ false, false, false }
     SDL_FreeSurface(introBG_surface);
 
     SDL_QueryTexture(texture_, NULL, NULL, &source_rectangle_.w, &source_rectangle_.h);
-    source_rectangle_ = { 0, 0, source_rectangle_.w, source_rectangle_.h };//Àß¶ó¿À´Â °Å
-    destination_rectangle_ = { 0, 0, 1080, 720 };//±×¸®´Â °Å
+    source_rectangle_ = { 0, 0, source_rectangle_.w, source_rectangle_.h };//ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    destination_rectangle_ = { 0, 0, 1080, 720 };//ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-    //°­¾ÆÁö¶Ë ½ºÅ×ÀÌÁö
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     SDL_Surface* stagePoop_surface = IMG_Load("../../Resources/Intro/stage1_icon.png");
     stagePoop_texture_ = SDL_CreateTextureFromSurface(g_renderer, stagePoop_surface);
     SDL_FreeSurface(stagePoop_surface);
@@ -22,7 +22,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     stagePoop_source_rectangle_ = { 0, 0, stagePoop_source_rectangle_.w, stagePoop_source_rectangle_.h };
     stagePoop_destination_rectangle_ = { 194, 140, stagePoop_source_rectangle_.w, stagePoop_source_rectangle_.h };
 
-    //º°ÁÖºÎ ½ºÅ×ÀÌÁö
+    //ï¿½ï¿½ï¿½Öºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     SDL_Surface* stageRabbit_surface = IMG_Load("../../Resources/Intro/stage2_icon.png");
     stageRabbit_texture_ = SDL_CreateTextureFromSurface(g_renderer, stageRabbit_surface);
     SDL_FreeSurface(stageRabbit_surface);
@@ -31,7 +31,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     stageRabbit_source_rectangle_ = { 0, 0, stageRabbit_source_rectangle_.w, stageRabbit_source_rectangle_.h };
     stageRabbit_destination_rectangle_ = { 88, 357, stageRabbit_source_rectangle_.w, stageRabbit_source_rectangle_.h };
 
-    //±îÄ¡ ½ºÅ×ÀÌÁö
+    //ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     SDL_Surface* stageSnake_surface = IMG_Load("../../Resources/Intro/stage3_icon.png");
     stageSnake_texture_ = SDL_CreateTextureFromSurface(g_renderer, stageSnake_surface);
     SDL_FreeSurface(stageSnake_surface);
@@ -40,7 +40,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     stageSnake_source_rectangle_ = { 0, 0, stageSnake_source_rectangle_.w, stageSnake_source_rectangle_.h };
     stageSnake_destination_rectangle_ = { 297, 357, stageSnake_source_rectangle_.w, stageSnake_source_rectangle_.h };
 
-    //Start¹öÆ°
+    //Startï¿½ï¿½Æ°
     SDL_Surface* start_button_surface = IMG_Load("../../Resources/Intro/start_button.png");
     start_button_texture_ = SDL_CreateTextureFromSurface(g_renderer, start_button_surface);
     SDL_FreeSurface(start_button_surface);
@@ -49,7 +49,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     start_button_source_rectangle_ = { 0, 0, 349, 109 };
     start_button_destination_rectangle_ = { 616, 111, start_button_source_rectangle_.w, start_button_source_rectangle_.h };
 
-    //Gallery¹öÆ°
+    //Galleryï¿½ï¿½Æ°
     SDL_Surface* gallery_button_surface = IMG_Load("../../Resources/Intro/gallery_button.png");
     gallery_button_texture_ = SDL_CreateTextureFromSurface(g_renderer, gallery_button_surface);
     SDL_FreeSurface(gallery_button_surface);
@@ -58,7 +58,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     gallery_button_source_rectangle_ = { 0, 0, 349, 109 };
     gallery_button_destination_rectangle_ = { 616, 300, gallery_button_source_rectangle_.w, gallery_button_source_rectangle_.h };
 
-    ////option¹öÆ°
+    ////optionï¿½ï¿½Æ°
     //SDL_Surface* option_button_surface = IMG_Load("../../Resources/Intro/option_button.png");
     //option_button_texture_ = SDL_CreateTextureFromSurface(g_renderer, option_button_surface);
     //SDL_FreeSurface(option_button_surface);
@@ -67,7 +67,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     //option_button_source_rectangle_ = { 0, 0, 349, 109 };
     //option_button_destination_rectangle_ = { 616, 373, option_button_source_rectangle_.w, option_button_source_rectangle_.h };
 
-    //Exit¹öÆ°
+    //Exitï¿½ï¿½Æ°
     SDL_Surface* exit_button_surface = IMG_Load("../../Resources/Intro/exit_button.png");
     exit_button_texture_ = SDL_CreateTextureFromSurface(g_renderer, exit_button_surface);
     SDL_FreeSurface(exit_button_surface);
@@ -86,7 +86,7 @@ Intro::Intro() :selected_stage{ false, false, false }
     frame_destination_rectangle2_ = { 88, 357, stageRabbit_source_rectangle_.w, stageRabbit_source_rectangle_.h };
     frame_destination_rectangle3_ = { 297, 357, stageSnake_source_rectangle_.w, stageSnake_source_rectangle_.h };
 
-    //Onoff ¹öÆ° Ãß°¡ÇÏ±â
+    //Onoff ï¿½ï¿½Æ° ï¿½ß°ï¿½ï¿½Ï±ï¿½
     SDL_Surface* hard_button_surface = IMG_Load("../../Resources/intro/exit_button");
     hard_button_texture = SDL_CreateTextureFromSurface(g_renderer, hard_button_surface);
     SDL_FreeSurface(hard_button_surface);
@@ -100,9 +100,10 @@ Intro::Intro() :selected_stage{ false, false, false }
 
 
 
-    //À½¾Ç ·Îµå
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     click_start = Mix_LoadMUS("../../Resources/Intro/click_start.mp3");
     click_gallery = Mix_LoadMUS("../../Resources/Intro/click_gallery.mp3");
+    intro_bgm = Mix_LoadMUS("../../Resources/gallery/gallery_background_bgm.mp3");
     pause_Sound = Mix_LoadWAV("../../Resources/Intro/pauseSound.wav");
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) {
         std::cerr << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
@@ -125,6 +126,8 @@ Intro::~Intro()
     Mix_FreeMusic(click_start);
     Mix_FreeMusic(click_gallery);
     Mix_FreeChunk(pause_Sound);
+	Mix_FreeMusic(intro_bgm);
+	Mix_CloseAudio();
 
 }
 
@@ -152,7 +155,7 @@ void Intro::Render()
     SDL_RenderCopy(g_renderer, frame_texture_, &frame_source_rectangle_, &frame_destination_rectangle3_);
 
 
-    //¼±ÅÃÇÑ ½ºÅ×ÀÌÁö¿¡ µû¶ó¼­ Å×µÎ¸®¸¦ ±×·ÁÁÜ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×µÎ¸ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½
     if (selected_stage[0] == true)
     {
         SDL_SetRenderDrawColor(g_renderer, 255, 0, 0, 255);
@@ -199,7 +202,7 @@ void Intro::HandleEvents()
                     is_hard = !is_hard;
                     std::cout << " is_hard is true" << std::endl;
                 }
-                //stagePoop¹öÆ°À» ´©¸£°í Start¹öÆ°À» ´©¸£¸é Stage1·Î ³Ñ¾î°¨
+                //stagePoopï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Startï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Stage1ï¿½ï¿½ ï¿½Ñ¾î°¨
                 if (event.button.x > stagePoop_destination_rectangle_.x && event.button.x < stagePoop_destination_rectangle_.x + stagePoop_source_rectangle_.w &&
                     event.button.y > stagePoop_destination_rectangle_.y && event.button.y < stagePoop_destination_rectangle_.y + stagePoop_source_rectangle_.h)
                 {
@@ -208,7 +211,7 @@ void Intro::HandleEvents()
                     selected_stage[2] = false;
                     Mix_PlayChannel(-1, pause_Sound, 0);
                 }
-                //stageSnake¹öÆ°À» ´©¸£°í Start¹öÆ°À» ´©¸£¸é Stage2·Î ³Ñ¾î°¨
+                //stageSnakeï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Startï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Stage2ï¿½ï¿½ ï¿½Ñ¾î°¨
                 else if (event.button.x > stageSnake_destination_rectangle_.x && event.button.x < stageSnake_destination_rectangle_.x + stageSnake_source_rectangle_.w &&
                     event.button.y > stageSnake_destination_rectangle_.y && event.button.y < stageSnake_destination_rectangle_.y + stageSnake_source_rectangle_.h)
                 {
@@ -217,7 +220,7 @@ void Intro::HandleEvents()
                     selected_stage[1] = false;
                     Mix_PlayChannel(-1, pause_Sound, 0);
                 }
-                //stageRabbit¹öÆ°À» ´©¸£°í Start¹öÆ°À» ´©¸£¸é Stage3·Î ³Ñ¾î°¨
+                //stageRabbitï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Startï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Stage3ï¿½ï¿½ ï¿½Ñ¾î°¨
                 else if (event.button.x > stageRabbit_destination_rectangle_.x && event.button.x < stageRabbit_destination_rectangle_.x + stageRabbit_source_rectangle_.w &&
                     event.button.y > stageRabbit_destination_rectangle_.y && event.button.y < stageRabbit_destination_rectangle_.y + stageRabbit_source_rectangle_.h)
                 {
@@ -226,7 +229,7 @@ void Intro::HandleEvents()
                     selected_stage[2] = false;
                     Mix_PlayChannel(-1, pause_Sound, 0);
                 }
-                //Start¹öÆ°À» ´©¸£¸é Stage1·Î ³Ñ¾î°¨
+                //Startï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Stage1ï¿½ï¿½ ï¿½Ñ¾î°¨
                 else if (event.button.x > start_button_destination_rectangle_.x && event.button.x < start_button_destination_rectangle_.x + start_button_source_rectangle_.w &&
                     event.button.y > start_button_destination_rectangle_.y && event.button.y < start_button_destination_rectangle_.y + start_button_source_rectangle_.h)
                 {
@@ -246,7 +249,7 @@ void Intro::HandleEvents()
                         g_current_game_phase = PHASE_STAGE3_INTRO;
                     }
                 }
-                //Gallery¹öÆ°À» ´©¸£¸é Gallery·Î ³Ñ¾î°¨
+                //Galleryï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Galleryï¿½ï¿½ ï¿½Ñ¾î°¨
                 if (event.button.x > gallery_button_destination_rectangle_.x && event.button.x < gallery_button_destination_rectangle_.x + gallery_button_source_rectangle_.w &&
                     event.button.y > gallery_button_destination_rectangle_.y && event.button.y < gallery_button_destination_rectangle_.y + gallery_button_source_rectangle_.h)
                 {
@@ -255,7 +258,7 @@ void Intro::HandleEvents()
                     g_current_game_phase = PHASE_GALLERY;
                 }
 
-                //Exit¹öÆ°À» ´©¸£¸é °ÔÀÓÀÌ Á¾·áµÊ
+                //Exitï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
                 else if (event.button.x > exit_button_destination_rectangle_.x && event.button.x < exit_button_destination_rectangle_.x + exit_button_source_rectangle_.w &&
                     event.button.y > exit_button_destination_rectangle_.y && event.button.y < exit_button_destination_rectangle_.y + exit_button_source_rectangle_.h)
                 {
@@ -265,7 +268,7 @@ void Intro::HandleEvents()
             }
 
         case SDL_MOUSEMOTION:
-            //start¹öÆ° À§¿¡ ¸¶¿ì½º°¡ ¿Ã¶ó°¡¸é »öÀÌ º¯ÇÔ
+            //startï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ã¶ó°¡¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (event.motion.x > start_button_destination_rectangle_.x && event.motion.x < start_button_destination_rectangle_.x + start_button_source_rectangle_.w &&
                 event.motion.y > start_button_destination_rectangle_.y && event.motion.y < start_button_destination_rectangle_.y + start_button_source_rectangle_.h)
             {
@@ -275,7 +278,7 @@ void Intro::HandleEvents()
             {
                 SDL_SetTextureColorMod(start_button_texture_, 255, 255, 255);
             }
-            //gallery¹öÆ° À§¿¡ ¸¶¿ì½º°¡ ¿Ã¶ó°¡¸é »öÀÌ º¯ÇÔ
+            //galleryï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ã¶ó°¡¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (event.motion.x > gallery_button_destination_rectangle_.x && event.motion.x < gallery_button_destination_rectangle_.x + gallery_button_source_rectangle_.w &&
                 event.motion.y > gallery_button_destination_rectangle_.y && event.motion.y < gallery_button_destination_rectangle_.y + gallery_button_source_rectangle_.h)
             {
@@ -285,7 +288,7 @@ void Intro::HandleEvents()
             {
                 SDL_SetTextureColorMod(gallery_button_texture_, 255, 255, 255);
             }
-            ////option¹öÆ° À§¿¡ ¸¶¿ì½º°¡ ¿Ã¶ó°¡¸é »öÀÌ º¯ÇÔ
+            ////optionï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ã¶ó°¡¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             //if (event.motion.x > option_button_destination_rectangle_.x && event.motion.x < option_button_destination_rectangle_.x + option_button_source_rectangle_.w &&
             //    event.motion.y > option_button_destination_rectangle_.y && event.motion.y < option_button_destination_rectangle_.y + option_button_source_rectangle_.h)
             //{
@@ -295,7 +298,7 @@ void Intro::HandleEvents()
             //{
             //    SDL_SetTextureColorMod(option_button_texture_, 255, 255, 255);
             //}
-            //exit¹öÆ° À§¿¡ ¸¶¿ì½º°¡ ¿Ã¶ó°¡¸é »öÀÌ º¯ÇÔ
+            //exitï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ã¶ó°¡¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (event.motion.x > exit_button_destination_rectangle_.x && event.motion.x < exit_button_destination_rectangle_.x + exit_button_source_rectangle_.w &&
                 event.motion.y > exit_button_destination_rectangle_.y && event.motion.y < exit_button_destination_rectangle_.y + exit_button_source_rectangle_.h)
             {
@@ -317,7 +320,7 @@ void Intro::Reset()
     selected_stage[1] = false;
     selected_stage[2] = false;
 
-    //À½¾Ç ÃÊ±âÈ­
     Mix_HaltMusic();
     Mix_HaltChannel(-1);
+    Mix_FadeInMusic(intro_bgm, -1, 2000);
 }

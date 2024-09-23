@@ -43,7 +43,7 @@ bool viewedEndings[NUMBER_OF_STAGES][ENDINGS_PER_STAGE] = { {false, false, false
 int main(int argc, char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    IMG_Init(IMG_INIT_PNG); // ÀÌ¹ÌÁö ¶óÀÌºê·¯¸® ÃÊ±âÈ­
+    IMG_Init(IMG_INIT_PNG); // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ ï¿½Ê±ï¿½È­
     TTF_Init();
 
     font = TTF_OpenFont("../../Resources/PF.ttf", 100);
