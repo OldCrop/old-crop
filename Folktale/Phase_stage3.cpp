@@ -28,12 +28,22 @@ Stage3::Stage3() {
 
 
     bell = new Bell(distributionX(generator), distributionY(generator), 0, 0);
-    //b. 까치 생성
-    magpie = new Magpie(3, 3, 1, 50, 0); //(0,0)에서 시작, speed는 1,hp는 100으로 설정
-    //c. 구렁이 생성
-    snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY());
-    //d. 폭탄 생성
-    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
+    if (is_hard) {
+        //b. 까치 생성
+        magpie = new Magpie(3, 3, 1, 30, 0,3); //(0,0)에서 시작, speed는 1,hp는 30으로 설정
+        //c. 구렁이 생성
+        snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
+        //d. 폭탄 생성
+        bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
+    }
+    else {
+        //b. 까치 생성
+        magpie = new Magpie(3, 3, 1, 50, 0,5); //(0,0)에서 시작, speed는 1,hp는 50으로 설정
+        //c. 구렁이 생성
+        snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
+        //d. 폭탄 생성
+        bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
+    }
 
     ////2. 텍스쳐 가져오기
     //a. 종 텍스쳐
@@ -180,6 +190,9 @@ Stage3::Stage3() {
     pauseStartTime = 0;
     totalPauseTime = 0;
     totalPauseTime_2 = 0;
+
+    magpie_init_health = magpie->getHealth();
+
     UpdateScoreTexture();
 
 }
@@ -394,11 +407,9 @@ void Stage3::Update() {
     //2. 구렁이 업데이트
     //구렁이 속도 조절
     int time = SDL_GetTicks();
-    if (snake->getN() > 5 && time - lastSpeedUpTime > 10000) {
+    if (snake->getN() > magpie->getN() && time - lastSpeedUpTime > 10000) { //구렁이 속도가 5 이상이고 10초가 지났다면
         //cout<<snake->getN()<<endl;
         snake->setN(snake->getN() - 1);
-        // 속도 증가 시간 업데이트
-        // 속도 증가 시간 업데이트
         lastSpeedUpTime = time;
     }
     //구렁이 이동
@@ -637,9 +648,8 @@ void Stage3::Render() {
 
     //하트 출력
     int hp = (int)magpie->getHealth();
-
     // 하트 렌더링
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < magpie_init_health/10; i++) {
 
         heart_destination_rect.x = i * (GRID_STAGE3)+GRID_STAGE3 + 5;
         heart_destination_rect.y = 0 + GRID_STAGE3 + 5;
@@ -718,15 +728,27 @@ void Stage3::Reset() {
     //a. 종 생성
     uniform_int_distribution<int> distributionX(1, screenWidth / GRID_STAGE3 - 2);
     uniform_int_distribution<int> distributionY(1, screenHeight / GRID_STAGE3 - 2);
+
     bell = new Bell(distributionX(generator), distributionY(generator), 0, 0);
-    //b. 까치 생성
-    magpie = new Magpie(3, 3, 1, 50, 0); //(0,0)에서 시작, speed는 1,hp는 100으로 설정
-    //c. 구렁이 생성
-    snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY());
 
-    //d. 폭탄 생성
-    bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
+    if (is_hard) {
+        //b. 까치 생성
+        magpie = new Magpie(3, 3, 1, 30, 0, 3); //(0,0)에서 시작, speed는 1,hp는 30으로 설정
+        //c. 구렁이 생성
+        snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
+        //d. 폭탄 생성
+        bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
+    }
+    else {
+        //b. 까치 생성
+        magpie = new Magpie(3, 3, 1, 50, 0, 5); //(0,0)에서 시작, speed는 1,hp는 50으로 설정
+        //c. 구렁이 생성
+        snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
+        //d. 폭탄 생성
+        bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
+    }
 
+    magpie_init_health = magpie->getHealth();
 
     //2. 기타 세팅
     f_state = STOP;//방향키 안 누름

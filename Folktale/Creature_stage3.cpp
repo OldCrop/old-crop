@@ -3,7 +3,7 @@
 
 
 //구렁이 메서드 구현 -------------------------------------------------------------------------------
-Snake::Snake(int x, int y, int speed, double health, int attackPower, int tX, int tY) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
+Snake::Snake(int x, int y, int speed, double health, int attackPower, int tX, int tY, int n) : Monster(x, y, speed, health, attackPower, tX, tY) {//init 함수 -> 초기값 설정
     //구렁이 좌표 초기값 설정 
     //구렁이의 길이는 일단 10개로 지정
     //처음 구렁이는 화면의 중앙에 위치
@@ -19,7 +19,7 @@ Snake::Snake(int x, int y, int speed, double health, int attackPower, int tX, in
     dSnake = LEFT; //구렁이 처음 헤드 방향을 LEFT로 설정
 
     moveCounter = 0;
-    n = 8;
+    this->n = n;
 }
 
 void Snake::Draw() { //얘는 뭐하는 함수지
@@ -44,7 +44,7 @@ void Snake::move(int magpieX, int magpieY) { //newX와 newY는 사용하지 않음
     //좌, 우, 위, 아래 중 하나가 랜덤하게 결정
     //switch문으로 좌표 갱신
     moveCounter++;
-    if (moveCounter < n) { // 5번의 게임 루프마다 한 번씩 움직이도록 변경
+    if (moveCounter < n) { // n번의 게임 루프마다 한 번씩 움직이도록 변경
         return;
     }
     moveCounter = 0; // 카운터 초기화
@@ -195,11 +195,12 @@ Bomb::~Bomb() {
 
 //까치 메서드 구현 -----------------------------------------------------------------------------
 
-Magpie::Magpie(int x, int y, int speed, double health, int attackPower) :Ally(x, y, speed, health, attackPower) {
+Magpie::Magpie(int x, int y, int speed, double health, int attackPower, int n) :Ally(x, y, speed, health, attackPower) {
     moveCounter = 0;
     invincible = false;
     countBell = 0;
     lastDamageTime = 0;
+    this->n = n;
     Mix_VolumeChunk(hit_sound, 100);
 }
 
