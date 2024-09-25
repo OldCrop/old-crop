@@ -86,6 +86,6 @@ private:
     SDL_Rect back_to_main_destination_rect;
 
     Mix_Music* gallery_bgm;
-    Mix_Chunk* click_sound;
+    Mix_Music* click_sound;
     Mix_Music* click_main;
 };

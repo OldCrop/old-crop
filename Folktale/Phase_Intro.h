@@ -56,6 +56,7 @@ private:
 	SDL_Rect hard_button_dest_rectangle;
 	SDL_Rect hard_button_source_rectangle;
 
+	Mix_Music* intro_bgm;
 	Mix_Music* click_start;
 	Mix_Music* click_gallery;
 	Mix_Chunk* pause_Sound;
