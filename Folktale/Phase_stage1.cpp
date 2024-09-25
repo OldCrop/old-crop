@@ -16,11 +16,11 @@ bool is_rock = false;
 bool is_hard;
 
 Direction g_direction = DOWN_;
-Uint32 FIRE_COOLDOWN = 500;  // Åõ»çÃ¼ ¹ß»ç ÄðÅ¸ÀÓ
+Uint32 FIRE_COOLDOWN = 500;  // ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ß»ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
 
 const int monsterCount = 20;
 
-// Èê·¯°£ ½Ã°£ ±â·Ï
+// ï¿½ê·¯ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½
 double g_elapsed_time_ms;
 
 
@@ -44,13 +44,13 @@ Stage1::Stage1() {
     items->items.clear();
 
     for (auto& monster : monsters) {
-        delete monster;  // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Þ¸ð¸®¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+        delete monster;  // ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     }
 
-    monsters.clear();  // º¤ÅÍ¸¦ ºñ¿ó´Ï´Ù.
+    monsters.clear();  // ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.
 
     if (dogPoop != nullptr)
-        delete dogPoop;  // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Þ¸ð¸®¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+        delete dogPoop;  // ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     dogPoop = new DogPoop(0, 10, 5, 100.0, 10, 1, 10, 0);
     dogPoop->setXY(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2);
     dogPoop->setSpeed(5);
@@ -62,7 +62,7 @@ Stage1::Stage1() {
 
 
     if (dandelion != nullptr)
-        delete dandelion;  // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Þ¸ð¸®¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+        delete dandelion;  // ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
     dandelion = new Dandelion(50, 50, 0, 100.0, 10);
     dandelion->setXY(SCREEN_WIDTH / 2 - 25, SCREEN_HEIGHT / 2 - 25);
@@ -76,21 +76,21 @@ Stage1::Stage1() {
 
     dogPoop->setInvincible(false);
 
-    // 50°³ÀÇ ¸ó½ºÅÍ¸¦ º¤ÅÍ·Î »ý¼ºÇÕ´Ï´Ù.
+    // 50ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     //std::vector<Monster*> monsters;
 
-    // projectiles º¤ÅÍ¸¦ ºñ¿ó´Ï´Ù.
+    // projectiles ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.
     dogPoop->projectiles.clear();
 
     if (g_current_game_phase == PHASE_STAGE1_GAME) {
-        //À½¾Ç Àç»ý
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         Mix_PlayMusic(stg1_music, -1);
     }
     else {
-        //À½¾Ç Á¤Áö
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Mix_HaltMusic();
     }
-    // ¹è°æ ÀÌ¹ÌÁö ·Îµå
+    // ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     bg_surface = IMG_Load("../../Resources/stage1/bg.png");
     bg_texture = SDL_CreateTextureFromSurface(g_renderer, bg_surface);
     SDL_FreeSurface(bg_surface);
@@ -103,17 +103,17 @@ Stage1::Stage1() {
     bgframe_source_rect = { 0, 0, 1080, 720 };
     bgframe_dest_rect = { 0, 0, 1080, 720 };
 
-    // ¾ÆÀÌÅÛ ÀÌ¹ÌÁö ½ÃÆ® ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½Îµï¿½
     i_surface = IMG_Load("../../Resources/stage1/item/items2_sheet.png");
     i_texture = SDL_CreateTextureFromSurface(g_renderer, i_surface);
     SDL_FreeSurface(i_surface);
     i_source_rect = { 0, 0, 32, 32 };
     i_dest_rect = { 0, 0, 50, 50 };
 
-    // ¾ÆÀÌÅÛ ÀÌ¹ÌÁö ½ÃÆ®ÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓÀ» ¼³Á¤
-    for (int i = 0; i < 4; i++) { // ¾ÆÀÌÅÛ Á¾·ù°¡ 4°³
-        std::vector<SDL_Rect> itemClip; // °¢ ¾ÆÀÌÅÛÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓÀ» ÀúÀåÇÒ º¤ÅÍ
-        for (int j = 0; j < 10; j++) { // °¢ ¾ÆÀÌÅÛÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓÀÌ 10°³
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    for (int i = 0; i < 4; i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½
+        std::vector<SDL_Rect> itemClip; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        for (int j = 0; j < 10; j++) { // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½
             SDL_Rect clip;
             clip.x = j * 32;
             clip.y = i * 32;
@@ -121,10 +121,10 @@ Stage1::Stage1() {
             clip.h = 32;
             itemClip.push_back(clip);
         }
-        itemClips.push_back(itemClip); // °¢ ¾ÆÀÌÅÛÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓ º¤ÅÍ¸¦ ÀüÃ¼ ¾ÆÀÌÅÛ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓ º¤ÅÍ¿¡ Ãß°¡
+        itemClips.push_back(itemClip); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ß°ï¿½
     }
 
-    // °­¾ÆÁö ¶ËÀÇ ÀÌ¹ÌÁö ½ÃÆ®¸¦ ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½
     dp_ani_surface = IMG_Load("../../Resources/stage1/creature/dogPoopMovesheet.png");
     dogPoopTexture = SDL_CreateTextureFromSurface(g_renderer, dp_ani_surface);
     SDL_FreeSurface(dp_ani_surface);
@@ -132,7 +132,7 @@ Stage1::Stage1() {
     dp_dest_rect = { 0, 0, 50, 50 };
 
 
-    // °­¾ÆÁö ¶ËÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓÀ» ¼³Á¤
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < 4; ++i) {
         SDL_Rect clip;
         clip.x = i * 32;
@@ -142,19 +142,19 @@ Stage1::Stage1() {
         dogPoopClips.push_back(clip);
     }
 
-    // °­¾ÆÁö ¶ËÀÌ ¸Â¾ÒÀ» ¶§ÀÇ ÀÌ¹ÌÁö¸¦ ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Â¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     dp_hit_surface = IMG_Load("../../Resources/stage1/creature/dogPoopHitted.png");
     dogPoopHitTexture = SDL_CreateTextureFromSurface(g_renderer, dp_hit_surface);
     SDL_FreeSurface(dp_hit_surface);
 
-    // ¹Îµé·¹ ÀÌ¹ÌÁö ·Îµå
+    // ï¿½Îµé·¹ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     d_surface = IMG_Load("../../Resources/stage1/creature/dandelion.png");
     d_texture = SDL_CreateTextureFromSurface(g_renderer, d_surface);
     SDL_FreeSurface(d_surface);
     d_source_rect = { 0, 0, 32, 32 };
     d_dest_rect = { 0, 0, 50, 50 };
 
-    // ¹Îµé·¹°¡ ¸Â¾ÒÀ» ¶§ÀÇ ÀÌ¹ÌÁö¸¦ ·Îµå
+    // ï¿½Îµé·¹ï¿½ï¿½ ï¿½Â¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     d_hit_surface = IMG_Load("../../Resources/stage1/creature/dandelionHitted1.png");
     d_hit_texture = SDL_CreateTextureFromSurface(g_renderer, d_hit_surface);
     SDL_FreeSurface(d_hit_surface);
@@ -167,21 +167,21 @@ Stage1::Stage1() {
     d_hit_texture3 = SDL_CreateTextureFromSurface(g_renderer, d_hit_surface3);
     SDL_FreeSurface(d_hit_surface3);
 
-    // º´¾Æ¸® ÀÌ¹ÌÁö ·Îµå
+    // ï¿½ï¿½ï¿½Æ¸ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     c_surface = IMG_Load("../../Resources/stage1/creature/chick.png");
     c_texture = SDL_CreateTextureFromSurface(g_renderer, c_surface);
     SDL_FreeSurface(c_surface);
     c_source_rect = { 0, 0, 32, 32 };
     c_dest_rect = { 0, 0, 32, 32 };
 
-    // Âü»õ ÀÌ¹ÌÁö ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     s_surface = IMG_Load("../../Resources/stage1/creature/sparrow.png");
     s_texture = SDL_CreateTextureFromSurface(g_renderer, s_surface);
     SDL_FreeSurface(s_surface);
     s_source_rect = { 0, 0, 32, 32 };
     s_dest_rect = { 0, 0, 32, 32 };
 
-    // Åõ»çÃ¼ ÀÌ¹ÌÁö ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     p_surface = IMG_Load("../../Resources/stage1/item/projectile.png");
     p_texture = SDL_CreateTextureFromSurface(g_renderer, p_surface);
     SDL_FreeSurface(p_surface);
@@ -191,7 +191,7 @@ Stage1::Stage1() {
     p_source_rect = { 0, 0, 32, 32 };
     p_dest_rect = { 0, 0, 40, 40 };
 
-    // empty heart, half heart, full heart ÀÌ¹ÌÁö ·Îµå
+    // empty heart, half heart, full heart ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     h0_surface = IMG_Load("../../Resources/heart0.png");
     h0_texture = SDL_CreateTextureFromSurface(g_renderer, h0_surface);
     SDL_FreeSurface(h0_surface);
@@ -202,8 +202,8 @@ Stage1::Stage1() {
     h2_texture = SDL_CreateTextureFromSurface(g_renderer, h2_surface);
     SDL_FreeSurface(h2_surface);
 
-    // ###### ÀÏ½Ã Á¤Áö ÀÌ¹ÌÁö #######
-    // main, continue ¹öÆ° ÀÌ¹ÌÁö ·Îµå
+    // ###### ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ #######
+    // main, continue ï¿½ï¿½Æ° ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* tmp_surface1 = IMG_Load("../../Resources/btn_continue.png");
     _stg1_continue_button_texture = SDL_CreateTextureFromSurface(g_renderer, tmp_surface1);
     SDL_FreeSurface(tmp_surface1);
@@ -216,22 +216,22 @@ Stage1::Stage1() {
 
     _stg1_home_button_destination = { 490, 370, 100, 100 };
 
-    // ¹ÝÅõ¸í °ËÁ¤ ¹è°æ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     SDL_Surface* tmp_surface3 = IMG_Load("../../Resources/translucent_black.png");
     _stg1_pause_bg_texture = SDL_CreateTextureFromSurface(g_renderer, tmp_surface3);
     SDL_FreeSurface(tmp_surface3);
     _stg1_pause_bg_destination = { 0, 0, 1080, 720 };
 
-    // ¹è°æÀ½¾Ç ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     stg1_music = Mix_LoadMUS("../../Resources/stage1/sounds/stg1backgroundmusic.mp3");
 
-    // ¾ÆÀÌÅÛ ¸Ô´Â È¿°úÀ½ ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     stg1_eat_sound = Mix_LoadWAV("../../Resources/stage1/sounds/stgItemEat.wav");
 
-    // ¹ß»ç È¿°úÀ½ ·Îµå
+    // ï¿½ß»ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     stg1_shoot_sound = Mix_LoadWAV("../../Resources/stage1/sounds/stgShoot.wav");
 
-    // ÀÏ½ÃÁ¤Áö ¹öÆ° È¿°úÀ½ ·Îµå
+    // ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     stg1_pause_sound = Mix_LoadWAV("../../Resources/stage1/sounds/pauseSound.wav");
 
     //std::cout << dogPoop->getHealth() << std::endl;
@@ -250,9 +250,9 @@ void Stage1::HandleEvents() {
 
         case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_ESCAPE) {
-                g_is_paused = !g_is_paused;  // °ÔÀÓÀÇ ÀÏ½ÃÁ¤Áö »óÅÂ¸¦ Åä±ÛÇÕ´Ï´Ù.
+                g_is_paused = !g_is_paused;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
                 if (g_is_paused) {
-                    g_pause_sound_played = false;  // ÀÏ½ÃÁ¤Áö »óÅÂ·Î ÀüÈ¯µÉ ¶§ È¿°úÀ½ Àç»ý »óÅÂ¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+                    g_pause_sound_played = false;  // ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
                 }
             }
             if (event.key.keysym.sym == SDLK_LEFT) {
@@ -299,12 +299,12 @@ void Stage1::HandleEvents() {
                 if (g_X >= _stg1_continue_button_destination.x && g_X <= _stg1_continue_button_destination.x + _stg1_continue_button_destination.w &&
                     g_Y >= _stg1_continue_button_destination.y && g_Y <= _stg1_continue_button_destination.y + _stg1_continue_button_destination.h) {
                     Mix_PlayChannel(-1, stg1_pause_sound, 0);
-                    stg1_pause_btn_pushed = 1; //continue ¹öÆ° ´©¸§
+                    stg1_pause_btn_pushed = 1; //continue ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
                 }
                 else if (g_X >= _stg1_home_button_destination.x && g_X <= _stg1_home_button_destination.x + _stg1_home_button_destination.w &&
                     g_Y >= _stg1_home_button_destination.y && g_Y <= _stg1_home_button_destination.y + _stg1_home_button_destination.h) {
                     Mix_PlayChannel(-1, stg1_pause_sound, 0);
-                    stg1_pause_btn_pushed = 2; //home ¹öÆ° ´©¸§
+                    stg1_pause_btn_pushed = 2; //home ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
                 }
             }
             break;
@@ -318,78 +318,78 @@ void Stage1::HandleEvents() {
 
 
 void Stage1::Update() {
-    // 1.1. Å°º¸µå ÀÔ·Â¿¡ µû¶ó ÁÖÀÎ°øÀÇ À§Ä¡¸¦ º¯°æÇÑ´Ù.
-    // ÀÏ½ÃÁ¤Áö »óÅÂÀÎÁö È®ÀÎ
+    // 1.1. Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+    // ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     std::cout << dogPoop->getHealth();
     if (g_is_paused) {
-        //¹è°æÀ½ ÀÏ½Ã ÁßÁö
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Mix_PauseMusic();
         if (!g_pause_sound_played) {
             Mix_PlayChannel(-1, stg1_pause_sound, 0);
-            g_pause_sound_played = true;  // È¿°úÀ½ÀÌ Àç»ýµÇ¾úÀ½À» Ç¥½Ã
+            g_pause_sound_played = true;  // È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
         }
 
         if (stg1_pause_btn_pushed == 1) {
-            g_is_paused = !g_is_paused;// °ÔÀÓÀÇ ÀÏ½ÃÁ¤Áö »óÅÂ¸¦ Åä±Û
-            g_pause_sound_played = false;  // "Continue" ¹öÆ°À» ´©¸£¸é È¿°úÀ½ Àç»ý »óÅÂ¸¦ ÃÊ±âÈ­
+            g_is_paused = !g_is_paused;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½
+            g_pause_sound_played = false;  // "Continue" ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½Ê±ï¿½È­
             stg1_pause_btn_pushed = 0;
         }
         else if (stg1_pause_btn_pushed == 2) {
-            g_is_paused = !g_is_paused;  // °ÔÀÓÀÇ ÀÏ½ÃÁ¤Áö »óÅÂ¸¦ Åä±Û
+            g_is_paused = !g_is_paused;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½
             g_current_game_phase = PHASE_INTRO;
             game_result = 0;
             stg1_pause_btn_pushed = 0;
         }
 
-        return;  // °ÔÀÓÀÌ ÀÏ½ÃÁ¤ÁöµÈ °æ¿ì, ¾÷µ¥ÀÌÆ®¸¦ ¼öÇàÇÏÁö ¾Ê½À´Ï´Ù.
+        return;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.
     }
     else {
-        //¹è°æÀ½ Àç»ý
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         Mix_ResumeMusic();
     }
     if (g_key_left && g_key_up) {
-        dogPoop->move(-1, -1);  // ¿ÞÂÊ À§·Î ÀÌµ¿
+        dogPoop->move(-1, -1);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         g_direction = LEFT_UP;
     }
     else if (g_key_right && g_key_up) {
-        dogPoop->move(1, -1);  // ¿À¸¥ÂÊ À§·Î ÀÌµ¿
+        dogPoop->move(1, -1);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
         g_direction = RIGHT_UP;
 
     }
     else if (g_key_left && g_key_down) {
-        dogPoop->move(-1, 1);  // ¿ÞÂÊ ¾Æ·¡·Î ÀÌµ¿
+        dogPoop->move(-1, 1);  // ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         g_direction = LEFT_DOWN;
     }
     else if (g_key_right && g_key_down) {
-        dogPoop->move(1, 1);  // ¿À¸¥ÂÊ ¾Æ·¡·Î ÀÌµ¿
+        dogPoop->move(1, 1);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         g_direction = RIGHT_DOWN;
     }
-    // ÁÂÃø ÀÌµ¿
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     else if (g_key_left) {
-        dogPoop->move(-1, 0);  // ¿ÞÂÊÀ¸·Î ÀÌµ¿
+        dogPoop->move(-1, 0);  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
         g_direction = LEFT_;
     }
-    // ¿ìÃø ÀÌµ¿
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     else if (g_key_right) {
         dogPoop->move(1, 0);
 
         g_direction = RIGHT_;
     }
-    // À§·Î ÀÌµ¿
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     else if (g_key_up) {
-        dogPoop->move(0, -1);  // À§·Î ÀÌµ¿
+        dogPoop->move(0, -1);  // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
         g_direction = UP_;
     }
-    // ¾Æ·¡·Î ÀÌµ¿
+    // ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     else if (g_key_down) {
-        dogPoop->move(0, 1);  // ¾Æ·¡·Î ÀÌµ¿
+        dogPoop->move(0, 1);  // ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
         g_direction = DOWN_;
     }
-    // È­¸é ¹ÛÀ¸·Î ³ª°¡´Â °ÍÀ» È®ÀÎÇÕ´Ï´Ù.
+    // È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     if (dogPoop->getX() < 40) {
         dogPoop->setX(40);
     }
@@ -404,7 +404,7 @@ void Stage1::Update() {
     }
 
     Uint32 currentTime = SDL_GetTicks();
-    // ½ºÆäÀÌ½º¹Ù¸¦ ´©¸£¸é, Åõ»çÃ¼¸¦ ¹ß»çÇÑ´Ù.
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ñ´ï¿½.
     if (g_key_space && currentTime >= lastFireTime + FIRE_COOLDOWN) {
         int dx = 0, dy = 0;
         switch (g_direction) {
@@ -422,7 +422,7 @@ void Stage1::Update() {
         lastFireTime = currentTime;
     }
 
-    // 1.2. Åõ»çÃ¼ ÀÌµ¿
+    // 1.2. ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½Ìµï¿½
     dogPoop->moveProjectiles();
 
     if (dogPoop->getKillcount() > monsterCount) {
@@ -431,25 +431,25 @@ void Stage1::Update() {
         viewedEndings[0][2] = true;
     }
 
-    //3ÃÊ¸¶´Ù Àû »ý¼º
+    //3ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (g_elapsed_time_ms >= 3000 && monsters.size() < 50) {
-        // Àû °´Ã¼ÀÇ ÃâÇö À§Ä¡¸¦ È­¸éÀÇ ¿ÜºÎ·Î ¼³Á¤ÇÕ´Ï´Ù.
+        // ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ÜºÎ·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         int x, y;
-        int spawnSide = rand() % 4; // 0: ¿ÞÂÊ, 1: ¿À¸¥ÂÊ, 2: À§ÂÊ, 3: ¾Æ·¡ÂÊ
+        int spawnSide = rand() % 4; // 0: ï¿½ï¿½ï¿½ï¿½, 1: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 2: ï¿½ï¿½ï¿½ï¿½, 3: ï¿½Æ·ï¿½ï¿½ï¿½
         switch (spawnSide) {
-        case 0: // ¿ÞÂÊ¿¡¼­ ÃâÇö
+        case 0: // ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             x = -50;
             y = (rand() % SCREEN_HEIGHT + 50) - 100;
             break;
-        case 1: // ¿À¸¥ÂÊ¿¡¼­ ÃâÇö
+        case 1: // ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             x = SCREEN_WIDTH + 50;
             y = (rand() % SCREEN_HEIGHT + 50) - 100;
             break;
-        case 2: // À§ÂÊ¿¡¼­ ÃâÇö
+        case 2: // ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             x = (rand() % SCREEN_WIDTH + 50) - 100;
             y = -50;
             break;
-        case 3: // ¾Æ·¡ÂÊ¿¡¼­ ÃâÇö
+        case 3: // ï¿½Æ·ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             x = (rand() % SCREEN_WIDTH + 50) - 100;
             y = SCREEN_HEIGHT + 50;
             break;
@@ -464,7 +464,7 @@ void Stage1::Update() {
             monsters.back()->setTarget(dandelion);
         }
         if (monsters.size() % 3 == 0) {
-            //¾ÆÀÌÅÛ »ý¼ºÁÖ±â = ¸ó½ºÅÍ°¡ n¹ø »ý¼ºµÉ ¶§¸¶´Ù 
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ = ï¿½ï¿½ï¿½Í°ï¿½ nï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
             int x = rand() % (SCREEN_WIDTH - 120) + 40;
             int y = rand() % (SCREEN_HEIGHT - 120) + 40;
             int type;
@@ -476,34 +476,34 @@ void Stage1::Update() {
             }
             items->items.push_back(new Item(x, y, type));
         }
-        // °æ°ú ½Ã°£ ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
         g_elapsed_time_ms = 0;
     }
-    //¸ó½ºÅÍµé ÀÌµ¿ ·ÎÁ÷
+    //ï¿½ï¿½ï¿½Íµï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
     for (auto& monster : monsters) {
         monster->toTarget();
     }
 
-    // 1.3. Åõ»çÃ¼¿Í ÀûÀÇ Ãæµ¹ ÆÇÁ¤
+    // 1.3. ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
     dogPoop->updateProjectiles(monsters);
 
-    // 1.4. Àû°ú ¹Îµé·¹, ÁÖÀÎ°øÀÇ Ãæµ¹ ÆÇÁ¤
+    // 1.4. ï¿½ï¿½ï¿½ï¿½ ï¿½Îµé·¹, ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
     for (auto& monster : monsters) {
         Uint32 currentTime = SDL_GetTicks();
-        // Àû°ú ¹Îµé·¹ÀÇ Ãæµ¹ ÆÇÁ¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Îµé·¹ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
         int dx1 = dandelion->getX() - monster->getX();
         int dy1 = dandelion->getY() - monster->getY();
         if (dx1 * dx1 + dy1 * dy1 < COLLISION_DISTANCE * COLLISION_DISTANCE) {
-            //¸ÂÀº µÚ ¹Îµé·¹´Â 2ÃÊ°£ ¹«Àû
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îµé·¹ï¿½ï¿½ 2ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (currentTime >= dandelionInvincibleStartTime + 2000) {
                 dandelion->GetAttackted(monster->getAttackDamage());
                 dandelionInvincibleStartTime = currentTime;
             }
         }
-        // Àû°ú ÁÖÀÎ°øÀÇ Ãæµ¹ ÆÇÁ¤
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
         int dx2 = dogPoop->getX() - monster->getX();
         int dy2 = dogPoop->getY() - monster->getY();
-        //¸ÂÀº µÚ °­¾ÆÁö¶ËÀº 2ÃÊ°£ ¹«Àû
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (dx2 * dx2 + dy2 * dy2 < COLLISION_DISTANCE * COLLISION_DISTANCE) {
             if (currentTime >= dogPoopInvincibleStartTime + 2000) {
                 dogPoop->setInvincible(true);
@@ -512,13 +512,13 @@ void Stage1::Update() {
             }
         }
     }
-    // ¹«Àû »óÅÂ ÇØÁ¦
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     Uint32 currentTimed = SDL_GetTicks();
     if (dogPoop->getInvincible() && currentTimed >= dogPoopInvincibleStartTime + 2000) {
         dogPoop->setInvincible(false);
     }
 
-    //¾ÆÀÌÅÛ°ú °­¾ÆÁö¶ËÀÇ Ãæµ¹ ÆÇÁ¤
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Û°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < items->items.size(); ++i) {
         Item* item = items->items[i];
         int dx = dogPoop->getX() - item->getX();
@@ -526,21 +526,21 @@ void Stage1::Update() {
         if (dx * dx + dy * dy < COLLISION_DISTANCE * COLLISION_DISTANCE) {
             Mix_PlayChannel(-1, stg1_eat_sound, 0);
             if (item->getType() == 0) {
-                //0¹øÀÌ¸é Ã¼·Â È¸º¹ ¾ÆÀÌÅÛ
+                //0ï¿½ï¿½ï¿½Ì¸ï¿½ Ã¼ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 dogPoop->setHealth(dogPoop->getHealth() + 10);
             }
             else if (item->getType() == 1) {
-                //1¹øÀÌ¸é °ø°Ý·Â Áõ°¡ ¾ÆÀÌÅÛ
+                //1ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 FIRE_COOLDOWN -= 50;
                 if (FIRE_COOLDOWN <= 300)
                     FIRE_COOLDOWN = 300;
             }
             else if (item->getType() == 2) {
-                //2¹øÀÌ¸é ÀÌµ¿¼Óµµ Áõ°¡ ¾ÆÀÌÅÛ
+                //2ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ìµï¿½ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 dogPoop->setSpeed(dogPoop->getSpeed() + 1);
             }
             else if (item->getType() == 3) {
-                //3¹øÀÌ¸é µ¹ ¹«±â 
+                //3ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
                 is_rock = true;
                 dogPoop->setProjectileDamage(15);
             }
@@ -549,13 +549,13 @@ void Stage1::Update() {
             --i;
         }
     }
-    //°­Áã¶Ë Ã¼·ÂÀÌ 0ÀÌÇÏ·Î ¶³¾îÁö¸é ¿£µù
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (dogPoop->getHealth() <= 0) {
         g_current_game_phase = PHASE_STAGE1_ENDING;
         game_result = 2;
         viewedEndings[0][1] = true;
     }
-    //¹Îµé·¹ Ã¼·ÂÀÌ 0ÀÌÇÏ·Î ¶³¾îÁö¸é ¿£µù
+    //ï¿½Îµé·¹ Ã¼ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (dandelion->getHealth() <= 0) {
         g_current_game_phase = PHASE_STAGE1_ENDING;
         game_result = 1;
@@ -606,9 +606,9 @@ void Stage1::Render() {
 
     // Render the items
     for (Item* item : items->items) {
-        int itemType = item->getType(); // ¾ÆÀÌÅÛÀÇ Á¾·ù
-        int frameIndex = item->getCurrentFrameIndex(); // ÇöÀçÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓ ÀÎµ¦½º
-        SDL_Rect& clip = itemClips[itemType][frameIndex]; // ÇöÀçÀÇ ¾Ö´Ï¸ÞÀÌ¼Ç ÇÁ·¹ÀÓ
+        int itemType = item->getType(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        int frameIndex = item->getCurrentFrameIndex(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
+        SDL_Rect& clip = itemClips[itemType][frameIndex]; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         i_dest_rect.x = item->getX();
         i_dest_rect.y = item->getY();
         if (SDL_RenderCopy(g_renderer, i_texture, &clip, &i_dest_rect) != 0) {
@@ -736,16 +736,16 @@ void Stage1::Reset() {
     items->items.clear();
 
     for (auto& monster : monsters) {
-        delete monster;  // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Þ¸ð¸®¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+        delete monster;  // ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     }
 
-    monsters.clear();  // º¤ÅÍ¸¦ ºñ¿ó´Ï´Ù.
+    monsters.clear();  // ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.
 
     if (dogPoop != nullptr)
-        delete dogPoop;  // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Þ¸ð¸®¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+        delete dogPoop;  // ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
-    if (!is_hard) { //is_hard ·Î º¯°æÇÏ±â
-        //ÀÌÁö¸ðµå ÀÏ °æ¿ì ÇÇ°¡ 2¹è ( º¯¼ö¸íÀÌ ISHARDÀÓ )
+    if (!is_hard) { //is_hard ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ 2ï¿½ï¿½ ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ISHARDï¿½ï¿½ )
         dogPoop = new DogPoop(0, 10, 5, 200.0, 10, 1, 10, 10);
         dogPoop->setXY(SCREEN_WIDTH / 2 + 20, SCREEN_HEIGHT / 2);
         dogPoop->setSpeed(5);
@@ -767,7 +767,7 @@ void Stage1::Reset() {
     }
 
     if (dandelion != nullptr)
-        delete dandelion;  // Æ÷ÀÎÅÍ°¡ °¡¸®Å°´Â ¸Þ¸ð¸®¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+        delete dandelion;  // ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¸ð¸®¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
     dandelion = new Dandelion(50, 50, 0, 100.0, 10);
     dandelion->setXY(SCREEN_WIDTH / 2 - 25, SCREEN_HEIGHT / 2 - 25);
@@ -781,18 +781,18 @@ void Stage1::Reset() {
 
     dogPoop->setInvincible(false);
 
-    // 50°³ÀÇ ¸ó½ºÅÍ¸¦ º¤ÅÍ·Î »ý¼ºÇÕ´Ï´Ù.
+    // 50ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     //std::vector<Monster*> monsters;
 
-    // projectiles º¤ÅÍ¸¦ ºñ¿ó´Ï´Ù.
+    // projectiles ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.
     dogPoop->projectiles.clear();
 
     if (g_current_game_phase == PHASE_STAGE1_GAME) {
-        //À½¾Ç Àç»ý
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         Mix_PlayMusic(stg1_music, -1);
     }
     else {
-        //À½¾Ç Á¤Áö
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Mix_HaltMusic();
     }
 
