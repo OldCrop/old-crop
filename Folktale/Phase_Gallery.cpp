@@ -3,8 +3,15 @@
 
 Gallery::Gallery()
 {
+    // Initialization code...
+    std::cout << "Gallery phase initialized" << std::endl;
+
     //��� �̹��� �ҷ�����
     SDL_Surface* gallery_bg_surface = IMG_Load("../../Resources/main.png");
+    if (!gallery_bg_surface) {
+        std::cerr << "Failed to load gallery background: " << IMG_GetError() << std::endl;
+        return;
+    }
     gallery_bg_texture = SDL_CreateTextureFromSurface(g_renderer, gallery_bg_surface);
     SDL_FreeSurface(gallery_bg_surface);
 
@@ -13,6 +20,10 @@ Gallery::Gallery()
 
     //���� ���� �� �̹���
     SDL_Surface* ending_before_surface = IMG_Load("../../Resources/gallery/ending_before.png");
+	if (!ending_before_surface) {
+		std::cerr << "Failed to load ending_before: " << IMG_GetError() << std::endl;
+		return;
+	}
     ending_before_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
 
     ending_before_source_rect = { 0, 0, ending_before_surface->w, ending_before_surface->h };
@@ -35,6 +46,10 @@ Gallery::Gallery()
     ending32_destination_rect = { 840, 365, ending_before_source_rect.w, ending_before_source_rect.h };
 
     SDL_Surface* frame_surface = IMG_Load("../../Resources/frame.png");
+	if (!frame_surface) {
+		std::cerr << "Failed to load frame: " << IMG_GetError() << std::endl;
+		return;
+	}
     frame_texture_ = SDL_CreateTextureFromSurface(g_renderer, frame_surface);
     SDL_FreeSurface(frame_surface);
 
@@ -310,7 +325,7 @@ void Gallery::HandleEvents()
                 {
                     Mix_PlayMusic(click_main, 0);
                     SDL_Delay(1000);
-                    g_current_game_phase = PHASE_INTRO;
+                    g_current_game_phase = PHASE_MAIN_MENU;
                 }
                 //ending11
                 else if (event.button.x > ending11_destination_rect.x && event.button.x < ending11_destination_rect.x + ending11_destination_rect.w &&

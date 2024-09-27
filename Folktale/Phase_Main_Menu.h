@@ -3,11 +3,11 @@
 #include "SDL.h"
 #include "STAGE.h"
 
-class Intro : public PhaseInterface
+class MainMenu : public PhaseInterface
 {
 public:
-	Intro();
-	~Intro();
+	MainMenu();
+	~MainMenu();
 	virtual void HandleEvents();
 	virtual void Update();
 	virtual void Render();
