@@ -336,7 +336,7 @@ void Stage1::Update() {
         }
         else if (stg1_pause_btn_pushed == 2) {
             g_is_paused = !g_is_paused;  // ������ �Ͻ����� ���¸� ���
-            g_current_game_phase = PHASE_INTRO;
+            g_current_game_phase = PHASE_MAIN_MENU;
             game_result = 0;
             stg1_pause_btn_pushed = 0;
         }

@@ -1,6 +1,7 @@
 
 #include "Game.h"
-#include "Phase_Intro.h"
+#include "Phase_Main_Intro.h"
+#include "Phase_Main_Menu.h"
 #include "Phase_stage1Intro.h"
 #include "Phase_stage1Game.h"
 #include "Phase_stage1Ending.h"
@@ -43,7 +44,7 @@ bool viewedEndings[NUMBER_OF_STAGES][ENDINGS_PER_STAGE] = { {false, false, false
 int main(int argc, char* argv[])
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    IMG_Init(IMG_INIT_PNG); // ÀÌ¹ÌÁö ¶óÀÌºê·¯¸® ÃÊ±âÈ­
+    IMG_Init(IMG_INIT_PNG); // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ ï¿½Ê±ï¿½È­
     TTF_Init();
 
     font = TTF_OpenFont("../../Resources/PF.ttf", 100);
@@ -59,9 +60,11 @@ int main(int argc, char* argv[])
 
     InitGame();
 
-    PhaseInterface* game_phase[11];
+    PhaseInterface* game_phase[14];
 
+	game_phase[PHASE_MAIN_INTRO] = new Phase_Main_Intro();
     game_phase[PHASE_INTRO] = new Intro();
+    game_phase[PHASE_MAIN_MENU] = new MainMenu();
     game_phase[PHASE_STAGE1_INTRO] = new Phase_stage1Intro();
     game_phase[PHASE_STAGE1_GAME] = new Stage1();
     game_phase[PHASE_STAGE1_ENDING] = new Phase_stage1Ending();
@@ -75,8 +78,8 @@ int main(int argc, char* argv[])
     game_phase[PHASE_ENDING] = new Ending();
 
     game_phase[g_prev_game_phase]->Reset();
-    g_current_game_phase = PHASE_INTRO;
-    g_prev_game_phase = PHASE_INTRO;
+    g_current_game_phase = PHASE_MAIN_INTRO;
+    g_prev_game_phase = PHASE_MAIN_INTRO;
 
     //game_phase[PHASE_STAGE1_GAME]->Reset();
 
@@ -106,7 +109,10 @@ int main(int argc, char* argv[])
         //}
     }
 
+	ClearGame();
+	delete game_phase[PHASE_MAIN_INTRO];
     delete game_phase[PHASE_INTRO];
+    delete game_phase[PHASE_MAIN_MENU];
     delete game_phase[PHASE_STAGE1_INTRO];
     delete game_phase[PHASE_STAGE1_GAME];
     delete game_phase[PHASE_STAGE1_ENDING];
