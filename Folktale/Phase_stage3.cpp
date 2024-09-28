@@ -9,7 +9,7 @@ void Stage3::UpdateScoreTexture()
 {
     if (myBell_ != 0)
     {
-        SDL_DestroyTexture(myBell_);		// !!!Áß¿ä!!!  ÀÌ¹Ì »ý¼ºµÇ¾îÀÖ´Â texture °¡ ÀÖÀ¸¸é ¹Ýµå½Ã ¸Þ¸ð¸®¿¡¼­ Áö¿ö¾ßÇÑ´Ù. !!!
+        SDL_DestroyTexture(myBell_);		// !!!ï¿½ß¿ï¿½!!!  ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ texture ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Þ¸ð¸®¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. !!!
         myBell_ = 0;
     }
 
@@ -21,54 +21,54 @@ void Stage3::UpdateScoreTexture()
 }
 
 Stage3::Stage3() {
-    //1. °´Ã¼ »ý¼º
-    //a. Á¾ »ý¼º
+    //1. ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+    //a. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     uniform_int_distribution<int> distributionX(1, screenWidth / GRID_STAGE3 - 2);
     uniform_int_distribution<int> distributionY(1, screenHeight / GRID_STAGE3 - 2);
 
 
     bell = new Bell(distributionX(generator), distributionY(generator), 0, 0);
     if (is_hard) {
-        //b. ±îÄ¡ »ý¼º
-        magpie = new Magpie(3, 3, 1, 30, 0,3); //(0,0)¿¡¼­ ½ÃÀÛ, speed´Â 1,hp´Â 30À¸·Î ¼³Á¤
-        //c. ±¸··ÀÌ »ý¼º
+        //b. ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        magpie = new Magpie(3, 3, 1, 30, 0,3); //(0,0)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, speedï¿½ï¿½ 1,hpï¿½ï¿½ 30ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //c. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
-        //d. ÆøÅº »ý¼º
+        //d. ï¿½ï¿½Åº ï¿½ï¿½ï¿½ï¿½
         bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
     }
     else {
-        //b. ±îÄ¡ »ý¼º
-        magpie = new Magpie(3, 3, 1, 50, 0,5); //(0,0)¿¡¼­ ½ÃÀÛ, speed´Â 1,hp´Â 50À¸·Î ¼³Á¤
-        //c. ±¸··ÀÌ »ý¼º
+        //b. ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        magpie = new Magpie(3, 3, 1, 50, 0,5); //(0,0)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, speedï¿½ï¿½ 1,hpï¿½ï¿½ 50ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //c. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
-        //d. ÆøÅº »ý¼º
+        //d. ï¿½ï¿½Åº ï¿½ï¿½ï¿½ï¿½
         bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
     }
 
-    ////2. ÅØ½ºÃÄ °¡Á®¿À±â
-    //a. Á¾ ÅØ½ºÃÄ
+    ////2. ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //a. ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface = IMG_Load("../../Resources/stage3/bell.png");
     bell_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     bell_destination_rect.x = bell->getX();
     bell_destination_rect.y = bell->getY();
     bell_destination_rect.w = GRID_STAGE3;
     bell_destination_rect.h = GRID_STAGE3;
 
-    //b. ±îÄ¡ ÅØ½ºÃÄ
+    //b. ï¿½ï¿½Ä¡ ï¿½Ø½ï¿½ï¿½ï¿½
     temp_sheet_surface = IMG_Load("../../Resources/stage3/magpie.png");
     magpie_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     magpie_destination_rect.x = magpie->getX() * GRID_STAGE3;
     magpie_destination_rect.y = magpie->getY() * GRID_STAGE3;
     magpie_destination_rect.w = GRID_STAGE3;
     magpie_destination_rect.h = GRID_STAGE3;
 
 
-    //c. ±¸··ÀÌ ÅØ½ºÃÄ
+    //c. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     temp_sheet_surface = IMG_Load("../../Resources/stage3/snakeHead.png");
     snakeHead_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     snake_destination_rect.x = snake->getSnakeList().front()->sX;
     snake_destination_rect.y = snake->getSnakeList().front()->sY;
     snake_destination_rect.w = GRID_STAGE3;
@@ -76,16 +76,16 @@ Stage3::Stage3() {
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/snakeBody.png");
     snakeBody_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     temp_sheet_surface = IMG_Load("../../Resources/stage3/snakeTail.png");
     snakeTail_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
 
-    //ÆøÅº ÅØ½ºÃÄ 
+    //ï¿½ï¿½Åº ï¿½Ø½ï¿½ï¿½ï¿½ 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/bombAfter.png");
     bombAfter_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     bomb_source_rect.x = 0;
     bomb_source_rect.y = 0;
     bomb_source_rect.w = 32;
@@ -94,10 +94,10 @@ Stage3::Stage3() {
     bomb_destination_rect.w = GRID_STAGE3 * 3;
     bomb_destination_rect.h = GRID_STAGE3 * 3;
 
-    //d. ¹è°æ ÅØ½ºÃÄ
+    //d. ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     temp_sheet_surface = IMG_Load("../../Resources/stage3/background.png");
     bg_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     bg_destination_rect.x = GRID_STAGE3;
     bg_destination_rect.y = GRID_STAGE3;
     bg_destination_rect.w = screenWidth - GRID_STAGE3 * 2;
@@ -105,43 +105,43 @@ Stage3::Stage3() {
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/red.png");
     red_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/translucent_black.png");
     wait_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
-    //ÇÏÆ® ÅØ½ºÃ³
+    //ï¿½ï¿½Æ® ï¿½Ø½ï¿½Ã³
     temp_sheet_surface = IMG_Load("../../Resources/heart0.png");
     heartZero_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/heart1.png");
     heartHalf_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/heart2.png");
     heartOne_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     heart_destination_rect.w = GRID_STAGE3 - 15;
     heart_destination_rect.h = GRID_STAGE3 - 15;
 
-    //¹öÆ° ÅØ½ºÃÄ
+    //ï¿½ï¿½Æ° ï¿½Ø½ï¿½ï¿½ï¿½
     temp_sheet_surface = IMG_Load("../../Resources/btn_continue.png");
     button_continue = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     continue_destination_rect = { 490,270,100,100 };
 
     temp_sheet_surface = IMG_Load("../../Resources/btn_main.png");
     button_main = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     main_destination_rect = { 490,370,100,100 };
 
 
 
-    //±Û¾¾ ÅØ½ºÃÄ ¸¸µé±â,,
+    //ï¿½Û¾ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,,
     myBell_destination.x = screenWidth - GRID_STAGE3 * 2;
     myBell_destination.y = GRID_STAGE3 + 5;
     myBell_destination.w = GRID_STAGE3 - 10;
@@ -155,7 +155,7 @@ Stage3::Stage3() {
     readyCount_destination.h = 100;
 
 
-    //À½¾Ç °¡Á®¿À±â
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     background_music = Mix_LoadMUS("../../Resources/stage3/stage3.mp3");
     Mix_VolumeMusic(90);
 
@@ -170,10 +170,10 @@ Stage3::Stage3() {
     button_sound = Mix_LoadWAV("../../Resources/stage3/pauseSound.wav");
     Mix_VolumeChunk(button_sound, 128);
 
-    //2. ±âÅ¸ ¼¼ÆÃ
-    f_state = STOP;//¹æÇâÅ° ¾È ´©¸§
-    stop = true; //Á¤Áö »óÈ²À¸·Î ÃÊ±âÈ­
-    key_pushed.clear();//Å° Á¤º¸ ÃÊ±âÈ­
+    //2. ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½
+    f_state = STOP;//ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    stop = true; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+    key_pushed.clear();//Å° ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 
 
 
@@ -211,31 +211,31 @@ void Stage3::HandleEvents() {
         case SDL_KEYDOWN:
 
             if (event.key.keysym.sym == SDLK_ESCAPE) {
-                if (stage3_status == 1) {//°ÔÀÎ ÁøÇà ÁßÀÌ¾úÀ¸¸é ÀÏ½ÃÁßÁö·Î
+                if (stage3_status == 1) {//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     stage3_status = 2;
                     pauseStartTime = SDL_GetTicks();
                     totalPauseTime = 0;
 
-                    Mix_PauseMusic(); // ¹è°æÀ½¾Ç ÀÏ½ÃÁ¤Áö
+                    Mix_PauseMusic(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
                     for (int i = 0; i < MIX_CHANNELS; i++) {
-                        Mix_Pause(i); // ¸ðµç Ã¤³ÎÀÇ »ç¿îµå ÀÏ½ÃÁ¤Áö
+                        Mix_Pause(i); // ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
                     }
                 }
 
             }
-            if (stage3_status == 2) {//ÀÏ½ÃÁ¤Áö »óÅÂ¸é Å° ÀÔ·Â ¹ÞÁö ¾ÊÀ½
+            if (stage3_status == 2) {//ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 break;
             }
-            /////////////¹æÇâÅ° Á¶ÀÛ
+            /////////////ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½
 
             if (event.key.keysym.sym == SDLK_LEFT) {
-                f_state = LEFT; //ÇöÀç ´­¸° °ªÀÌ LEFT
+                f_state = LEFT; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ LEFT
                 stop = false;
                 if (stage3_status == 0) {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
                     lastBombTime = SDL_GetTicks();
-                    /// Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    /// Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
 
             }
@@ -249,7 +249,7 @@ void Stage3::HandleEvents() {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
                     lastBombTime = SDL_GetTicks();
-                    ///Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    ///Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
             }
             else if (event.key.keysym.sym == SDLK_UP) {
@@ -274,11 +274,11 @@ void Stage3::HandleEvents() {
                     stage3_status = 1;
                     stage3_startTime = SDL_GetTicks();
                     lastBombTime = SDL_GetTicks();
-                    //Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    //Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
             }
             if (std::find(key_pushed.begin(), key_pushed.end(), f_state) == key_pushed.end())
-                key_pushed.push_front(f_state);//´­¸° Å° Á¤º¸ ÀúÀå
+                key_pushed.push_front(f_state);//ï¿½ï¿½ï¿½ï¿½ Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             break;
 
@@ -312,31 +312,31 @@ void Stage3::HandleEvents() {
 
             if (event.button.button == SDL_BUTTON_LEFT)
             {
-                if (stage3_status == 2) {//ÀÏ½ÃÁ¤Áö »óÅÂ¶ó¸é
+                if (stage3_status == 2) {//ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½
 
                     int mouse_x = event.button.x;
                     int mouse_y = event.button.y;
 
                     if (mouse_x >= continue_destination_rect.x && mouse_x <= continue_destination_rect.x + continue_destination_rect.w &&
                         mouse_y >= continue_destination_rect.y && mouse_y <= continue_destination_rect.y + continue_destination_rect.h
-                        )//°è¼ÓÇÏ±â ¹öÆ° ´©¸§
+                        )//ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
                     {
-                        Mix_PlayChannel(-1, button_sound, 0);//È¿°úÀ½ Ãâ·Â
+                        Mix_PlayChannel(-1, button_sound, 0);//È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
                         stage3_status = 1;
                         totalPauseTime = SDL_GetTicks() - pauseStartTime;
                         totalPauseTime_2 += totalPauseTime;
-                        Mix_ResumeMusic(); // ¹è°æÀ½¾Ç Àç»ý Àç°³
+                        Mix_ResumeMusic(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ç°³
                         for (int i = 0; i < MIX_CHANNELS; i++) {
-                            Mix_Resume(i); // ¸ðµç Ã¤³ÎÀÇ »ç¿îµå Àç»ý Àç°³
+                            Mix_Resume(i); // ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ç°³
                         }
                     }
                     else if (mouse_x >= main_destination_rect.x && mouse_x <= main_destination_rect.x + main_destination_rect.w &&
                         mouse_y >= main_destination_rect.y && mouse_y <= main_destination_rect.y + main_destination_rect.h
-                        )//¸ÞÀÎÀ¸·Î ¹öÆ° ´©¸§
+                        )//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
                     {
-                        Mix_PlayChannel(-1, button_sound, 0);//È¿°úÀ½ Ãâ·Â
-                        g_current_game_phase = PHASE_INTRO;
+                        Mix_PlayChannel(-1, button_sound, 0);//È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+                        g_current_game_phase = PHASE_MAIN_MENU;
                         game_result = 0;
                         if (Mix_PlayingMusic()) {
                             Mix_HaltMusic();
@@ -350,39 +350,39 @@ void Stage3::HandleEvents() {
     }
 }
 void Stage3::Update() {
-    /*cout << "¹æÇâÅ° : ";
+    /*cout << "ï¿½ï¿½ï¿½ï¿½Å° : ";
     for (int i : key_pushed) {
         cout << i << " ";
     }
     cout << endl;*/
-    if (stage3_status == 0 || stage3_status == 2) //Å° ´ë±â È¤Àº ÀÏ½ÃÁ¤Áö  == stage3_status == 2
+    if (stage3_status == 0 || stage3_status == 2) //Å° ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½  == stage3_status == 2
         return;
 
 
 
-    //1. ±îÄ¡
-    //1.1 ±îÄ¡ ÁÂÇ¥ ¾÷µ¥ÀÌÆ®
+    //1. ï¿½ï¿½Ä¡
+    //1.1 ï¿½ï¿½Ä¡ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     int x = magpie->getX();
     int y = magpie->getY();
-    if (!stop) { //Á¤Áö°¡ ¾Æ´Ï¶ó¸é ±îÄ¡ ÀÌµ¿
-        if (key_pushed.front() == LEFT) { //ÁÂÃøÀÌµ¿
+    if (!stop) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Ìµï¿½
+        if (key_pushed.front() == LEFT) { //ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½
             x -= 1;
             flip = SDL_FLIP_NONE;
         }
-        else if (key_pushed.front() == RIGHT) {//¿ìÃøÀÌµ¿
+        else if (key_pushed.front() == RIGHT) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½
             x += 1;
             flip = SDL_FLIP_HORIZONTAL;
         }
-        else if (key_pushed.front() == UP) {//À§·Î ÀÌµ¿
+        else if (key_pushed.front() == UP) {//ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
             y -= 1;
         }
-        else if (key_pushed.front() == DOWN) {//¾Æ·¡·Î ÀÌµ¿
+        else if (key_pushed.front() == DOWN) {//ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
             y += 1;
         }
 
     }
 
-    //1.2 ±îÄ¡ ÁÂÇ¥ ¹üÀ§
+    //1.2 ï¿½ï¿½Ä¡ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
     if (x > screenWidth / GRID_STAGE3 - 2) {
         x = 1;
     }
@@ -395,32 +395,32 @@ void Stage3::Update() {
     else if (y < 1) {
         y = screenHeight / GRID_STAGE3 - 2;
     }
-    //1.3 ±îÄ¡ ÀÌµ¿
+    //1.3 ï¿½ï¿½Ä¡ ï¿½Ìµï¿½
     magpie->move(x, y);
 
-    //1.4 ±îÄ¡ ¹«Àû ½Ã°£ ¾÷µ¥ÀÌÆ®
+    //1.4 ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     if (magpie->getInvincible() && (SDL_GetTicks() - magpie->getLastDamageTime() >= 2000)) {
         magpie->setInvincible(false);
     }
 
 
-    //2. ±¸··ÀÌ ¾÷µ¥ÀÌÆ®
-    //±¸··ÀÌ ¼Óµµ Á¶Àý
+    //2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
     int time = SDL_GetTicks();
-    if (snake->getN() > magpie->getN() && time - lastSpeedUpTime > 10000) { //±¸··ÀÌ ¼Óµµ°¡ 5 ÀÌ»óÀÌ°í 10ÃÊ°¡ Áö³µ´Ù¸é
+    if (snake->getN() > magpie->getN() && time - lastSpeedUpTime > 10000) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ 5 ï¿½Ì»ï¿½ï¿½Ì°ï¿½ 10ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
         //cout<<snake->getN()<<endl;
         snake->setN(snake->getN() - 1);
         lastSpeedUpTime = time;
     }
-    //±¸··ÀÌ ÀÌµ¿
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     snake->move(magpie->getX(), magpie->getY());
 
 
-    //3. ÆøÅº ¾÷µ¥ÀÌÆ®
-    // °ÔÀÓ½ÃÀÛ ÈÄ 20ÃÊ¸¶´Ù bomb Ãß°¡ -> ·£´ýÇÏ°Ô ÅÍÁö´Â ¾Ö¶û ±îÄ¡ ÂÑ¾Æ¿À´Â ¾Ö
+    //3. ï¿½ï¿½Åº ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    // ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ ï¿½ï¿½ 20ï¿½Ê¸ï¿½ï¿½ï¿½ bomb ï¿½ß°ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¶ï¿½ ï¿½ï¿½Ä¡ ï¿½Ñ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½
     int currentTime = SDL_GetTicks() - totalPauseTime;
     if ((currentTime - lastBombTime) >= 7000 && bombList.size() < 10) {
-        // bombÀ» Ãß°¡ÇÏ´Â ÄÚµå¸¦ ¿©±â¿¡ ÀÛ¼ºÇÕ´Ï´Ù.
+        // bombï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï´ï¿½ ï¿½Úµå¸¦ ï¿½ï¿½ï¿½â¿¡ ï¿½Û¼ï¿½ï¿½Õ´Ï´ï¿½.
         uniform_int_distribution<int> distribution(0, 2);
         bombList.push_back(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, distribution(generator)));
         lastBombTime = currentTime;
@@ -430,54 +430,54 @@ void Stage3::Update() {
     for (const auto& bomb : bombList) {
         //cout<<i << ": checkCount: " << bomb->getCheckCount() << endl;
         if (bomb->getCheckCount() >= bomb->getLastCount())
-            bomb->setCheckCount(bomb->getStartCount()); //Àç¼³Á¤
-        bomb->setCheckCount(bomb->getCheckCount() + 1); //Ä«¿îÆ® °³¼ö Áõ°¡
+            bomb->setCheckCount(bomb->getStartCount()); //ï¿½ç¼³ï¿½ï¿½
+        bomb->setCheckCount(bomb->getCheckCount() + 1); //Ä«ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (bomb->getType() == 1) {
-            bomb->move(magpie->getX(), magpie->getY()); //Å¸°Ù ÁÂÇ¥ º¯°æ -> 0 ÀÌÇÏÀÏ ¶§¸¸ °ª º¯°æµÊ
+            bomb->move(magpie->getX(), magpie->getY()); //Å¸ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ -> 0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         }
         else {
             uniform_int_distribution<int> distributionX(1, screenWidth / GRID_STAGE3 - 2);
             uniform_int_distribution<int> distributionY(1, screenHeight / GRID_STAGE3 - 2);
-            bomb->move(distributionX(generator), distributionY(generator)); //Å¸°Ù ÁÂÇ¥ º¯°æ -> 0 ÀÌÇÏÀÏ ¶§¸¸ °ª º¯°æµÊ
+            bomb->move(distributionX(generator), distributionY(generator)); //Å¸ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ -> 0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
 
     }
 
-    //3. Ãæµ¹ È®ÀÎ
-    //3.1 Á¾ Ãæµ¹ È®ÀÎ
-    if (magpie->isCollidingBell(bell)) {//bellÀÌ¶û ºÎµúÇû´Ù¸é
-        bell->setCount(bell->getCount() + 1); //count°³¼ö ÇÏ³ª Áõ°¡
+    //3. ï¿½æµ¹ È®ï¿½ï¿½
+    //3.1 ï¿½ï¿½ ï¿½æµ¹ È®ï¿½ï¿½
+    if (magpie->isCollidingBell(bell)) {//bellï¿½Ì¶ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
+        bell->setCount(bell->getCount() + 1); //countï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½ï¿½
         Mix_PlayChannel(3, bell_sound, 0);
 
     }
-    //5ÃÊ°¡ Áö³µ´Ù¸é Á¾ À§Ä¡ °»½Å
+    //5ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
     int current = SDL_GetTicks() - totalPauseTime;
-    if (current - bell->getLastEatenTime() > 5000) { // 5ÃÊ°¡ Áö³µ´Ù¸é
-        bell->spawn();//Á¾ À§Ä¡ °»½Å
-        bell->setLastEatenTime(current); // Àç»ý¼º ½Ã°£ ÃÊ±âÈ­
+    if (current - bell->getLastEatenTime() > 5000) { // 5ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
+        bell->spawn();//ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        bell->setLastEatenTime(current); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
     }
 
-    //3.2 ±¸··ÀÌ Ãæµ¹ È®ÀÎ
-    if (magpie->isCollidingSnake(snake)) { //snake¶û ºÎµúÇû´Ù¸é hp ±ðÀÓ
+    //3.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ È®ï¿½ï¿½
+    if (magpie->isCollidingSnake(snake)) { //snakeï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ hp ï¿½ï¿½ï¿½ï¿½
         //Mix_PlayChannel(-1, hit_sound, 0);
-        magpie->GetAttackted(snake->getAttackPower());//µ¥¹ÌÁö ¹ÞÀ½
+        magpie->GetAttackted(snake->getAttackPower());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     }
 
 
-    //3.3 ÆøÅº Ãæµ¹ È®ÀÎ + À½Çâ Ãâ·Â
+    //3.3 ï¿½ï¿½Åº ï¿½æµ¹ È®ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     for (const auto& bomb : bombList) {
-        //Ãæµ¹ È®ÀÎ
+        //ï¿½æµ¹ È®ï¿½ï¿½
         if (bomb->getCheckCount() >= bomb->getMiddleCount() && bomb->getCheckCount() < bomb->getLastCount()) {
             if (magpie->isCollidingBomb(bomb)) {
                 magpie->GetAttackted(bomb->getAttackPower());
                 //Mix_PlayChannel(-1, hit_sound, 0);
             }
         }
-        //À½Çâ Ãâ·Â
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         int b_count = bomb->getCheckCount();
-        //Ä«¿îÆ®°¡ 50ÀÌ¸é Å¸ÀÓ½ÃÀÛ
+        //Ä«ï¿½ï¿½Æ®ï¿½ï¿½ 50ï¿½Ì¸ï¿½ Å¸ï¿½Ó½ï¿½ï¿½ï¿½
         if (b_count == 0) {
             Mix_PlayChannel(-1, bombPrev_sound, 0);
         }
@@ -487,18 +487,18 @@ void Stage3::Update() {
 
     }
 
-    //4. Á¾·á Á¶°Ç È®ÀÎ
-    //¿£µùÆäÀÌÁî ³Ñ¾î°¡±â Àü µô·¹ÀÌ ÁÖ´Â°Å Áö±Ý ¿©±â¿¡ ÇØ³ù´Âµ¥
-    //ÇÕÄ¡°í ³ª¼­ ¸ÞÀÎ¿¡¼­ prev¶û current ºñ±³ÇØ¼­ ÇØ¾ß ´õ ÀÚ¿¬½º·¯¿ï µí
-    if (bell->getCount() == 5) {//Á¾ 5°³ ¸ð¾ÒÀ¸¸é 
-        game_result = 1; //½Â¸®
+    //4. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½Ø³ï¿½ï¿½Âµï¿½
+    //ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ prevï¿½ï¿½ current ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    if (bell->getCount() == 5) {//ï¿½ï¿½ 5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+        game_result = 1; //ï¿½Â¸ï¿½
         g_current_game_phase = PHASE_STAGE3_ENDING;
         viewedEndings[2][1] = true;
         SDL_Delay(1000);
     }
 
     if (magpie->getHealth() <= 0) {
-        game_result = 2; //½ÇÆÐ
+        game_result = 2; //ï¿½ï¿½ï¿½ï¿½
         g_current_game_phase = PHASE_STAGE3_ENDING;
         viewedEndings[2][0] = true;
         SDL_Delay(1000);
@@ -508,16 +508,16 @@ void Stage3::Update() {
 }
 void Stage3::Render() {
 
-    //// 1. ¹è°æ ±×¸®±â.
-    // 1.1. Ä¿¼­¸¦ ÄÜ¼Ö È­¸éÀÇ ¿ÞÂÊ À§ ¸ð¼­¸® ºÎºÐÀ¸·Î ¿Å±ä´Ù. ÁÂÇ¥(0, 0)
-    // <windows.h>¿¡¼­ Á¦°øÇÏ´Â ÇÔ¼ö¸¦ »ç¿ëÇÑ´Ù
+    //// 1. ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½.
+    // 1.1. Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¼ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¼­¸ï¿½ ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å±ï¿½ï¿½. ï¿½ï¿½Ç¥(0, 0)
+    // <windows.h>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 
-    //// 1.2. ¹è°æ ±×¸®±â
+    //// 1.2. ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 
-    // ºÓÀº ¹è°æ ¿ÀÆÛ½ÃÆ¼ Á¶Àý
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½
     if (stage3_status == 1) {
         int time = SDL_GetTicks() - stage3_startTime - totalPauseTime_2;
-        if (time < 60000) { // 1ºÐ µ¿¾È Á¡Â÷ ºÓ¾îÁü
+        if (time < 60000) { // 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¾ï¿½ï¿½ï¿½
             alpha = time / 60000.0 * 255;
             if (alpha > 70)
                 alpha = 70;
@@ -527,16 +527,16 @@ void Stage3::Render() {
     SDL_RenderCopy(g_renderer, bg_texture, NULL, &bg_destination_rect);
 
 
-    //// 2. Ä³¸¯ÅÍ ±×¸®±â.
-    // Á¾ ±×¸®±â
-    bell_destination_rect.x = bell->getX() * GRID_STAGE3; //±×·ÁÁú ÁÂÇ¥ ÁöÁ¤
+    //// 2. Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½.
+    // ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+    bell_destination_rect.x = bell->getX() * GRID_STAGE3; //ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
     bell_destination_rect.y = bell->getY() * GRID_STAGE3;
     SDL_RenderCopy(g_renderer, bell_texture, NULL, &bell_destination_rect);
 
-    // ÆøÅº ±×¸®±â
+    // ï¿½ï¿½Åº ï¿½×¸ï¿½ï¿½ï¿½
     for (const auto& bomb : bombList) {
         int b_count = bomb->getCheckCount();
-        //Ä«¿îÆ®°¡ 50º¸´Ù ÀÛ°í 0 ÀÌ»óÀÎµ¥ Â¦¼ö¸é ? Ãâ·Â
+        //Ä«ï¿½ï¿½Æ®ï¿½ï¿½ 50ï¿½ï¿½ï¿½ï¿½ ï¿½Û°ï¿½ 0 ï¿½Ì»ï¿½ï¿½Îµï¿½ Â¦ï¿½ï¿½ï¿½ï¿½ ? ï¿½ï¿½ï¿½
         if (b_count < bomb->getMiddleCount() && b_count >= 0) {
             if (b_count % 2 == 0) {
                 bell_destination_rect.x = bomb->getBombRange()[4].x * GRID_STAGE3;
@@ -548,7 +548,7 @@ void Stage3::Render() {
             }
         }
 
-        //Ä«¿îÆ®°¡ 100¿¡¼­ 150 »çÀÌ¸é !Ãâ·Â
+        //Ä«ï¿½ï¿½Æ®ï¿½ï¿½ 100ï¿½ï¿½ï¿½ï¿½ 150 ï¿½ï¿½ï¿½Ì¸ï¿½ !ï¿½ï¿½ï¿½
         else if (b_count >= bomb->getMiddleCount() && b_count < bomb->getLastCount()) {
             bombAttack* b = bomb->getBombRange();
 
@@ -565,7 +565,7 @@ void Stage3::Render() {
         }
     }
 
-    // ±¸··ÀÌ ±×¸®±â
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
     auto snakeList = snake->getSnakeList();
     auto last = --snakeList.end();
     int angle = 0;
@@ -573,21 +573,21 @@ void Stage3::Render() {
     int shiftX = 0, shiftY = 0;
 
     for (auto it = snakeList.begin(); it != snakeList.end(); ++it) {
-        snake_destination_rect.x = (*it)->sX * (GRID_STAGE3); // ±×·ÁÁú ÁÂÇ¥ ÁöÁ¤
+        snake_destination_rect.x = (*it)->sX * (GRID_STAGE3); // ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
         snake_destination_rect.y = (*it)->sY * (GRID_STAGE3);
 
-        //°¢µµ ¼³Á¤
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         switch ((*it)->dircetion) {
-        case LEFT://ÁÂ
+        case LEFT://ï¿½ï¿½
             angle = -90;
             break;
-        case RIGHT://¿ì
+        case RIGHT://ï¿½ï¿½
             angle = 90;
             break;
-        case UP://À§
+        case UP://ï¿½ï¿½
             angle = 0;
             break;
-        case DOWN://¾Æ·¡
+        case DOWN://ï¿½Æ·ï¿½
             angle = 180;
             break;
         default:
@@ -595,22 +595,22 @@ void Stage3::Render() {
         }
 
 
-        // ¹ìÀÇ Çìµå ³ëµåÀÎ °æ¿ì¿¡´Â Çìµå ÀÌ¹ÌÁö¸¦ »ç¿ëÇÏ°í, ±×·¸Áö ¾ÊÀº °æ¿ì¿¡´Â ±âÁ¸ÀÇ ¹ì ÀÌ¹ÌÁö¸¦ »ç¿ëÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         if (it == snakeList.begin()) {
             SDL_RenderCopyEx(g_renderer, snakeHead_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
         }
         else if (it == last) {
             switch (prevD) {
-            case LEFT://ÁÂ
+            case LEFT://ï¿½ï¿½
                 angle = -90;
                 break;
-            case RIGHT://¿ì
+            case RIGHT://ï¿½ï¿½
                 angle = 90;
                 break;
-            case UP://À§
+            case UP://ï¿½ï¿½
                 angle = -0;
                 break;
-            case DOWN://¾Æ·¡
+            case DOWN://ï¿½Æ·ï¿½
                 angle = 180;
 
                 break;
@@ -629,26 +629,26 @@ void Stage3::Render() {
     }
 
 
-    // ±îÄ¡ ±×¸®±â
-    magpie_destination_rect.x = magpie->getX() * GRID_STAGE3; //±×·ÁÁú ÁÂÇ¥ ÁöÁ¤
+    // ï¿½ï¿½Ä¡ ï¿½×¸ï¿½ï¿½ï¿½
+    magpie_destination_rect.x = magpie->getX() * GRID_STAGE3; //ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½
     magpie_destination_rect.y = magpie->getY() * GRID_STAGE3;
 
-    // ±îÄ¡ ·»´õ¸µ
+    // ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (magpie->getInvincible()) {
-        SDL_SetTextureColorMod(magpie_texture, 255, 120, 120); // »¡°£»öÀ¸·Î º¯°æ
+        SDL_SetTextureColorMod(magpie_texture, 255, 120, 120); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
     else {
-        SDL_SetTextureColorMod(magpie_texture, 255, 255, 255); // ¿ø·¡ »ö»óÀ¸·Î º¯°æ
+        SDL_SetTextureColorMod(magpie_texture, 255, 255, 255); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
-    if (!magpie->getInvincible() || SDL_GetTicks() % 500 < 250) { // ¹«Àû »óÅÂ°¡ ¾Æ´Ï°Å³ª 0.25ÃÊ °£°ÝÀ¸·Î ±ôºý°Å¸²
+    if (!magpie->getInvincible() || SDL_GetTicks() % 500 < 250) { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°Å³ï¿½ 0.25ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¸ï¿½
         SDL_RenderCopyEx(g_renderer, magpie_texture, NULL, &magpie_destination_rect, 0, NULL, flip);
     }
 
 
 
-    //ÇÏÆ® Ãâ·Â
+    //ï¿½ï¿½Æ® ï¿½ï¿½ï¿½
     int hp = (int)magpie->getHealth();
-    // ÇÏÆ® ·»´õ¸µ
+    // ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < magpie_init_health/10; i++) {
 
         heart_destination_rect.x = i * (GRID_STAGE3)+GRID_STAGE3 + 5;
@@ -657,9 +657,9 @@ void Stage3::Render() {
         if (magpie->getInvincible()) {
             int timeSinceDamage = SDL_GetTicks() - magpie->getLastDamageTime();
             if (timeSinceDamage < 100) {
-                // 0.125ÃÊ¿Í 0.375ÃÊ¿¡ ÇÏÆ®¸¦ Èçµë
+                // 0.125ï¿½Ê¿ï¿½ 0.375ï¿½Ê¿ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½
                 if ((timeSinceDamage % 100) < 20 || (timeSinceDamage % 100) > 80) {
-                    heart_destination_rect.y += 10; // y ÁÂÇ¥¸¦ Èçµë
+                    heart_destination_rect.y += 10; // y ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½
                 }
             }
 
@@ -680,28 +680,28 @@ void Stage3::Render() {
         hp -= 10;
     }
 
-    //¸ðÀº Á¾ °³¼ö Ãâ·Â -> ¾ÆÁ÷ ¾È ÇÔ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
     UpdateScoreTexture();
     SDL_RenderCopy(g_renderer, myBell_, NULL, &myBell_destination);
 
 
-    //// 3. ÇÁ·¹ÀÓ ¿Ï¼º.
-    // std::coutÀ¸·Î Ãâ·ÂÇÑ ³»¿ë Áß, ¾ÆÁ÷ È­¸é¿¡ Ç¥½ÃµÇ ¾Ê°í ¹öÆÛ¿¡ ³²¾Æ ÀÖ´Â °ÍÀÌ ÀÖ´Ù¸é, ¸ðµÎ È­¸é¿¡ Ãâ·ÂµÇµµ·Ï ÇÑ´Ù.
-    //ºÓÀº ÀÌ¹ÌÁö Àû¿ë
+    //// 3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¼ï¿½.
+    // std::coutï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ Ç¥ï¿½Ãµï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½, ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ÂµÇµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     SDL_SetTextureAlphaMod(red_texture, alpha);
     SDL_RenderCopy(g_renderer, red_texture, NULL, &bg_destination_rect);
     SDL_RenderCopy(g_renderer, frame_texture, NULL, &frame_destination);
 
-    if (stage3_status != 1) {//ÀÏ½ÃÁ¤Áö »óÅÂ È¤Àº ´ë±â »óÅÂ
+    if (stage3_status != 1) {//ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         SDL_RenderCopy(g_renderer, wait_texture, NULL, &bg_destination_rect);
         switch (stage3_status)
         {
         case 0:
-            //´ë±â ·»´õ
+            //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             SDL_RenderCopy(g_renderer, ready_texture, NULL, &readyCount_destination);
             break;
         case 2:
-            //¹öÆ° ·»´õ
+            //ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
 
             SDL_RenderCopy(g_renderer, button_continue, NULL, &continue_destination_rect);
             SDL_RenderCopy(g_renderer, button_main, NULL, &main_destination_rect);
@@ -716,7 +716,7 @@ void Stage3::Render() {
 
 
 void Stage3::Reset() {
-    //°´Ã¼ ÃÊ±âÈ­
+    //ï¿½ï¿½Ã¼ ï¿½Ê±ï¿½È­
     delete bell;
     delete magpie;
     delete snake;
@@ -725,35 +725,35 @@ void Stage3::Reset() {
     }
     bombList.clear();
 
-    //a. Á¾ »ý¼º
+    //a. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     uniform_int_distribution<int> distributionX(1, screenWidth / GRID_STAGE3 - 2);
     uniform_int_distribution<int> distributionY(1, screenHeight / GRID_STAGE3 - 2);
 
     bell = new Bell(distributionX(generator), distributionY(generator), 0, 0);
 
     if (is_hard) {
-        //b. ±îÄ¡ »ý¼º
-        magpie = new Magpie(3, 3, 1, 30, 0, 3); //(0,0)¿¡¼­ ½ÃÀÛ, speed´Â 1,hp´Â 30À¸·Î ¼³Á¤
-        //c. ±¸··ÀÌ »ý¼º
+        //b. ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        magpie = new Magpie(3, 3, 1, 30, 0, 3); //(0,0)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, speedï¿½ï¿½ 1,hpï¿½ï¿½ 30ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //c. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
-        //d. ÆøÅº »ý¼º
+        //d. ï¿½ï¿½Åº ï¿½ï¿½ï¿½ï¿½
         bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
     }
     else {
-        //b. ±îÄ¡ »ý¼º
-        magpie = new Magpie(3, 3, 1, 50, 0, 5); //(0,0)¿¡¼­ ½ÃÀÛ, speed´Â 1,hp´Â 50À¸·Î ¼³Á¤
-        //c. ±¸··ÀÌ »ý¼º
+        //b. ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        magpie = new Magpie(3, 3, 1, 50, 0, 5); //(0,0)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, speedï¿½ï¿½ 1,hpï¿½ï¿½ 50ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //c. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         snake = new Snake(0, 0, 1, 100, 10, magpie->getX(), magpie->getY(), 8);
-        //d. ÆøÅº »ý¼º
+        //d. ï¿½ï¿½Åº ï¿½ï¿½ï¿½ï¿½
         bombList.push_front(new Bomb(0, 0, 1, 100, 5, magpie->getX(), magpie->getY(), -20, 50, 75, 0));
     }
 
     magpie_init_health = magpie->getHealth();
 
-    //2. ±âÅ¸ ¼¼ÆÃ
-    f_state = STOP;//¹æÇâÅ° ¾È ´©¸§
-    stop = true; //Á¤Áö »óÈ²À¸·Î ÃÊ±âÈ­
-    key_pushed.clear();//Å° Á¤º¸ ÃÊ±âÈ­
+    //2. ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½ï¿½
+    f_state = STOP;//ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    stop = true; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+    key_pushed.clear();//Å° ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 
     flip = SDL_FLIP_HORIZONTAL;
 
@@ -761,14 +761,14 @@ void Stage3::Reset() {
     alpha = 0;
     stage3_status = 0;
 
-    //À½Çâ ²ô±â
-    Mix_HaltChannel(-1);//¸ðµç »ç¿îµå ÁßÁö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    Mix_HaltChannel(-1);//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    //À½¾Ç ´Ù½Ã ½ÃÀÛ
-    Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
-    //ÀÏ½ÃÁ¤Áö ½Ã°£ ÃÊ±âÈ­
+    //ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
     totalPauseTime = 0;
     stage3_startTime = 0;
     lastBombTime = 0;
@@ -778,7 +778,7 @@ void Stage3::Reset() {
 
 
 Stage3::~Stage3() {
-    //ÀÌ¹ÌÁö ÅØ½ºÃÄ ÇØÁ¦
+    //ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     SDL_DestroyTexture(snakeHead_texture);
     SDL_DestroyTexture(snakeBody_texture);
     SDL_DestroyTexture(snakeTail_texture);
@@ -797,7 +797,7 @@ Stage3::~Stage3() {
     SDL_DestroyTexture(myBell_);
 
 
-    //À½¾Ç ÇØÁ¦
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     Mix_FreeMusic(background_music);
     Mix_FreeChunk(bell_sound);
 
@@ -807,7 +807,7 @@ Stage3::~Stage3() {
 
 
 
-    //°´Ã¼ ÇØÁ¦
+    //ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
     delete bell;
     delete magpie;
     delete snake;

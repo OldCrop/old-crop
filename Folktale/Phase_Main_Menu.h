@@ -3,11 +3,11 @@
 #include "SDL.h"
 #include "STAGE.h"
 
-class Intro : public PhaseInterface
+class MainMenu : public PhaseInterface
 {
 public:
-	Intro();
-	~Intro();
+	MainMenu();
+	~MainMenu();
 	virtual void HandleEvents();
 	virtual void Update();
 	virtual void Render();
@@ -56,6 +56,7 @@ private:
 	SDL_Rect hard_button_dest_rectangle;
 	SDL_Rect hard_button_source_rectangle;
 
+	Mix_Music* intro_bgm;
 	Mix_Music* click_start;
 	Mix_Music* click_gallery;
 	Mix_Chunk* pause_Sound;

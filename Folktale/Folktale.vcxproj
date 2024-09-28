@@ -136,10 +136,11 @@
     <ClCompile Include="Creature_stage3.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PhaseManager.cpp" />
+    <ClCompile Include="Phase_Intro.cpp" />
+    <ClCompile Include="Phase_Main_Intro.cpp" />
     <ClCompile Include="Phase_Ending.cpp" />
     <ClCompile Include="Phase_Gallery.cpp" />
-    <ClCompile Include="Phase_Intro.cpp" />
+    <ClCompile Include="Phase_Main_Menu.cpp" />
     <ClCompile Include="Phase_stage1.cpp" />
     <ClCompile Include="Phase_stage1Ending.cpp" />
     <ClCompile Include="Phase_stage1Intro.cpp" />
@@ -156,9 +157,10 @@
     <ClInclude Include="Creature_stage1.h" />
     <ClInclude Include="Creature_stage2.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Phase_Main_Intro.h" />
     <ClInclude Include="Phase_Ending.h" />
     <ClInclude Include="Phase_Gallery.h" />
-    <ClInclude Include="Phase_Intro.h" />
+    <ClInclude Include="Phase_Main_Menu.h" />
     <ClInclude Include="Phase_Stage1Ending.h" />
     <ClInclude Include="Phase_stage1Game.h" />
     <ClInclude Include="Phase_Stage1Intro.h" />

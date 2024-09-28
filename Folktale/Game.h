@@ -11,18 +11,20 @@
 #include "SDL_image.h"
 
 // Game Phases
-const int PHASE_INTRO = 0;
-const int PHASE_STAGE1_INTRO = 1;
-const int PHASE_STAGE1_GAME = 2;
-const int PHASE_STAGE1_ENDING = 3;
-const int PHASE_STAGE2_INTRO = 4;
-const int PHASE_STAGE2_GAME = 5;
-const int PHASE_STAGE2_ENDING = 6;
-const int PHASE_STAGE3_INTRO = 7;
-const int PHASE_STAGE3_GAME = 8;
-const int PHASE_STAGE3_ENDING = 9;
-const int PHASE_GALLERY = 10;
-const int PHASE_ENDING = 11;
+const int PHASE_MAIN_INTRO = 0;
+const int PHASE_INTRO = 1;
+const int PHASE_MAIN_MENU = 2;
+const int PHASE_STAGE1_INTRO = 3;
+const int PHASE_STAGE1_GAME = 4;
+const int PHASE_STAGE1_ENDING = 5;
+const int PHASE_STAGE2_INTRO = 6;
+const int PHASE_STAGE2_GAME = 7;
+const int PHASE_STAGE2_ENDING = 8;
+const int PHASE_STAGE3_INTRO = 9;
+const int PHASE_STAGE3_GAME = 10;
+const int PHASE_STAGE3_ENDING = 11;
+const int PHASE_GALLERY = 12;
+const int PHASE_ENDING = 13;
 
 class PhaseInterface
 {
@@ -53,12 +55,12 @@ extern SDL_Window* g_window;
 extern int screenWidth, screenHeight;
 extern int game_result;
 
-// ½ºÅ×ÀÌÁö ´ç ¿£µùÀÇ ¼ö¸¦ ¼±¾ðÇÏ´Â »ó¼ö
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 const int ENDINGS_PER_STAGE = 3;
 
-// ½ºÅ×ÀÌÁöÀÇ ¼ö¸¦ ¼±¾ðÇÏ´Â »ó¼ö
-const int NUMBER_OF_STAGES = 3; // ½ÇÁ¦ ½ºÅ×ÀÌÁö ¼ö·Î º¯°æÇÏ¼¼¿ä
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+const int NUMBER_OF_STAGES = 3; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
 
-// °¢ ½ºÅ×ÀÌÁö¿¡¼­ º» ¿£µùÀ» ÀúÀåÇÏ´Â ¹è¿­ ¼±¾ð
+// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½ï¿½
 extern bool viewedEndings[NUMBER_OF_STAGES][ENDINGS_PER_STAGE];
 

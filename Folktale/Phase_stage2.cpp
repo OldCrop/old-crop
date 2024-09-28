@@ -5,8 +5,8 @@
 
 using namespace std;
 
-//¹Ì·Î
-//¹è°æ ÅØ½ºÃÄ
+//ï¿½Ì·ï¿½
+//ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
 
 SDL_Rect stage2_bg_source_rect;
 
@@ -18,34 +18,34 @@ Stage2::Stage2() {
     turtle = new Turtle(1, 1, 0, 3, 0);
     coral = new Coral(0, 0, 0, 0, 1);
     coral2 = new Coral2(0, 0, 0, 0, 1);
-    // ±âÁ¸ Conch °´Ã¼ »ý¼º
+    // ï¿½ï¿½ï¿½ï¿½ Conch ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
     conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
     conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
     conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
     conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
 
     rabbitSpawnTimer = RABBIT_SPAWN_TIME;
-    coral2_spawn_timer = CORAL2_SPAWN_TIME; // CORAL2_SPAWN_TIMEÀº coral2°¡ ³ªÅ¸³ª°í »ç¶óÁö´Â ½Ã°£ °£°Ý
-    coral2_visible = false; // Ã³À½¿¡´Â coral2¸¦ Ç¥½ÃÇÏÁö ¾ÊÀ½
+    coral2_spawn_timer = CORAL2_SPAWN_TIME; // CORAL2_SPAWN_TIMEï¿½ï¿½ coral2ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
+    coral2_visible = false; // Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ coral2ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    coral3_spawn_timer = CORAL2_SPAWN_TIME; // CORAL2_SPAWN_TIMEÀº coral2°¡ ³ªÅ¸³ª°í »ç¶óÁö´Â ½Ã°£ °£°Ý=>Ãß°¡
-    coral3_visible = true; //=>Ãß°¡
+    coral3_spawn_timer = CORAL2_SPAWN_TIME; // CORAL2_SPAWN_TIMEï¿½ï¿½ coral2ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½=>ï¿½ß°ï¿½
+    coral3_visible = true; //=>ï¿½ß°ï¿½
 
-    // ¹è°æ ÅØ½ºÃÄ ·Îµå
+    // ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* stage2_bg_surface = IMG_Load("../../Resources/stage2/stage2/stage2_bg.png");
     stage2_bg_texture = SDL_CreateTextureFromSurface(g_renderer, stage2_bg_surface);
     SDL_FreeSurface(stage2_bg_surface);
     stage2_bg_source_rect = { 0, 0, 750, 600 };
     stage2_bg_destination_rect = { TILE_SIZE,TILE_SIZE , 1080, 600 };
 
-    //¹è°æ¹è°æ ÅØ½ºÃ³ ·Îµå
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Ã³ ï¿½Îµï¿½
     SDL_Surface* stage2_bgbg_surface = IMG_Load("../../Resources/stage2/stage2/stage2_bgbg.png");
     stage2_bgbgbg_texture = SDL_CreateTextureFromSurface(g_renderer, stage2_bgbg_surface);
     stage2_bgbgbg_destination_rect = { 0, 0, 1080, 720 };
     SDL_FreeSurface(stage2_bgbg_surface);
 
 
-    //°ÅºÏÀÌ ÅØ½ºÃÄ ·Îµå
+    //ï¿½Åºï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* turtle_surface = IMG_Load("../../Resources/stage2/stage2/stage2_turtle.png");
     turtle_texture = SDL_CreateTextureFromSurface(g_renderer, turtle_surface);
     SDL_FreeSurface(turtle_surface);
@@ -54,7 +54,7 @@ Stage2::Stage2() {
     turtle_destination_rect.w = GRID_stage2;
     turtle_destination_rect.h = GRID_stage2;
 
-    //°ÅºÏÀÌ2 ÅØ½ºÃÄ ·Îµå=>Ãß°¡
+    //ï¿½Åºï¿½ï¿½ï¿½2 ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½=>ï¿½ß°ï¿½
     SDL_Surface* turtle2_surface = IMG_Load("../../Resources/stage2/stage2/stage2_turtle2.png");
     turtle2_texture = SDL_CreateTextureFromSurface(g_renderer, turtle2_surface);
     SDL_FreeSurface(turtle2_surface);
@@ -63,7 +63,7 @@ Stage2::Stage2() {
     turtle_destination_rect.w = GRID_stage2;
     turtle_destination_rect.h = GRID_stage2;
 
-    //Åä³¢ ÅØ½ºÃÄ ·Îµå
+    //ï¿½ä³¢ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* rabbit_surface = IMG_Load("../../Resources/stage2/stage2/stage2_rabbit.png");
     rabbit_texture = SDL_CreateTextureFromSurface(g_renderer, rabbit_surface);
     SDL_FreeSurface(rabbit_surface);
@@ -72,7 +72,7 @@ Stage2::Stage2() {
     rabbit_destination_rect.w = GRID_stage2;
     rabbit_destination_rect.h = GRID_stage2;
 
-    //»êÈ£ ÅØ½ºÃÄ ·Îµå
+    //ï¿½ï¿½È£ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* coral_surface = IMG_Load("../../Resources/stage2/stage2/stage2_coral2.png");
     coral_texture = SDL_CreateTextureFromSurface(g_renderer, coral_surface);
     SDL_FreeSurface(coral_surface);
@@ -81,7 +81,7 @@ Stage2::Stage2() {
     coral_destination_rect.w = GRID_stage2;
     coral_destination_rect.h = GRID_stage2;
 
-    //»êÈ£2 ÅØ½ºÃÄ ·Îµå
+    //ï¿½ï¿½È£2 ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* coral2_surface = IMG_Load("../../Resources/stage2/stage2/stage2_coral.png");
     coral2_texture = SDL_CreateTextureFromSurface(g_renderer, coral2_surface);
     SDL_FreeSurface(coral2_surface);
@@ -91,7 +91,7 @@ Stage2::Stage2() {
     coral2_destination_rect.h = GRID_stage2;
 
 
-    //°£ ÅØ½ºÃÄ ·Îµå
+    //ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* gan_surface = IMG_Load("../../Resources/stage2/stage2/stage2_gan.png");
     gan_texture = SDL_CreateTextureFromSurface(g_renderer, gan_surface);
     SDL_FreeSurface(gan_surface);
@@ -100,7 +100,7 @@ Stage2::Stage2() {
     gan_destination_rect.w = GRID_stage2;
     gan_destination_rect.h = GRID_stage2;
 
-    //ÇÏÆ®0 ÅØ½ºÃÄ ·Îµå
+    //ï¿½ï¿½Æ®0 ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* heart0_surface = IMG_Load("../../Resources/stage2/stage2/stage2_heart0.png");
     heart0_texture = SDL_CreateTextureFromSurface(g_renderer, heart0_surface);
     SDL_FreeSurface(heart0_surface);
@@ -109,7 +109,7 @@ Stage2::Stage2() {
     heart0_destination_rect.w = GRID_stage2;
     heart0_destination_rect.h = GRID_stage2;
 
-    //ÇÏÆ®2 ÅØ½ºÃÄ ·Îµå
+    //ï¿½ï¿½Æ®2 ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* heart2_surface = IMG_Load("../../Resources/stage2/stage2/stage2_heart2.png");
     heart2_texture = SDL_CreateTextureFromSurface(g_renderer, heart2_surface);
     SDL_FreeSurface(heart2_surface);
@@ -118,7 +118,7 @@ Stage2::Stage2() {
     heart2_destination_rect.w = GRID_stage2;
     heart2_destination_rect.h = GRID_stage2;
 
-    //¼Ò¶ó°Ô ÅØ½ºÃÄ ·Îµå
+    //ï¿½Ò¶ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     SDL_Surface* conch_surface = IMG_Load("../../Resources/stage2/stage2/stage2_conch.png");
     conch_texture = SDL_CreateTextureFromSurface(g_renderer, conch_surface);
     SDL_FreeSurface(conch_surface);
@@ -127,25 +127,25 @@ Stage2::Stage2() {
     conch_destination_rect.w = GRID_stage2;
     conch_destination_rect.h = GRID_stage2;
 
-    //wait_texture ÀÌ¹ÌÁö
+    //wait_texture ï¿½Ì¹ï¿½ï¿½ï¿½
     SDL_Surface* wait_surface = IMG_Load("../../Resources/translucent_black.png");
     wait_texture = SDL_CreateTextureFromSurface(g_renderer, wait_surface);
-    SDL_FreeSurface(wait_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(wait_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     wait_destination_rect = { 0,0,1080,720 };
 
 
-    //¹öÆ° ÅØ½ºÃÄ
+    //ï¿½ï¿½Æ° ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* continue_btn = IMG_Load("../../Resources/btn_continue.png");
     button_continue = SDL_CreateTextureFromSurface(g_renderer, continue_btn);
-    SDL_FreeSurface(continue_btn);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(continue_btn);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     continue_destination_rect = { 490,270,100,100 };
 
     SDL_Surface* main_btn = IMG_Load("../../Resources/btn_main.png");
     button_main = SDL_CreateTextureFromSurface(g_renderer, main_btn);
-    SDL_FreeSurface(main_btn);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(main_btn);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
     main_destination_rect = { 490,370,100,100 };
 
-    //±Û¾¾ ÅØ½ºÃÄ ¸¸µé±â,,
+    //ï¿½Û¾ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½,,
     ready_texture = SDL_CreateTextureFromSurface(g_renderer, TTF_RenderText_Blended(font, "READY", { 255,255,255 }));
 
     readyCount_destination.x = screenWidth / 2 - 100;
@@ -155,28 +155,28 @@ Stage2::Stage2() {
 
 
 
-    //À½Çâ
-    //À½¾Ç °¡Á®¿À±â
+    //ï¿½ï¿½ï¿½ï¿½
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     background_music = Mix_LoadMUS("../../Resources/stage2/stage2.mp3");
     Mix_VolumeMusic(90);
 
-    rabbit_sound = Mix_LoadWAV("../../Resources/stage2/stage2_rabbitSound.mp3");//Åä³¢ ºÎµúÈú¶§ ¼Ò¸®
+    rabbit_sound = Mix_LoadWAV("../../Resources/stage2/stage2_rabbitSound.mp3");//ï¿½ä³¢ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
     Mix_VolumeChunk(rabbit_sound, 128);
 
-    //°ÅºÏÀÌ »êÈ£ ºÎµúÈú¶§ ¼Ò¸®
+    //ï¿½Åºï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
     coral_sound = Mix_LoadWAV("../../Resources/stage2/stage2_coralSound.mp3");
     Mix_VolumeChunk(coral_sound, 128);
 
-    //¼Ò¶ó°Ô ºÎµúÈú¶§ ¼Ò¸®
+    //ï¿½Ò¶ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
     conch_sound = Mix_LoadWAV("../../Resources/stage2/stage2_conchSound.mp3");
     Mix_VolumeChunk(conch_sound, 128);
 
-    //¹öÆ° ´©¸¦¶§ ¼Ò¸®
+    //ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½
     button_sound = Mix_LoadWAV("../../Resources/stage2/pauseSound.wav");
     Mix_VolumeChunk(button_sound, 128);
 
 
-    //±âÅ¸
+    //ï¿½ï¿½Å¸
     f_state = -1;
     stop = true;
     for (int i = 0; i < 4; i++) {
@@ -208,21 +208,21 @@ void Stage2::HandleEvents() {
         case SDL_KEYDOWN:
 
             if (event.key.keysym.sym == SDLK_ESCAPE) {
-                if (stage2_status == 1) {//°ÔÀÎ ÁøÇà ÁßÀÌ¾úÀ¸¸é ÀÏ½ÃÁßÁö·Î
+                if (stage2_status == 1) {//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     stage2_status = 2;
                     pauseStartTime = SDL_GetTicks();
                     totalPauseTime = 0;
 
-                    Mix_PauseMusic(); // ¹è°æÀ½¾Ç ÀÏ½ÃÁ¤Áö
+                    Mix_PauseMusic(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
                     for (int i = 0; i < MIX_CHANNELS; i++) {
-                        Mix_Pause(i); // ¸ðµç Ã¤³ÎÀÇ »ç¿îµå ÀÏ½ÃÁ¤Áö
+                        Mix_Pause(i); // ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
                     }
                 }
-                else if (stage2_status == 2) {//ÀÏ½ÃÁ¤Áö¿´À¸¸é °ÔÀÓ ÁßÀ¸·Î
+                else if (stage2_status == 2) {//ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     stage2_status = 1;
-                    Mix_ResumeMusic(); // ¹è°æÀ½¾Ç Àç»ý Àç°³
+                    Mix_ResumeMusic(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ç°³
                     for (int i = 0; i < MIX_CHANNELS; i++) {
-                        Mix_Resume(i); // ¸ðµç Ã¤³ÎÀÇ »ç¿îµå Àç»ý Àç°³
+                        Mix_Resume(i); // ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ç°³
                     }
                 }
             }
@@ -232,13 +232,13 @@ void Stage2::HandleEvents() {
 
 
             if (event.key.keysym.sym == SDLK_LEFT) {
-                f_state = LEFT; //ÇöÀç ´­¸° °ªÀÌ LEFT
+                f_state = LEFT; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ LEFT
                 f_list[f_state] = true;
                 stop = false;
                 if (stage2_status == 0) {
                     stage2_status = 1;
                     stage2_startTime = SDL_GetTicks();
-                    // Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    // Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
 
             }
@@ -250,7 +250,7 @@ void Stage2::HandleEvents() {
                 if (stage2_status == 0) {
                     stage2_status = 1;
                     stage2_startTime = SDL_GetTicks();
-                    // Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    // Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
             }
             else if (event.key.keysym.sym == SDLK_UP) {
@@ -260,7 +260,7 @@ void Stage2::HandleEvents() {
                 if (stage2_status == 0) {
                     stage2_status = 1;
                     stage2_startTime = SDL_GetTicks();
-                    //  Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    //  Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
             }
             else if (event.key.keysym.sym == SDLK_DOWN) {
@@ -270,7 +270,7 @@ void Stage2::HandleEvents() {
                 if (stage2_status == 0) {
                     stage2_status = 1;
                     stage2_startTime = SDL_GetTicks();
-                    // Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+                    // Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
             }
             break;
@@ -304,31 +304,31 @@ void Stage2::HandleEvents() {
 
             if (event.button.button == SDL_BUTTON_LEFT)
             {
-                if (stage2_status == 2) {//ÀÏ½ÃÁ¤Áö »óÅÂ¶ó¸é
+                if (stage2_status == 2) {//ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½
 
                     int mouse_x = event.button.x;
                     int mouse_y = event.button.y;
 
                     if (mouse_x >= continue_destination_rect.x && mouse_x <= continue_destination_rect.x + continue_destination_rect.w &&
                         mouse_y >= continue_destination_rect.y && mouse_y <= continue_destination_rect.y + continue_destination_rect.h
-                        )//°è¼ÓÇÏ±â ¹öÆ° ´©¸§
+                        )//ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
                     {
-                        Mix_PlayChannel(-1, button_sound, 0);//È¿°úÀ½ Ãâ·Â
+                        Mix_PlayChannel(-1, button_sound, 0);//È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
                         stage2_status = 1;
                         totalPauseTime = SDL_GetTicks() - pauseStartTime;
                         totalPauseTime_2 += totalPauseTime;
-                        Mix_ResumeMusic(); // ¹è°æÀ½¾Ç Àç»ý Àç°³
+                        Mix_ResumeMusic(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ç°³
                         for (int i = 0; i < MIX_CHANNELS; i++) {
-                            Mix_Resume(i); // ¸ðµç Ã¤³ÎÀÇ »ç¿îµå Àç»ý Àç°³
+                            Mix_Resume(i); // ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ç°³
                         }
                     }
                     else if (mouse_x >= main_destination_rect.x && mouse_x <= main_destination_rect.x + main_destination_rect.w &&
                         mouse_y >= main_destination_rect.y && mouse_y <= main_destination_rect.y + main_destination_rect.h
-                        )//¸ÞÀÎÀ¸·Î ¹öÆ° ´©¸§
+                        )//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
                     {
-                        Mix_PlayChannel(-1, button_sound, 0);//È¿°úÀ½ Ãâ·Â
-                        g_current_game_phase = PHASE_INTRO;
+                        Mix_PlayChannel(-1, button_sound, 0);//È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+                        g_current_game_phase = PHASE_MAIN_MENU;
                         game_result = 0;
                         if (Mix_PlayingMusic()) {
                             Mix_HaltMusic();
@@ -344,7 +344,7 @@ void Stage2::HandleEvents() {
 
 void Stage2::Update() {
 
-    if (stage2_status == 0 || stage2_status == 2) //Å° ´ë±â È¤Àº ÀÏ½ÃÁ¤Áö
+    if (stage2_status == 0 || stage2_status == 2) //Å° ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
         return;
 
     conch1->move(0, 0);
@@ -356,31 +356,31 @@ void Stage2::Update() {
         int timer = turtle->getInvincibleTimer();
         timer--;
         if (timer <= 0) {
-            turtle->setInvincible(false); // ¹«Àû »óÅÂ ÇØÁ¦
-            timer = 0; // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+            turtle->setInvincible(false); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            timer = 0; // Å¸ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
         }
         turtle->setInvincibleTimer(timer);
     }
-    // °ÔÀÓ ·çÇÁ¿¡¼­ Å¸ÀÌ¸Ó¸¦ °¨¼Ò½ÃÅ´
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸Ó¸ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½Å´
     rabbitSpawnTimer--;
 
-    // Å¸ÀÌ¸Ó°¡ 0ÀÌ µÇ¸é Åä³¢¸¦ ¸®½ºÆùÇÏ°í Å¸ÀÌ¸Ó¸¦ Àç¼³Á¤ÇÔ
+    // Å¸ï¿½Ì¸Ó°ï¿½ 0ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ä³¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Å¸ï¿½Ì¸Ó¸ï¿½ ï¿½ç¼³ï¿½ï¿½ï¿½ï¿½
     if (rabbitSpawnTimer <= 0) {
-        rabbit->spawn(); // Åä³¢ ¸®½ºÆù
-        rabbitSpawnTimer = RABBIT_SPAWN_TIME; // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+        rabbit->spawn(); // ï¿½ä³¢ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        rabbitSpawnTimer = RABBIT_SPAWN_TIME; // Å¸ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
     }
 
-    // coral2_spawn_timer¸¦ °¨¼Ò½ÃÅ°°í, ÀÏÁ¤ ½Ã°£ÀÌ °æ°úÇÏ¸é coral2ÀÇ »óÅÂ¸¦ º¯°æ
+    // coral2_spawn_timerï¿½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½Å°ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ coral2ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     coral2_spawn_timer--;
     if (coral2_spawn_timer <= 0) {
-        coral2_visible = !coral2_visible; // coral2ÀÇ »óÅÂ¸¦ º¯°æÇÏ¿© ³ªÅ¸³ª°Å³ª »ç¶óÁöµµ·Ï ¼³Á¤
-        coral2_spawn_timer = CORAL2_SPAWN_TIME; // Å¸ÀÌ¸Ó Àç¼³Á¤
+        coral2_visible = !coral2_visible; // coral2ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        coral2_spawn_timer = CORAL2_SPAWN_TIME; // Å¸ï¿½Ì¸ï¿½ ï¿½ç¼³ï¿½ï¿½
     }
-    // coral3_spawn_timer¸¦ °¨¼Ò½ÃÅ°°í, ÀÏÁ¤ ½Ã°£ÀÌ °æ°úÇÏ¸é coral2ÀÇ »óÅÂ¸¦ º¯°æ=>Ãß°¡
+    // coral3_spawn_timerï¿½ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½Å°ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ coral2ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½=>ï¿½ß°ï¿½
     coral3_spawn_timer--;
     if (coral3_spawn_timer <= 0) {
-        coral3_visible = !coral3_visible; // coral2ÀÇ »óÅÂ¸¦ º¯°æÇÏ¿© ³ªÅ¸³ª°Å³ª »ç¶óÁöµµ·Ï ¼³Á¤
-        coral3_spawn_timer = CORAL3_SPAWN_TIME; // Å¸ÀÌ¸Ó Àç¼³Á¤
+        coral3_visible = !coral3_visible; // coral2ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        coral3_spawn_timer = CORAL3_SPAWN_TIME; // Å¸ï¿½Ì¸ï¿½ ï¿½ç¼³ï¿½ï¿½
     }
 
     if (!stop) {
@@ -409,16 +409,16 @@ void Stage2::Update() {
         if (y >= SCREEN_HEIGHT_STAGE2) y = SCREEN_HEIGHT_STAGE2 - 1;
         if (y < 0) y = 0;
 
-        // °ÅºÏÀÌ°¡ »êÈ£¿¡ ´êÁö ¾Ê´Â °æ¿ì¿¡¸¸ ÀÌµ¿
+        // ï¿½Åºï¿½ï¿½Ì°ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½Ìµï¿½
         if (x >= 0 && x < SCREEN_WIDTH_STAGE2 && y >= 0 && y < SCREEN_HEIGHT_STAGE2 && !Maze::isCoral(x, y)) {
-            turtle->move(x, y); // ÀÌµ¿ °¡´ÉÇÑ °æ¿ì¿¡¸¸ ÀÌµ¿ ¸Þ¼­µå È£Ãâ
+            turtle->move(x, y); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½
         }
     }
-    // °ÅºÏÀÌÀÇ ¹«Àû »óÅÂ ¾÷µ¥ÀÌÆ®
+    // ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     if (turtle->isInvincible()) {
-        // ¹«Àû ½Ã°£ °¨¼Ò
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
         turtle->setInvincibleTimer(turtle->getInvincibleTimer() - 1);
-        // ¹«Àû ½Ã°£ÀÌ ³¡³ª¸é ¹«Àû »óÅÂ ÇØÁ¦
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (turtle->getInvincibleTimer() <= 0) {
             turtle->setInvincible(false);
         }
@@ -426,44 +426,44 @@ void Stage2::Update() {
 
 
 
-    // ¸ðµç »êÈ£¿ÍÀÇ Ãæµ¹ È®ÀÎ
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ È®ï¿½ï¿½
     for (int i = 0; i < SCREEN_HEIGHT_STAGE2; i++) {
         for (int j = 0; j < SCREEN_WIDTH_STAGE2; j++) {
             if (Maze::maze[i][j] == 2 && turtle->getX() == j && turtle->getY() == i && coral2_visible) {
                 Mix_PlayChannel(-1, coral_sound, 0);
-                turtle->GetAttackted(1); // °ÅºÏÀÌ°¡ »êÈ£¿Í Ãæµ¹ÇÒ ¶§ Ã¼·Â °¨¼Ò
+                turtle->GetAttackted(1); // ï¿½Åºï¿½ï¿½Ì°ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
             else if (Maze::maze[i][j] == 3 && turtle->getX() == j && turtle->getY() == i && coral3_visible) {
-                //À½Çâ
+                //ï¿½ï¿½ï¿½ï¿½
                 Mix_PlayChannel(-1, coral_sound, 0);
-                turtle->GetAttackted(1); // °ÅºÏÀÌ°¡ »êÈ£¿Í Ãæµ¹ÇÒ ¶§ Ã¼·Â °¨¼Ò
+                turtle->GetAttackted(1); // ï¿½Åºï¿½ï¿½Ì°ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
         }
     }
 
-    //¼Ò¶ó°Ô¿Í Ãæµ¹È®ÀÎ 
+    //ï¿½Ò¶ï¿½Ô¿ï¿½ ï¿½æµ¹È®ï¿½ï¿½ 
     if (turtle->isCollision_Conch(conch1) || turtle->isCollision_Conch(conch2) || turtle->isCollision_Conch(conch3) || turtle->isCollision_Conch(conch4)) {
         Mix_PlayChannel(-1, conch_sound, 0);
         turtle->GetAttackted(1);
     }
 
 
-    // Åä³¢¿ÍÀÇ Ãæµ¹ È®ÀÎ
+    // ï¿½ä³¢ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ È®ï¿½ï¿½
     if (turtle->isCollision_Rabbit(rabbit)) {
-        Mix_PlayChannel(-1, rabbit_sound, 0); // Åä³¢¿Í ºÎµúÈú ¶§ È¿°úÀ½ Ãâ·Â
+        Mix_PlayChannel(-1, rabbit_sound, 0); // ï¿½ä³¢ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         rabbit->setCount(rabbit->getCount() + 1);
         rabbit->spawn();
     }
 
-    //Á¾·áÁ¶°Ç
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (rabbit->getCount() == 5) {
-        game_result = 1; //½Â¸®
+        game_result = 1; //ï¿½Â¸ï¿½
         g_current_game_phase = PHASE_STAGE2_ENDING;
         viewedEndings[1][1] = true;
         SDL_Delay(1000);
     }
     if (turtle->getHealth() <= 0) {
-        game_result = 2; //½ÇÆÐ
+        game_result = 2; //ï¿½ï¿½ï¿½ï¿½
         g_current_game_phase = PHASE_STAGE2_ENDING;
         viewedEndings[1][0] = true;
         SDL_Delay(1000);
@@ -474,10 +474,10 @@ void Stage2::Update() {
 
 void Stage2::Render() {
 
-    //¹è°æ¹è°æ ±×¸®±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
     SDL_RenderCopy(g_renderer, stage2_bgbgbg_texture, NULL, &stage2_bgbgbg_destination_rect);
 
-    //¹è°æ ±×¸®±â
+    //ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
     SDL_RenderCopy(g_renderer, stage2_bg_texture, &stage2_bg_source_rect, &stage2_bg_destination_rect);
 
 
@@ -498,7 +498,7 @@ void Stage2::Render() {
                 cout << " ";
             }
             else if (Maze::maze[i][j] == 2) {
-                // coral2 ·»´õ¸µ
+                // coral2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (coral2_visible) {
                     coral2_destination_rect.x = j * GRID_stage2 + TILE_SIZE + 6;
                     coral2_destination_rect.y = i * GRID_stage2 + TILE_SIZE;
@@ -508,7 +508,7 @@ void Stage2::Render() {
 
             }
             else if (Maze::maze[i][j] == 3) {
-                // coral2 ·»´õ¸µ
+                // coral2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (coral3_visible) {
                     coral2_destination_rect.x = j * GRID_stage2 + TILE_SIZE + 6;
                     coral2_destination_rect.y = i * GRID_stage2 + TILE_SIZE;
@@ -521,7 +521,7 @@ void Stage2::Render() {
     }
 
 
-    //Åä³¢°³¼ö °£ ±×¸®±â
+    //ï¿½ä³¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
     for (int i = 0; i < rabbit->getCount(); i++) {
         gan_destination_rect.x = GRID_stage2 * 5 + i * GRID_stage2 + TILE_SIZE + 6;
         gan_destination_rect.y = TILE_SIZE + SCREEN_HEIGHT_STAGE2 * GRID_stage2 + 5;
@@ -531,18 +531,18 @@ void Stage2::Render() {
 
 
 
-    //Ä³¸¯ÅÍ±×¸®±â
-    // Åä³¢
+    //Ä³ï¿½ï¿½ï¿½Í±×¸ï¿½ï¿½ï¿½
+    // ï¿½ä³¢
     if (rabbit->getX() != turtle->getX() || rabbit->getY() != turtle->getY()) {
         rabbit_destination_rect.x = rabbit->getX() * GRID_stage2 + TILE_SIZE + 6;
         rabbit_destination_rect.y = rabbit->getY() * GRID_stage2 + TILE_SIZE;
         SDL_RenderCopy(g_renderer, rabbit_texture, NULL, &rabbit_destination_rect);
     }
 
-    //°ÅºÏÀÌ ±×¸®±â
+    //ï¿½Åºï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 
     if (!turtle->isInvincible()) {
-        // ¹«Àû »óÅÂ°¡ ¾Æ´Ï°Å³ª, ¹«Àû »óÅÂÀÌÁö¸¸ 0.5ÃÊ¸¶´Ù ±ô¹Ú°Å¸®µµ·Ï ÇÔ
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°Å³ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.5ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ú°Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         turtle_destination_rect.x = turtle->getX() * GRID_stage2 + TILE_SIZE + 6;
         turtle_destination_rect.y = turtle->getY() * GRID_stage2 + TILE_SIZE;
         SDL_RenderCopy(g_renderer, turtle_texture, NULL, &turtle_destination_rect);
@@ -553,7 +553,7 @@ void Stage2::Render() {
         SDL_RenderCopy(g_renderer, turtle2_texture, NULL, &turtle_destination_rect);
     }
 
-    //°ÅºÏÀÌ Ã¼·Â ±×¸®±â 
+    //ï¿½Åºï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ 
     for (int i = 0; i < 3; i++) {
         heart0_destination_rect.x = i * GRID_stage2 + TILE_SIZE + 6;
         heart0_destination_rect.y = TILE_SIZE + SCREEN_HEIGHT_STAGE2 * GRID_stage2 + 5;
@@ -567,19 +567,19 @@ void Stage2::Render() {
 
 
 
-    //¼Ò¶ó°Ô1 ±×¸®±â
+    //ï¿½Ò¶ï¿½ï¿½1 ï¿½×¸ï¿½ï¿½ï¿½
     conch_destination_rect.x = conch1->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch1->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //¼Ò¶ó°Ô2 ±×¸®±â
+    //ï¿½Ò¶ï¿½ï¿½2 ï¿½×¸ï¿½ï¿½ï¿½
     conch_destination_rect.x = conch2->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch2->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //¼Ò¶ó°Ô3 ±×¸®±â
+    //ï¿½Ò¶ï¿½ï¿½3 ï¿½×¸ï¿½ï¿½ï¿½
     conch_destination_rect.x = conch3->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch3->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //¼Ò¶ó°Ô4 ±×¸®±â
+    //ï¿½Ò¶ï¿½ï¿½4 ï¿½×¸ï¿½ï¿½ï¿½
     conch_destination_rect.x = conch4->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch4->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
@@ -589,16 +589,16 @@ void Stage2::Render() {
 
     SDL_RenderCopy(g_renderer, frame_texture, NULL, &frame_destination);
 
-    if (stage2_status != 1) {//ÀÏ½ÃÁ¤Áö »óÅÂ È¤Àº ´ë±â »óÅÂ
+    if (stage2_status != 1) {//ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         SDL_RenderCopy(g_renderer, wait_texture, NULL, &wait_destination_rect);
         switch (stage2_status)
         {
         case 0:
-            //´ë±â ·»´õ
+            //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             SDL_RenderCopy(g_renderer, ready_texture, NULL, &readyCount_destination);
             break;
         case 2:
-            //¹öÆ° ·»´õ
+            //ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
 
             SDL_RenderCopy(g_renderer, button_continue, NULL, &continue_destination_rect);
             SDL_RenderCopy(g_renderer, button_main, NULL, &main_destination_rect);
@@ -610,8 +610,8 @@ void Stage2::Render() {
     SDL_RenderPresent(g_renderer);
 
 }
-void Stage2::Reset() {//Àç½ÃÀÛ½Ã »óÅÂ
-    //°´Ã¼ ÃÊ±âÈ­
+void Stage2::Reset() {//ï¿½ï¿½ï¿½ï¿½Û½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //ï¿½ï¿½Ã¼ ï¿½Ê±ï¿½È­
     delete turtle;
     delete rabbit;
     delete coral;
@@ -630,22 +630,22 @@ void Stage2::Reset() {//Àç½ÃÀÛ½Ã »óÅÂ
     conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
     conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
 
-    //±âÅ¸
-    stop = true; //Á¤Áö »óÈ²À¸·Î ÃÊ±âÈ­
+    //ï¿½ï¿½Å¸
+    stop = true; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 
     flip = SDL_FLIP_HORIZONTAL;
 
     alpha = 0;
     stage2_status = 0;
 
-    //À½Çâ ²ô±â
-    Mix_HaltChannel(-1);//¸ðµç »ç¿îµå ÁßÁö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    Mix_HaltChannel(-1);//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    //À½¾Ç ´Ù½Ã ½ÃÀÛ
-    Mix_FadeInMusic(background_music, -1, 2000);//³ë·¡ ÆäÀÌµåÀÎÀ¸·Î ¹Ù·Î ½ÃÀÛ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Mix_FadeInMusic(background_music, -1, 2000);//ï¿½ë·¡ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
-    //ÀÏ½ÃÁ¤Áö ½Ã°£ ÃÊ±âÈ­
+    //ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
     totalPauseTime = 0;
     stage2_startTime = 0;
     pauseStartTime = 0;

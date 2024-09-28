@@ -22,7 +22,7 @@
     <ClCompile Include="Phase_Gallery.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="Phase_Intro.cpp">
+    <ClCompile Include="Phase_Main_Menu.cpp">
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="Phase_stage1.cpp">
@@ -52,7 +52,10 @@
     <ClCompile Include="Phase_stage3Intro.cpp">
       <Filter>stage3</Filter>
     </ClCompile>
-    <ClCompile Include="PhaseManager.cpp">
+    <ClCompile Include="Phase_Intro.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="Phase_Main_Intro.cpp">
       <Filter>main</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,7 +72,7 @@
     <ClInclude Include="Phase_Gallery.h">
       <Filter>main\헤더</Filter>
     </ClInclude>
-    <ClInclude Include="Phase_Intro.h">
+    <ClInclude Include="Phase_Main_Menu.h">
       <Filter>main\헤더</Filter>
     </ClInclude>
     <ClInclude Include="Creature_stage1.h">
@@ -109,6 +112,9 @@
       <Filter>stage3\헤더</Filter>
     </ClInclude>
     <ClInclude Include="STAGE.h">
+      <Filter>main\헤더</Filter>
+    </ClInclude>
+    <ClInclude Include="Phase_Main_Intro.h">
       <Filter>main\헤더</Filter>
     </ClInclude>
   </ItemGroup>

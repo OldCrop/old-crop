@@ -1,13 +1,13 @@
 #pragma once
 #include "Game.h"
 
-//>>Ãß°¡ÇÑ º¯¼öµé
+//>>ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 extern TTF_Font* font;
 extern SDL_Texture* frame_texture;
 extern SDL_Rect frame_destination;
 
 
-//>> ±âÁ¸ º¯¼ö
+//>> ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 extern int g_current_game_phase;
 extern int g_prev_game_phase;
 

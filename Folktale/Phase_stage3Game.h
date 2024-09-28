@@ -12,12 +12,12 @@ private:
     list<Bomb*> bombList;
     int magpie_init_health;
 
-    //¹æÇâÅ° Á¶ÀÛ º¯¼öµé
-    list<int> key_pushed;//´­¸° Å° Á¤º¸ ÀúÀå
-    int f_state;//ÇöÀç ´­¸° Å° Á¤º¸
-    bool stop;//Á¤Áö Á¤º¸
+    //ï¿½ï¿½ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    list<int> key_pushed;//ï¿½ï¿½ï¿½ï¿½ Å° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    int f_state;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å° ï¿½ï¿½ï¿½ï¿½
+    bool stop;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    //½ÂÆÐ È®ÀÎ º¯¼ö
+    //ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     SDL_RendererFlip flip;
 
     int lastSpeedUpTime;
@@ -27,8 +27,8 @@ private:
     Uint32 totalPauseTime;
     Uint32 totalPauseTime_2;
 
-    //¾Æ¹«Å°³ª ´©¸£¸é ½ÃÀÛ
-    int stage3_status; //0ÀÌ¸é Å° ´ë±â »óÅÂ, 1ÀÌ¸é °ÔÀÓ Áß, 2¸é °ÔÀÓ ÀÏ½ÃÁ¤Áö
+    //ï¿½Æ¹ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    int stage3_status; //0ï¿½Ì¸ï¿½ Å° ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, 2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
     int alpha;
 
 public:
@@ -46,54 +46,54 @@ public:
 
 
 private:
-    //Á¾ ÅØ½ºÃÄ 
+    //ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½ 
     SDL_Texture* bell_texture; // the SDL_Texture 
     SDL_Rect bell_destination_rect; // for destination
-    //±îÄ¡ ÅØ½ºÃÄ
+    //ï¿½ï¿½Ä¡ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* magpie_texture; // the SDL_Texture 
     SDL_Rect magpie_destination_rect; // for destination
-    //±¸··ÀÌ ÅØ½ºÃÄ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* snakeHead_texture; // the SDL_Texture 
     SDL_Texture* snakeBody_texture;
     SDL_Texture* snakeTail_texture;
     SDL_Rect snake_destination_rect; // for destination
 
-    //¹è°æ ÅØ½ºÃÄ
+    //ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* bg_texture; // the SDL_Texture 
     SDL_Rect bg_destination_rect; // for destination
     SDL_Texture* red_texture; // the SDL_Texture 
     SDL_Texture* wait_texture; // the SDL_Texture 
 
-    //ÆøÅº ÅØ½ºÃÄ
+    //ï¿½ï¿½Åº ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* bombAfter_texture;
     SDL_Rect bomb_source_rect; // for destination
     SDL_Rect bomb_destination_rect;
 
-    //ÇÏÆ® ÅØ½ºÃÄ
+    //ï¿½ï¿½Æ® ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* heartZero_texture; // the SDL_Texture 
     SDL_Texture* heartHalf_texture; // the SDL_Texture 
     SDL_Texture* heartOne_texture; // the SDL_Texture 
     SDL_Rect heart_destination_rect; // for destination
 
-    //¹öÆ° ÅØ½ºÃÄ
+    //ï¿½ï¿½Æ° ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* button_main; // the SDL_Texture 
     SDL_Texture* button_continue; // the SDL_Texture 
     SDL_Rect continue_destination_rect; // for destination
     SDL_Rect main_destination_rect; // for destination
 
-    //À½Çâ 
+    //ï¿½ï¿½ï¿½ï¿½ 
     Mix_Music* background_music;
     Mix_Chunk* bell_sound;
-    //Mix_Chunk* hit_sound; -> Creature_stage3.h¿¡ ÀÖÀ½
+    //Mix_Chunk* hit_sound; -> Creature_stage3.hï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     Mix_Chunk* bombPrev_sound;
     Mix_Chunk* bombAfter_sound;
     Mix_Chunk* button_sound;
 
-    //±Û¾¾ ÅØ½ºÃÄ
+    //ï¿½Û¾ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* ready_texture;
     SDL_Rect readyCount_destination;
 
-    SDL_Texture* myBell_; //¸ðÀº Á¾ °³¼ö Ãâ·Â
+    SDL_Texture* myBell_; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     SDL_Rect myBell_destination;
 
 };
