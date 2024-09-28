@@ -127,7 +127,6 @@ void Phase_Main_Intro::Render()
 		SDL_RenderCopy(g_renderer, face_texture_, NULL, &face_rect_);
 		SDL_RenderCopy(g_renderer, expression_texture_, NULL, &expression_rect_);
 	}
-	SDL_RenderCopy(g_renderer, text_texture_, NULL, &text_rect_);
 	SDL_RenderPresent(g_renderer);
 }
 
