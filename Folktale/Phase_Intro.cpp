@@ -54,6 +54,14 @@ Intro::Intro()
 	text_rect_.x = 450; // X position
 	text_rect_.y = 300; // Y position
 	SDL_QueryTexture(text_texture_, NULL, NULL, &text_rect_.w, &text_rect_.h);
+
+	// Load the background music
+	bgm = Mix_LoadMUS("../../Resources/Intro/Main/treeRoad.mp3");
+	if (bgm == nullptr)
+	{
+		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
+	}
+	
 }
 
 Intro::~Intro()
@@ -62,6 +70,7 @@ Intro::~Intro()
 	SDL_DestroyTexture(human_texture_);
 	SDL_DestroyTexture(book_texture_);
 	SDL_DestroyTexture(text_texture_);
+	Mix_FreeMusic(bgm);
 	if (font != nullptr)
 		TTF_CloseFont(font);
 	TTF_Quit();
@@ -134,4 +143,9 @@ void Intro::Reset()
 {
 	x = 30;
 	speed = 0;
+
+	Mix_HaltMusic();
+	Mix_HaltChannel(-1);
+	Mix_VolumeMusic(16);
+	Mix_FadeInMusic(bgm, -1, 3000);
 }

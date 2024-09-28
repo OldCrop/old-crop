@@ -2,6 +2,35 @@
 #include "Phase_Gallery.h"
 
 Gallery::Gallery()
+    : back_to_main_destination_rect{ 0, 0, 0, 0 },
+    back_to_main_source_rect{ 0, 0, 0, 0 },
+    ending11_destination_rect{ 0, 0, 0, 0 },
+    ending11_source_rect{ 0, 0, 0, 0 },
+    ending12_destination_rect{ 0, 0, 0, 0 },
+    ending12_source_rect{ 0, 0, 0, 0 },
+    ending13_destination_rect{ 0, 0, 0, 0 },
+    ending13_source_rect{ 0, 0, 0, 0 },
+    ending21_destination_rect{ 0, 0, 0, 0 },
+    ending21_source_rect{ 0, 0, 0, 0 },
+    ending22_destination_rect{ 0, 0, 0, 0 },
+    ending22_source_rect{ 0, 0, 0, 0 },
+    ending31_destination_rect{ 0, 0, 0, 0 },
+    ending31_source_rect{ 0, 0, 0, 0 },
+    ending32_destination_rect{ 0, 0, 0, 0 },
+    ending32_source_rect{ 0, 0, 0, 0 },
+    ending_before_source_rect{ 0, 0, 0, 0 },
+    frame11_destination_rect{ 0, 0, 0, 0 },
+    frame12_destination_rect{ 0, 0, 0, 0 },
+    frame13_destination_rect{ 0, 0, 0, 0 },
+    frame21_destination_rect{ 0, 0, 0, 0 },
+    frame22_destination_rect{ 0, 0, 0, 0 },
+    frame31_destination_rect{ 0, 0, 0, 0 },
+    frame32_destination_rect{ 0, 0, 0, 0 },
+    frame_source_rectangle_{ 0, 0, 0, 0 },
+    gallery_bg_destination_rect{ 0, 0, 0, 0 },
+    gallery_bg_source_rect{ 0, 0, 0, 0 },
+    stagetext_destination_rect{ 0, 0, 0, 0 },
+    stagetext_source_rect{ 0, 0, 0, 0 }
 {
     // Initialization code...
     std::cout << "Gallery phase initialized" << std::endl;

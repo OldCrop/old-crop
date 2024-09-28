@@ -38,6 +38,12 @@ Phase_Main_Intro::Phase_Main_Intro() : click_count_(0), last_click_time_(0), sho
 	SDL_QueryTexture(expression_texture_, NULL, NULL, &expression_rect_.w, &expression_rect_.h);
 	expression_rect_ = { 0, 0, expression_rect_.w, expression_rect_.h };
 
+	// Load the background music
+	bgm = Mix_LoadMUS("../../Resources/Intro/Main/opening2.mp3");
+	if (bgm == nullptr)
+	{
+		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
+	}
 }
 
 Phase_Main_Intro::~Phase_Main_Intro()
@@ -45,7 +51,8 @@ Phase_Main_Intro::~Phase_Main_Intro()
 	SDL_DestroyTexture(texture_);
 	SDL_DestroyTexture(face_texture_);
 	SDL_DestroyTexture(expression_texture_);
-	TTF_Quit();
+	Mix_FreeMusic(bgm);
+	Mix_HaltMusic();
 }
 
 void Phase_Main_Intro::HandleEvents()
@@ -84,11 +91,13 @@ void Phase_Main_Intro::HandleEvents()
 				{
 					if (is_first_click_)
 					{
+						SDL_Delay(1500);
 						g_current_game_phase = PHASE_INTRO;
 						is_first_click_ = false; // 첫 클릭 이후로 플래그 변경
 					}
 					else
 					{
+						SDL_Delay(1500);
 						g_current_game_phase = PHASE_MAIN_MENU;
 					}
 				}
@@ -127,7 +136,6 @@ void Phase_Main_Intro::Render()
 		SDL_RenderCopy(g_renderer, face_texture_, NULL, &face_rect_);
 		SDL_RenderCopy(g_renderer, expression_texture_, NULL, &expression_rect_);
 	}
-	SDL_RenderCopy(g_renderer, text_texture_, NULL, &text_rect_);
 	SDL_RenderPresent(g_renderer);
 }
 
@@ -135,4 +143,6 @@ void Phase_Main_Intro::Reset()
 {
 	Mix_HaltMusic();
 	Mix_HaltChannel(-1);
+	Mix_VolumeMusic(64);
+	Mix_FadeInMusic(bgm, -1, 2000);
 }
