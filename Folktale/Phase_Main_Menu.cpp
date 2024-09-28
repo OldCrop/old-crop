@@ -265,7 +265,7 @@ void MainMenu::HandleEvents()
                 else if (event.button.x > exit_button_destination_rectangle_.x && event.button.x < exit_button_destination_rectangle_.x + exit_button_source_rectangle_.w &&
                     event.button.y > exit_button_destination_rectangle_.y && event.button.y < exit_button_destination_rectangle_.y + exit_button_source_rectangle_.h)
                 {
-                    g_flag_running = false;
+					g_current_game_phase = PHASE_MAIN_INTRO;
                 }
 
             }
