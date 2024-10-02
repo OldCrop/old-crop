@@ -1,30 +1,30 @@
 #include "Phase_stage1Ending.h"
 
 Phase_stage1Ending::Phase_stage1Ending() {
-    //¹Îµé·¹ÀÇ HP°¡ 0ÀÌ µÈ ¿£µùÀÌ¹ÌÁö1
+    //ï¿½Îµé·¹ï¿½ï¿½ HPï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½1
     SDL_Surface* temp_sheet_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending1.png");
     stg1_dandelion_ending_texture1 = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);
 
-    // ¿£µùÀÌ¹ÌÁö1ÀÇ °ÔÀÓ¿À¹öÀÌ¹ÌÁö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½1ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface2 = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending1_1.png");
     stg1_dandelion_ending_texture2 = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface2);
-    SDL_FreeSurface(temp_sheet_surface2);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface2);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
-    //°­¾ÆÁö¶ËÀÇ HP°¡ 0ÀÌ µÈ ¿£µùÀÌ¹ÌÁö1
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ HPï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½1
     temp_sheet_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending2.png");
     stg1_dogPoop_ending_texture1 = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
-    // ¿£µùÀÌ¹ÌÁö2ÀÇ °ÔÀÓ¿À¹öÀÌ¹ÌÁö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½2ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface3 = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending2_1.png");
     stg1_dogPoop_ending_texture2 = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface3);
-    SDL_FreeSurface(temp_sheet_surface3);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface3);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
-    //ÇØÇÇ¿£µù ÀÌ¹ÌÁö
+    //ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
     temp_sheet_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending3.png");
     stg1_happy_ending_texture1 = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     stg1_ending_destination.x = 40;
     stg1_ending_destination.y = 40;
@@ -32,12 +32,12 @@ Phase_stage1Ending::Phase_stage1Ending() {
     stg1_ending_destination.h = screenHeight - 80;
 
 
-    //»õµå¿£µù È¿°úÀ½ ·Îµå
+    //ï¿½ï¿½ï¿½å¿£ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     stg1_gosad_sound = Mix_LoadWAV("../../Resources/stage1/sounds/sadEnding.wav");
-    //ÇØÇÇ¿£µù È¿°úÀ½ ·Îµå
+    //ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     stg1_gohappy_sound = Mix_LoadWAV("../../Resources/stage1/sounds/happyEnding.wav");
 
-    //¹öÆ° ÅØ½ºÃÄ
+    //ï¿½ï¿½Æ° ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* tmp_surface1 = IMG_Load("../../Resources/btn_retry.png");
     stg1_retry_button_texture = SDL_CreateTextureFromSurface(g_renderer, tmp_surface1);
     SDL_FreeSurface(tmp_surface1);
@@ -59,7 +59,7 @@ Phase_stage1Ending::Phase_stage1Ending() {
 
     stg1_button = false;
     stg1_endingPhaseStartTime = 0;
-    stg1_buttonPushed = 0; //0ÀÌ¸é ¹öÆ° ¾È´©¸§, 1ÀÌ¸é retry¹öÆ° ´©¸§, 2ÀÌ¸é home¹öÆ° ´©¸§
+    stg1_buttonPushed = 0; //0ï¿½Ì¸ï¿½ ï¿½ï¿½Æ° ï¿½È´ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ retryï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½, 2ï¿½Ì¸ï¿½ homeï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
     stg1_pageCheck = 0;
 
     game_result = 0;
@@ -76,7 +76,7 @@ void Phase_stage1Ending::HandleEvents() {
 
         case SDL_MOUSEBUTTONDOWN:
             if (event.button.button == SDL_BUTTON_LEFT)
-                if (stg1_button) {//¹öÆ°ÀÌ ÄÑÁ®ÀÖÀ¸¸é ¹öÆ°À» ´©¸£´Â ¼ø°£
+                if (stg1_button) {//ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                     int mouse_x = event.button.x;
                     int mouse_y = event.button.y;
@@ -108,8 +108,8 @@ void Phase_stage1Ending::Update() {
         stg1_endingPhaseStartTime = SDL_GetTicks();
 
     int currentTime = SDL_GetTicks();
-    if (currentTime - stg1_endingPhaseStartTime > 3000) { // 3ÃÊ°¡ Áö³µ´Ù¸é
-        // ¹öÆ° º¸ÀÌ°Ô ÇÔ
+    if (currentTime - stg1_endingPhaseStartTime > 3000) { // 3ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
+        // ï¿½ï¿½Æ° ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½
         stg1_button = true;
     }
     else
@@ -120,12 +120,12 @@ void Phase_stage1Ending::Update() {
         game_result = 0;
     }*/
 
-    //retry ¹öÆ° ´©¸£¸é ½ºÅ×ÀÌÁö
+    //retry ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     if (stg1_buttonPushed == 1) {
         g_current_game_phase = PHASE_STAGE1_GAME;
-    } //main ¹öÆ° ´©¸£¸é ÀÎÆ®·Î
+    } //main ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½
     else if (stg1_buttonPushed == 2) {
-        g_current_game_phase = PHASE_INTRO;
+        g_current_game_phase = PHASE_MAIN_MENU;
     }
 }
 
@@ -159,14 +159,14 @@ void Phase_stage1Ending::Render() {
 }
 
 void Phase_stage1Ending::Reset() {
-    //ÆäÀÌÁî ¹Ù²î°í 3ÃÊ¼¼±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ 3ï¿½Ê¼ï¿½ï¿½ï¿½
     stg1_endingPhaseStartTime = SDL_GetTicks();
-    //¹è°æÀ½ ÁßÁö
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     Mix_HaltMusic();
     stg1_button = false;
-    stg1_buttonPushed = 0; //0ÀÌ¸é ¹öÆ° ¾È´©¸§, 1ÀÌ¸é retry¹öÆ° ´©¸§, 2ÀÌ¸é home¹öÆ° ´©¸§
+    stg1_buttonPushed = 0; //0ï¿½Ì¸ï¿½ ï¿½ï¿½Æ° ï¿½È´ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ retryï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½, 2ï¿½Ì¸ï¿½ homeï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
     stg1_pageCheck = 0;
-    //¿£µù È¿°úÀ½ Àç»ý
+    //ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     if (game_result == 1 || game_result == 2) {
         Mix_PlayChannel(-1, stg1_gosad_sound, 0);
     }

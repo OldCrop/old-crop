@@ -1,4 +1,6 @@
 #pragma once
+#ifndef PHASE_GALLERY_H
+#define PHASE_GALLERY_H
 
 #include "Game.h"
 
@@ -12,12 +14,28 @@ public:
     virtual void Render();
     virtual void Reset();
 
+
 private:
     SDL_Texture* gallery_bg_texture;
     SDL_Rect gallery_bg_source_rect;
     SDL_Rect gallery_bg_destination_rect;
 
-    SDL_Texture* ending_before_texture;
+    SDL_Texture* ending_before11_texture;
+	SDL_Texture* ending_before12_texture;
+	SDL_Texture* ending_before13_texture;
+	SDL_Texture* ending_before21_texture;
+	SDL_Texture* ending_before22_texture;
+	SDL_Texture* ending_before31_texture;
+	SDL_Texture* ending_before32_texture;
+
+	SDL_Texture* ending_after11_texture;
+	SDL_Texture* ending_after12_texture;
+	SDL_Texture* ending_after13_texture;
+	SDL_Texture* ending_after21_texture;
+	SDL_Texture* ending_after22_texture;
+	SDL_Texture* ending_after31_texture;
+	SDL_Texture* ending_after32_texture;
+
     SDL_Texture* ending11_texture;
     SDL_Texture* ending12_texture;
     SDL_Texture* ending13_texture;
@@ -25,6 +43,14 @@ private:
     SDL_Texture* ending22_texture;
     SDL_Texture* ending31_texture;
     SDL_Texture* ending32_texture;
+
+	SDL_Rect ending_before11_destination_rect;
+	SDL_Rect ending_before12_destination_rect;
+	SDL_Rect ending_before13_destination_rect;
+	SDL_Rect ending_before21_destination_rect;
+	SDL_Rect ending_before22_destination_rect;
+	SDL_Rect ending_before31_destination_rect;
+	SDL_Rect ending_before32_destination_rect;
 
     SDL_Rect ending_before_source_rect;
     SDL_Rect ending11_source_rect;
@@ -42,30 +68,6 @@ private:
     SDL_Rect ending32_source_rect;
     SDL_Rect ending32_destination_rect;
 
-    /*SDL_Texture* stage1_happy_ending_texture;
-    SDL_Rect stage1_happy_ending_source_rect;
-    SDL_Rect stage1_happy_ending_destination_rect;
-    SDL_Texture* stage1_sad_ending1_texture;
-    SDL_Rect stage1_sad_ending1_source_rect;
-    SDL_Rect stage1_sad_ending1_destination_rect;
-    SDL_Texture* stage1_sad_ending2_texture;
-    SDL_Rect stage1_sad_ending2_source_rect;
-    SDL_Rect stage1_sad_ending2_destination_rect;
-
-    SDL_Texture* stage2_happy_ending_texture;
-    SDL_Rect stage2_happy_ending_source_rect;
-    SDL_Rect stage2_happy_ending_destination_rect;
-    SDL_Texture* stage2_sad_ending_texture;
-    SDL_Rect stage2_sad_ending_source_rect;
-    SDL_Rect stage2_sad_ending_destination_rect;
-
-    SDL_Texture* stage3_happy_ending_texture;
-    SDL_Rect stage3_happy_ending_source_rect;
-    SDL_Rect stage3_happy_ending_destination_rect;
-    SDL_Texture* stage3_sad_ending_texture;
-    SDL_Rect stage3_sad_ending_source_rect;
-    SDL_Rect stage3_sad_ending_destination_rect;*/
-
     SDL_Texture* frame_texture_;
     SDL_Rect frame_source_rectangle_;
     SDL_Rect frame11_destination_rect;
@@ -81,6 +83,7 @@ private:
     SDL_Rect stagetext_destination_rect;
 
     SDL_Texture* back_to_main_texture;
+	SDL_Texture* back_to_main_unclicked_texture;
     SDL_Texture* back_to_main_clicked_texture;
     SDL_Rect back_to_main_source_rect;
     SDL_Rect back_to_main_destination_rect;
@@ -88,4 +91,7 @@ private:
     Mix_Music* gallery_bgm;
     Mix_Music* click_sound;
     Mix_Music* click_main;
+
 };
+
+#endif // PHASE_GALLERY_H
