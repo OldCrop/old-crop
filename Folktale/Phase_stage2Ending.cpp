@@ -1,18 +1,18 @@
 #include "Phase_stage2Ending.h"
 
 Phase_stage2Ending::Phase_stage2Ending() {
-    // ¹è°æ ÅØ½ºÃÄ
+    // ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_happy.png");
     winEnding_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_sad1.png");
     loseEnding_texture1 = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_sad2.png");
     loseEnding_texture_gameover = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
 
     ending_destination.x = 40;
@@ -20,7 +20,7 @@ Phase_stage2Ending::Phase_stage2Ending() {
     ending_destination.w = screenWidth - 80;
     ending_destination.h = screenHeight - 80;
 
-    // ¹öÆ° ÅØ½ºÃÄ
+    // ï¿½ï¿½Æ° ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* tmp_surface = IMG_Load("../../Resources/btn_retry.png");
     retry_button_texture = SDL_CreateTextureFromSurface(g_renderer, tmp_surface);
     SDL_FreeSurface(tmp_surface);
@@ -41,7 +41,7 @@ Phase_stage2Ending::Phase_stage2Ending() {
 
     button = false;
     endingPhaseStartTime = SDL_GetTicks();;
-    buttonPushed = 0; //0ÀÌ¸é ¹öÆ° ¾È´©¸§, 1ÀÌ¸é retry¹öÆ° ´©¸§, 2ÀÌ¸é home¹öÆ° ´©¸§
+    buttonPushed = 0; //0ï¿½Ì¸ï¿½ ï¿½ï¿½Æ° ï¿½È´ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ retryï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½, 2ï¿½Ì¸ï¿½ homeï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
     pageCheck = 0;
 
     if (!win_music)
@@ -77,7 +77,7 @@ void Phase_stage2Ending::HandleEvents() {
         case SDL_MOUSEBUTTONDOWN:
 
             if (event.button.button == SDL_BUTTON_LEFT)
-                if (button) {//¹öÆ°ÀÌ ÄÑÁ®ÀÖÀ¸¸é ¹öÆ°À» ´©¸£´Â ¼ø°£
+                if (button) {//ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                     int mouse_x = event.button.x;
                     int mouse_y = event.button.y;
@@ -101,15 +101,15 @@ void Phase_stage2Ending::HandleEvents() {
 void Phase_stage2Ending::Update() {
     int currentTime = SDL_GetTicks();
 
-    if (game_result == 1) { //ÇØÇÇ¿£µùÀÌ¸é ¹Ù·Î ¹öÆ° »ý¼ºÇÒ °ÅÀÓ
+    if (game_result == 1) { //ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         pageCheck = 1;
-        if (currentTime - endingPhaseStartTime > 3000) { // 3ÃÊ°¡ Áö³µ´Ù¸é
+        if (currentTime - endingPhaseStartTime > 3000) { // 3ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
             button = true;
         }
 
     }
-    else if (game_result == 2) { //½½ÇÂ¿£µùÀÌ¸é 3ÃÊ¸¶´Ù ÆäÀÌÁö ³Ñ¾î°¡°Ô
-        if (currentTime - endingPhaseStartTime > 3000 && pageCheck < 3) { // 3ÃÊ°¡ Áö³µ´Ù¸é
+    else if (game_result == 2) { //ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ 3ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½
+        if (currentTime - endingPhaseStartTime > 3000 && pageCheck < 3) { // 3ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½
 
             pageCheck++;
             endingPhaseStartTime = currentTime;
@@ -125,12 +125,12 @@ void Phase_stage2Ending::Update() {
 
 
     if (buttonPushed == 1) {
-        Mix_PlayChannel(-1, button_sound, 0);//È¿°úÀ½ Ãâ·Â
+        Mix_PlayChannel(-1, button_sound, 0);//È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         g_current_game_phase = PHASE_STAGE2_GAME;
     }
     else if (buttonPushed == 2) {
-        Mix_PlayChannel(-1, button_sound, 0);//È¿°úÀ½ Ãâ·Â
-        g_current_game_phase = PHASE_INTRO;
+        Mix_PlayChannel(-1, button_sound, 0);//È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        g_current_game_phase = PHASE_MAIN_MENU;
     }
 
 }
@@ -176,7 +176,7 @@ void Phase_stage2Ending::Render() {
 
 void Phase_stage2Ending::Reset() {
     button = false;
-    buttonPushed = 0; //0ÀÌ¸é ¹öÆ° ¾È´©¸§, 1ÀÌ¸é retry¹öÆ° ´©¸§, 2ÀÌ¸é home¹öÆ° ´©¸§
+    buttonPushed = 0; //0ï¿½Ì¸ï¿½ ï¿½ï¿½Æ° ï¿½È´ï¿½ï¿½ï¿½, 1ï¿½Ì¸ï¿½ retryï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½, 2ï¿½Ì¸ï¿½ homeï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½
 
     endingPhaseStartTime = SDL_GetTicks();
     flag = true;

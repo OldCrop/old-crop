@@ -124,7 +124,8 @@ void Intro::Update()
 	// human_destination meet the book_destination -> change the phase
 	if (human_destination.x + human_destination.w - 50 >= book_destination.x)
 	{
-		SDL_Delay(1000);
+		Mix_FadeOutMusic(2000);
+		SDL_Delay(2500);
 		g_current_game_phase = PHASE_MAIN_MENU;
 	}
 }
@@ -146,6 +147,6 @@ void Intro::Reset()
 
 	Mix_HaltMusic();
 	Mix_HaltChannel(-1);
-	Mix_VolumeMusic(16);
+	Mix_VolumeMusic(8);
 	Mix_FadeInMusic(bgm, -1, 3000);
 }

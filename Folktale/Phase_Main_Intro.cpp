@@ -91,13 +91,15 @@ void Phase_Main_Intro::HandleEvents()
 				{
 					if (is_first_click_)
 					{
-						SDL_Delay(1500);
+						Mix_FadeOutMusic(2000);
+						SDL_Delay(2500);
 						g_current_game_phase = PHASE_INTRO;
 						is_first_click_ = false; // 첫 클릭 이후로 플래그 변경
 					}
 					else
 					{
-						SDL_Delay(1500);
+						Mix_FadeOutMusic(2000);
+						SDL_Delay(4000);
 						g_current_game_phase = PHASE_MAIN_MENU;
 					}
 				}
@@ -108,6 +110,13 @@ void Phase_Main_Intro::HandleEvents()
 				}
 			}
 			//g_current_game_phase = PHASE_INTRO;
+		}
+		else if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.sym == SDLK_m)
+			{
+				g_current_game_phase = PHASE_MAIN_MENU;
+			}
 		}
 		else if (event.type == SDL_QUIT)
 		{
