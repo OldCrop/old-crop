@@ -26,6 +26,8 @@ private:
 	SDL_Texture* expression_texture_;
 	SDL_Rect expression_rect_;
 
+	Mix_Music* bgm;
+
 	//SDL_Texture* text_texture_;
 	//SDL_Rect text_rect_;
 
@@ -64,6 +66,8 @@ private:
 	SDL_Texture* book_texture_;
 	SDL_Rect book_source_rectangle_;
 	SDL_Rect book_destination;
+
+	Mix_Music* bgm;
 
 	int x;
 	int speed;

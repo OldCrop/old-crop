@@ -20,22 +20,20 @@ Gallery::Gallery()
 
     //���� ���� �� �̹���
     SDL_Surface* ending_before_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-	if (!ending_before_surface) {
-		std::cerr << "Failed to load ending_before: " << IMG_GetError() << std::endl;
-		return;
-	}
-    ending_before_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    if (!ending_before_surface) {
+        std::cerr << "Failed to load ending_before: " << IMG_GetError() << std::endl;
+        return;
+    }
+    ending_before11_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    ending_before12_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    ending_before13_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    ending_before21_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    ending_before22_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    ending_before31_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
+    ending_before32_texture = SDL_CreateTextureFromSurface(g_renderer, ending_before_surface);
 
     ending_before_source_rect = { 0, 0, ending_before_surface->w, ending_before_surface->h };
     SDL_FreeSurface(ending_before_surface);
-
-    ending11_texture = ending_before_texture;
-    ending12_texture = ending_before_texture;
-    ending13_texture = ending_before_texture;
-    ending21_texture = ending_before_texture;
-    ending22_texture = ending_before_texture;
-    ending31_texture = ending_before_texture;
-    ending32_texture = ending_before_texture;
 
     ending11_destination_rect = { 192, 140, ending_before_source_rect.w, ending_before_source_rect.h };
     ending12_destination_rect = { 85, 340, ending_before_source_rect.w, ending_before_source_rect.h };
@@ -45,11 +43,68 @@ Gallery::Gallery()
     ending31_destination_rect = { 625, 365, ending_before_source_rect.w, ending_before_source_rect.h };
     ending32_destination_rect = { 840, 365, ending_before_source_rect.w, ending_before_source_rect.h };
 
+	SDL_Surface* ending11_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending1.png");
+	SDL_Surface* ending11_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending11_surface, NULL, ending11_resized_surface, NULL);
+	ending_after11_texture = SDL_CreateTextureFromSurface(g_renderer, ending11_resized_surface);
+	SDL_FreeSurface(ending11_surface);
+	SDL_FreeSurface(ending11_resized_surface);
+
+	SDL_Surface* ending12_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending2.png");
+	SDL_Surface* ending12_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending12_surface, NULL, ending12_resized_surface, NULL);
+	ending_after12_texture = SDL_CreateTextureFromSurface(g_renderer, ending12_resized_surface);
+	SDL_FreeSurface(ending12_surface);
+	SDL_FreeSurface(ending12_resized_surface);
+
+	SDL_Surface* ending13_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending3.png");
+	SDL_Surface* ending13_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending13_surface, NULL, ending13_resized_surface, NULL);
+	ending_after13_texture = SDL_CreateTextureFromSurface(g_renderer, ending13_resized_surface);
+	SDL_FreeSurface(ending13_surface);
+	SDL_FreeSurface(ending13_resized_surface);
+
+	SDL_Surface* ending21_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_sad1.png");
+	SDL_Surface* ending21_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending21_surface, NULL, ending21_resized_surface, NULL);
+	ending_after21_texture = SDL_CreateTextureFromSurface(g_renderer, ending21_resized_surface);
+	SDL_FreeSurface(ending21_surface);
+	SDL_FreeSurface(ending21_resized_surface);
+
+	SDL_Surface* ending22_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_happy.png");
+	SDL_Surface* ending22_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending22_surface, NULL, ending22_resized_surface, NULL);
+	ending_after22_texture = SDL_CreateTextureFromSurface(g_renderer, ending22_resized_surface);
+	SDL_FreeSurface(ending22_surface);
+	SDL_FreeSurface(ending22_resized_surface);
+
+	SDL_Surface* ending31_surface = IMG_Load("../../Resources/stage3/sadEnding1.png");
+	SDL_Surface* ending31_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending31_surface, NULL, ending31_resized_surface, NULL);
+	ending_after31_texture = SDL_CreateTextureFromSurface(g_renderer, ending31_resized_surface);
+	SDL_FreeSurface(ending31_surface);
+	SDL_FreeSurface(ending31_resized_surface);
+
+	SDL_Surface* ending32_surface = IMG_Load("../../Resources/stage3/happyEnding.png");
+	SDL_Surface* ending32_resized_surface = SDL_CreateRGBSurface(0, ending_before_source_rect.w, ending_before_source_rect.h, 32, 0, 0, 0, 0);
+	SDL_BlitScaled(ending32_surface, NULL, ending32_resized_surface, NULL);
+	ending_after32_texture = SDL_CreateTextureFromSurface(g_renderer, ending32_resized_surface);
+	SDL_FreeSurface(ending32_surface);
+	SDL_FreeSurface(ending32_resized_surface);
+
+	ending11_texture = ending_before11_texture;
+	ending12_texture = ending_before12_texture;
+	ending13_texture = ending_before13_texture;
+	ending21_texture = ending_before21_texture;
+	ending22_texture = ending_before22_texture;
+	ending31_texture = ending_before31_texture;
+	ending32_texture = ending_before32_texture;
+
     SDL_Surface* frame_surface = IMG_Load("../../Resources/frame.png");
-	if (!frame_surface) {
-		std::cerr << "Failed to load frame: " << IMG_GetError() << std::endl;
-		return;
-	}
+    if (!frame_surface) {
+        std::cerr << "Failed to load frame: " << IMG_GetError() << std::endl;
+        return;
+    }
     frame_texture_ = SDL_CreateTextureFromSurface(g_renderer, frame_surface);
     SDL_FreeSurface(frame_surface);
 
@@ -72,20 +127,25 @@ Gallery::Gallery()
     stagetext_destination_rect = { 0, 0, stagetext_source_rect.w, stagetext_source_rect.h };
 
     //�������� ���ư��� ��ư
-    SDL_Surface* back_to_main_surface = IMG_Load("../../Resources/gallery/back_to_main.png");
-    back_to_main_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_surface);
-    SDL_FreeSurface(back_to_main_surface);
+    SDL_Surface* back_to_main_unclicked_surface = IMG_Load("../../Resources/gallery/back_to_main.png");
+    back_to_main_unclicked_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_unclicked_surface);
 
-    back_to_main_source_rect = { 0, 0, back_to_main_surface->w, back_to_main_surface->h };
+	SDL_Surface* back_to_main_clicked_surface = IMG_Load("../../Resources/gallery/back_to_main_clicked.png");
+	back_to_main_clicked_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_clicked_surface);
+	SDL_FreeSurface(back_to_main_clicked_surface);
+
+	back_to_main_texture = back_to_main_unclicked_texture;
+    back_to_main_source_rect = { 0, 0, back_to_main_unclicked_surface->w, back_to_main_unclicked_surface->h };
     back_to_main_destination_rect = { 620, 560, back_to_main_source_rect.w, back_to_main_source_rect.h };
+    SDL_FreeSurface(back_to_main_unclicked_surface);
 
     if (back_to_main_texture == NULL) {
         std::cerr << "Failed to create texture: " << SDL_GetError() << std::endl;
     }
 
-	gallery_bgm = Mix_LoadMUS("../../Resources/gallery/gallery_background_bgm.mp3");
+    gallery_bgm = Mix_LoadMUS("../../Resources/gallery/gallery_background_bgm.mp3");
     click_main = Mix_LoadMUS("../../Resources/Intro/click_gallery.mp3");
-	click_sound = Mix_LoadMUS("../../Resources/gallery/gallery_to_end.mp3");
+    click_sound = Mix_LoadMUS("../../Resources/gallery/gallery_to_end.mp3");
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) {
         std::cerr << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
@@ -97,7 +157,23 @@ Gallery::Gallery()
 Gallery::~Gallery()
 {
     SDL_DestroyTexture(gallery_bg_texture);
-    SDL_DestroyTexture(ending_before_texture);
+
+    SDL_DestroyTexture(ending_before11_texture);
+	SDL_DestroyTexture(ending_before12_texture);
+	SDL_DestroyTexture(ending_before13_texture);
+	SDL_DestroyTexture(ending_before21_texture);
+	SDL_DestroyTexture(ending_before22_texture);
+	SDL_DestroyTexture(ending_before31_texture);
+	SDL_DestroyTexture(ending_before32_texture);
+
+	SDL_DestroyTexture(ending_after11_texture);
+	SDL_DestroyTexture(ending_after12_texture);
+	SDL_DestroyTexture(ending_after13_texture);
+	SDL_DestroyTexture(ending_after21_texture);
+	SDL_DestroyTexture(ending_after22_texture);
+	SDL_DestroyTexture(ending_after31_texture);
+	SDL_DestroyTexture(ending_after32_texture);
+
     SDL_DestroyTexture(ending11_texture);
     SDL_DestroyTexture(ending12_texture);
     SDL_DestroyTexture(ending13_texture);
@@ -105,9 +181,12 @@ Gallery::~Gallery()
     SDL_DestroyTexture(ending22_texture);
     SDL_DestroyTexture(ending31_texture);
     SDL_DestroyTexture(ending32_texture);
+
     SDL_DestroyTexture(frame_texture_);
     SDL_DestroyTexture(stagetext_texture);
     SDL_DestroyTexture(back_to_main_texture);
+	SDL_DestroyTexture(back_to_main_unclicked_texture);
+	SDL_DestroyTexture(back_to_main_clicked_texture);
 
     Mix_FreeMusic(gallery_bgm);
     Mix_FreeMusic(click_main);
@@ -118,140 +197,55 @@ Gallery::~Gallery()
 
 void Gallery::Update()
 {
-    // 기존 텍스처 해제
-    if (ending11_texture) {
-        SDL_DestroyTexture(ending11_texture);
-        ending11_texture = nullptr;
-    }
-    if (ending12_texture) {
-        SDL_DestroyTexture(ending12_texture);
-        ending12_texture = nullptr;
-    }
-    if (ending13_texture) {
-        SDL_DestroyTexture(ending13_texture);
-        ending13_texture = nullptr;
-    }
-    if (ending21_texture) {
-        SDL_DestroyTexture(ending21_texture);
-        ending21_texture = nullptr;
-    }
-    if (ending22_texture) {
-        SDL_DestroyTexture(ending22_texture);
-        ending22_texture = nullptr;
-    }
-    if (ending31_texture) {
-        SDL_DestroyTexture(ending31_texture);
-        ending31_texture = nullptr;
-    }
-    if (ending32_texture) {
-        SDL_DestroyTexture(ending32_texture);
-        ending32_texture = nullptr;
-    }
-
-    // ending11
-    SDL_Surface* ending11_surface = nullptr;
-    SDL_Surface* ending11_resized_surface = nullptr;
+    // viewedEndings 배열을 확인하여 텍스처를 선택합니다.
     if (viewedEndings[0][0]) {
-        ending11_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending1.png");
+        ending11_texture = ending_after11_texture;
     }
     else {
-        ending11_surface = IMG_Load("../../Resources/gallery/ending_before.png");
+        ending11_texture = ending_before11_texture;
     }
-    ending11_resized_surface = SDL_CreateRGBSurface(0, ending11_destination_rect.w, ending11_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending11_surface, NULL, ending11_resized_surface, NULL);
-    ending11_texture = SDL_CreateTextureFromSurface(g_renderer, ending11_resized_surface);
-    SDL_FreeSurface(ending11_surface);
-    SDL_FreeSurface(ending11_resized_surface);
 
-    // ending12
-    SDL_Surface* ending12_surface = nullptr;
-    SDL_Surface* ending12_resized_surface = nullptr;
-    if (viewedEndings[0][1]) {
-        ending12_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending2.png");
-    }
-    else {
-        ending12_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-    }
-    ending12_resized_surface = SDL_CreateRGBSurface(0, ending12_destination_rect.w, ending12_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending12_surface, NULL, ending12_resized_surface, NULL);
-    ending12_texture = SDL_CreateTextureFromSurface(g_renderer, ending12_resized_surface);
-    SDL_FreeSurface(ending12_surface);
-    SDL_FreeSurface(ending12_resized_surface);
+	if (viewedEndings[0][1]) {
+		ending12_texture = ending_after12_texture;
+	}
+	else {
+		ending12_texture = ending_before12_texture;
+	}
 
-    // ending13
-    SDL_Surface* ending13_surface = nullptr;
-    SDL_Surface* ending13_resized_surface = nullptr;
-    if (viewedEndings[0][2]) {
-        ending13_surface = IMG_Load("../../Resources/stage1/IntroEnding/stg_ending3.png");
-    }
-    else {
-        ending13_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-    }
-    ending13_resized_surface = SDL_CreateRGBSurface(0, ending13_destination_rect.w, ending13_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending13_surface, NULL, ending13_resized_surface, NULL);
-    ending13_texture = SDL_CreateTextureFromSurface(g_renderer, ending13_resized_surface);
-    SDL_FreeSurface(ending13_surface);
-    SDL_FreeSurface(ending13_resized_surface);
+	if (viewedEndings[0][2]) {
+		ending13_texture = ending_after13_texture;
+	}
+	else {
+		ending13_texture = ending_before13_texture;
+	}
 
-    // ending21
-    SDL_Surface* ending21_surface = nullptr;
-    SDL_Surface* ending21_resized_surface = nullptr;
-    if (viewedEndings[1][0]) {
-        ending21_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_sad1.png");
-    }
-    else {
-        ending21_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-    }
-    ending21_resized_surface = SDL_CreateRGBSurface(0, ending21_destination_rect.w, ending21_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending21_surface, NULL, ending21_resized_surface, NULL);
-    ending21_texture = SDL_CreateTextureFromSurface(g_renderer, ending21_resized_surface);
-    SDL_FreeSurface(ending21_surface);
-    SDL_FreeSurface(ending21_resized_surface);
+	if (viewedEndings[1][0]) {
+		ending21_texture = ending_after21_texture;
+	}
+	else {
+		ending21_texture = ending_before21_texture;
+	}
 
-    // ending22
-    SDL_Surface* ending22_surface = nullptr;
-    SDL_Surface* ending22_resized_surface = nullptr;
-    if (viewedEndings[1][1]) {
-        ending22_surface = IMG_Load("../../Resources/stage2/stage2/stage2_ending_happy.png");
-    }
-    else {
-        ending22_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-    }
-    ending22_resized_surface = SDL_CreateRGBSurface(0, ending22_destination_rect.w, ending22_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending22_surface, NULL, ending22_resized_surface, NULL);
-    ending22_texture = SDL_CreateTextureFromSurface(g_renderer, ending22_resized_surface);
-    SDL_FreeSurface(ending22_surface);
-    SDL_FreeSurface(ending22_resized_surface);
+	if (viewedEndings[1][1]) {
+		ending22_texture = ending_after22_texture;
+	}
+	else {
+		ending22_texture = ending_before22_texture;
+	}
 
-    // ending31
-    SDL_Surface* ending31_surface = nullptr;
-    SDL_Surface* ending31_resized_surface = nullptr;
-    if (viewedEndings[2][0]) {
-        ending31_surface = IMG_Load("../../Resources/stage3/sadEnding1.png");
-    }
-    else {
-        ending31_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-    }
-    ending31_resized_surface = SDL_CreateRGBSurface(0, ending31_destination_rect.w, ending31_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending31_surface, NULL, ending31_resized_surface, NULL);
-    ending31_texture = SDL_CreateTextureFromSurface(g_renderer, ending31_resized_surface);
-    SDL_FreeSurface(ending31_surface);
-    SDL_FreeSurface(ending31_resized_surface);
+	if (viewedEndings[2][0]) {
+		ending31_texture = ending_after31_texture;
+	}
+	else {
+		ending31_texture = ending_before31_texture;
+	}
 
-    // ending32
-    SDL_Surface* ending32_surface = nullptr;
-    SDL_Surface* ending32_resized_surface = nullptr;
-    if (viewedEndings[2][1]) {
-        ending32_surface = IMG_Load("../../Resources/stage3/happyEnding.png");
-    }
-    else {
-        ending32_surface = IMG_Load("../../Resources/gallery/ending_before.png");
-    }
-    ending32_resized_surface = SDL_CreateRGBSurface(0, ending32_destination_rect.w, ending32_destination_rect.h, 32, 0, 0, 0, 0);
-    SDL_BlitScaled(ending32_surface, NULL, ending32_resized_surface, NULL);
-    ending32_texture = SDL_CreateTextureFromSurface(g_renderer, ending32_resized_surface);
-    SDL_FreeSurface(ending32_surface);
-    SDL_FreeSurface(ending32_resized_surface);
+	if (viewedEndings[2][1]) {
+		ending32_texture = ending_after32_texture;
+	}
+	else {
+		ending32_texture = ending_before32_texture;
+	}
 }
 
 void Gallery::Render()
@@ -267,7 +261,6 @@ void Gallery::Render()
     SDL_RenderCopy(g_renderer, ending22_texture, &ending_before_source_rect, &ending22_destination_rect);
     SDL_RenderCopy(g_renderer, ending31_texture, &ending_before_source_rect, &ending31_destination_rect);
     SDL_RenderCopy(g_renderer, ending32_texture, &ending_before_source_rect, &ending32_destination_rect);
-    //SDL_RenderCopy(g_renderer, stage1_happy_ending_texture, &stage1_happy_ending_source_rect, &stage1_happy_ending_destination_rect);
 
     SDL_RenderCopy(g_renderer, frame_texture_, &frame_source_rectangle_, &frame11_destination_rect);
     SDL_RenderCopy(g_renderer, frame_texture_, &frame_source_rectangle_, &frame12_destination_rect);
@@ -303,16 +296,11 @@ void Gallery::HandleEvents()
             if (mouseX >= back_to_main_destination_rect.x && mouseX <= back_to_main_destination_rect.x + back_to_main_destination_rect.w &&
                 mouseY >= back_to_main_destination_rect.y && mouseY <= back_to_main_destination_rect.y + back_to_main_destination_rect.h)
             {
-                //�̹��� ����
-                SDL_Surface* back_to_main_surface = IMG_Load("../../Resources/gallery/back_to_main_clicked.png");
-                back_to_main_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_surface);
-                SDL_FreeSurface(back_to_main_surface);
+				back_to_main_texture = back_to_main_clicked_texture;
             }
             else
             {
-                SDL_Surface* back_to_main_surface = IMG_Load("../../Resources/gallery/back_to_main.png");
-                back_to_main_texture = SDL_CreateTextureFromSurface(g_renderer, back_to_main_surface);
-                SDL_FreeSurface(back_to_main_surface);
+				back_to_main_texture = back_to_main_unclicked_texture;
             }
             break;
         }
@@ -333,7 +321,7 @@ void Gallery::HandleEvents()
                 {
                     if (viewedEndings[0][0] == true) {
                         game_result = 1;
-						Mix_PlayMusic(click_sound, 0);
+                        Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
                         g_current_game_phase = PHASE_STAGE1_ENDING;
                     }
@@ -415,6 +403,8 @@ void Gallery::HandleEvents()
 
 void Gallery::Reset()
 {
+    back_to_main_texture = back_to_main_unclicked_texture;
+
     Mix_HaltMusic();
     Mix_HaltChannel(-1);
     Mix_FadeInMusic(gallery_bgm, -1, 2000);

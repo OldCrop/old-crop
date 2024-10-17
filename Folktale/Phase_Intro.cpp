@@ -54,6 +54,14 @@ Intro::Intro()
 	text_rect_.x = 450; // X position
 	text_rect_.y = 300; // Y position
 	SDL_QueryTexture(text_texture_, NULL, NULL, &text_rect_.w, &text_rect_.h);
+
+	// Load the background music
+	bgm = Mix_LoadMUS("../../Resources/Intro/Main/treeRoad.mp3");
+	if (bgm == nullptr)
+	{
+		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
+	}
+	
 }
 
 Intro::~Intro()
@@ -62,6 +70,7 @@ Intro::~Intro()
 	SDL_DestroyTexture(human_texture_);
 	SDL_DestroyTexture(book_texture_);
 	SDL_DestroyTexture(text_texture_);
+	Mix_FreeMusic(bgm);
 	if (font != nullptr)
 		TTF_CloseFont(font);
 	TTF_Quit();
@@ -115,7 +124,8 @@ void Intro::Update()
 	// human_destination meet the book_destination -> change the phase
 	if (human_destination.x + human_destination.w - 50 >= book_destination.x)
 	{
-		SDL_Delay(1000);
+		Mix_FadeOutMusic(2000);
+		SDL_Delay(2500);
 		g_current_game_phase = PHASE_MAIN_MENU;
 	}
 }
@@ -134,4 +144,9 @@ void Intro::Reset()
 {
 	x = 30;
 	speed = 0;
+
+	Mix_HaltMusic();
+	Mix_HaltChannel(-1);
+	Mix_VolumeMusic(8);
+	Mix_FadeInMusic(bgm, -1, 3000);
 }

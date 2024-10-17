@@ -326,5 +326,6 @@ void MainMenu::Reset()
     //���� �ʱ�ȭ
     Mix_HaltMusic();
     Mix_HaltChannel(-1);
+    Mix_VolumeMusic(64);
 	Mix_FadeInMusic(intro_bgm, -1, 2000);
 }
