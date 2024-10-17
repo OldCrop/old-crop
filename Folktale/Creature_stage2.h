@@ -128,6 +128,7 @@ public:
     bool isCollision_Coral(Coral* coral);
     bool isCollision_Rabbit(Rabbit* rabbit);
     bool isCollision_Conch(Conch* Conch);
+    bool isCollision_Conch2(Conch* Conch);
     bool isCollision_Coral2(Coral2* coral2);
 
     // 거북이의 무적 상태 설정

@@ -9,8 +9,8 @@ int Maze::maze[SCREEN_HEIGHT_STAGE2][SCREEN_WIDTH_STAGE2] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 3, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 1},
     {1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 3, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-    {1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 1, 3, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 2, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 3, 0, 1},
+    {1, 0, 1, 1, 3, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 2, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1},
     {1, 0, 2, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
     {1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 3, 1},
     {1, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 1},
@@ -125,20 +125,20 @@ void Conch::move(int newX, int newY) {
         }
 
         // 맵의 경계를 벗어나면 반대 방향으로 이동
-        if (x < 0) {
-            x = 0;
+        if (x < 1) {
+            x = 1;
             direction = 3; // 우로 방향 변경
         }
-        else if (x >= SCREEN_WIDTH_STAGE2) {
-            x = SCREEN_WIDTH_STAGE2 - 1;
+        else if (x >= SCREEN_WIDTH_STAGE2-1) {
+            x = SCREEN_WIDTH_STAGE2 - 2;
             direction = 2; // 좌로 방향 변경
         }
-        if (y < 0) {
-            y = 0;
+        if (y < 1) {
+            y = 1;
             direction = 1; // 하로 방향 변경
         }
-        else if (y >= SCREEN_HEIGHT_STAGE2) {
-            y = SCREEN_HEIGHT_STAGE2 - 1;
+        else if (y >= SCREEN_HEIGHT_STAGE2-1) {
+            y = SCREEN_HEIGHT_STAGE2 - 2;
             direction = 0; // 상으로 방향 변경
         }
 
@@ -249,6 +249,27 @@ bool Turtle::isCollision_Conch(Conch* Conch) {
     return isCollision;
 }
 
+bool Turtle::isCollision_Conch2(Conch* Conch) {
+    bool isCollision = false;
+
+    // 소라게의 네 개의 좌표를 확인
+    int conchX = Conch->getX();
+    int conchY = Conch->getY();
+
+    // 거북이의 좌표
+    int turtleX = this->getX();
+    int turtleY = this->getY();
+
+    // 소라게의 네 개의 좌표 중 하나라도 거북이의 좌표와 같으면 충돌
+    if ((turtleX == conchX && turtleY == conchY) ||
+        (turtleX == conchX + 1 && turtleY == conchY) ||
+        (turtleX == conchX && turtleY == conchY + 1) ||
+        (turtleX == conchX + 1 && turtleY == conchY + 1)) {
+        isCollision = true;
+    }
+
+    return isCollision;
+}
 
 //소멸자정의
 Turtle::~Turtle() {}
