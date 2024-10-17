@@ -26,7 +26,9 @@ private:
     Conch* conch2;
     Conch* conch3;
     Conch* conch4;
-
+    Conch* conch5;
+    Conch* conch6;
+    Conch* conch7;
 
     // 방향키 조작 변수들
     bool f_list[4];
@@ -64,7 +66,7 @@ private:
     SDL_Texture* heart2_texture;
     SDL_Texture* stage2_bgbgbg_texture;
     SDL_Texture* conch_texture;
-
+    SDL_Texture* conch_texture2;
     SDL_Texture* turtle2_texture;
 
 
@@ -79,6 +81,7 @@ private:
     SDL_Rect heart2_destination_rect;
     SDL_Rect stage2_bgbgbg_destination_rect;
     SDL_Rect conch_destination_rect;
+    SDL_Rect conch_destination_rect2;
     SDL_Rect wait_destination_rect;
 
     SDL_Texture* wait_texture; // the SDL_Texture

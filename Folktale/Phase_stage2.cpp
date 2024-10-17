@@ -14,22 +14,43 @@ Stage2::Stage2() {
 
     uniform_int_distribution<int> distributionX(0, SCREEN_WIDTH_STAGE2);
     uniform_int_distribution<int> distributionY(0, SCREEN_HEIGHT_STAGE2);
-    rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
-    turtle = new Turtle(1, 1, 0, 3, 0);
-    coral = new Coral(0, 0, 0, 0, 1);
-    coral2 = new Coral2(0, 0, 0, 0, 1);
-    // ���� Conch ��ü ����
-    conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
-    conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
-    conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
-    conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
+   
 
     rabbitSpawnTimer = RABBIT_SPAWN_TIME;
-    coral2_spawn_timer = CORAL2_SPAWN_TIME; // CORAL2_SPAWN_TIME�� coral2�� ��Ÿ���� ������� �ð� ����
-    coral2_visible = false; // ó������ coral2�� ǥ������ ����
-
-    coral3_spawn_timer = CORAL2_SPAWN_TIME; // CORAL2_SPAWN_TIME�� coral2�� ��Ÿ���� ������� �ð� ����=>�߰�
+    coral2_spawn_timer = CORAL2_SPAWN_TIME; 
+    coral2_visible = false;
+    coral3_spawn_timer = CORAL2_SPAWN_TIME; 
     coral3_visible = true; //=>�߰�
+
+
+    if (is_hard) {
+        
+        turtle = new Turtle(1, 1, 0, 5, 0);
+        coral = new Coral(0, 0, 0, 0, 1);
+        coral2 = new Coral2(0, 0, 0, 0, 1);
+        conch1 = new Conch(15, 15, 0, 0, 2, 0, 0);
+        conch2 = new Conch(10, 10, 0, 0, 2, 0, 0);
+        conch3 = new Conch(20, 3, 0, 0, 2, 0, 0);
+        conch4 = new Conch(25, 23, 0, 0, 2, 0, 0);
+        conch5 = nullptr; 
+        conch6 = nullptr; 
+        conch7 = nullptr; 
+        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
+    }
+    else {
+        
+        turtle = new Turtle(1, 1, 0, 5, 0);
+        coral = new Coral(0, 0, 0, 0, 1);
+        coral2 = new Coral2(0, 0, 0, 0, 1);
+        conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
+        conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
+        conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
+        conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
+        conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
+        conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
+        conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
+        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
+    }
 
     // ��� �ؽ��� �ε�
     SDL_Surface* stage2_bg_surface = IMG_Load("../../Resources/stage2/stage2/stage2_bg.png");
@@ -126,6 +147,15 @@ Stage2::Stage2() {
     conch_destination_rect.y = conch1->getY() * GRID_stage2;
     conch_destination_rect.w = GRID_stage2;
     conch_destination_rect.h = GRID_stage2;
+
+
+    SDL_Surface* conch_surface2 = IMG_Load("../../Resources/stage2/stage2/stage2_conch.png");
+    conch_texture2 = SDL_CreateTextureFromSurface(g_renderer, conch_surface2);
+    SDL_FreeSurface(conch_surface2);
+    conch_destination_rect2.x = conch5->getX() * GRID_stage2;
+    conch_destination_rect2.y = conch5->getY() * GRID_stage2;
+    conch_destination_rect2.w = GRID_stage2*2;
+    conch_destination_rect2.h = GRID_stage2*2;
 
     //wait_texture �̹���
     SDL_Surface* wait_surface = IMG_Load("../../Resources/translucent_black.png");
@@ -351,6 +381,9 @@ void Stage2::Update() {
     conch2->move(0, 0);
     conch3->move(0, 0);
     conch4->move(0, 0);
+    conch5->move(0, 0);
+    conch6->move(0, 0);
+    conch7->move(0, 0); 
 
     if (turtle->isInvincible()) {
         int timer = turtle->getInvincibleTimer();
@@ -362,13 +395,9 @@ void Stage2::Update() {
         turtle->setInvincibleTimer(timer);
     }
     // ���� �������� Ÿ�̸Ӹ� ���ҽ�Ŵ
-    rabbitSpawnTimer--;
+    
 
-    // Ÿ�̸Ӱ� 0�� �Ǹ� �䳢�� �������ϰ� Ÿ�̸Ӹ� �缳����
-    if (rabbitSpawnTimer <= 0) {
-        rabbit->spawn(); // �䳢 ������
-        rabbitSpawnTimer = RABBIT_SPAWN_TIME; // Ÿ�̸� �ʱ�ȭ
-    }
+    
 
     // coral2_spawn_timer�� ���ҽ�Ű��, ���� �ð��� ����ϸ� coral2�� ���¸� ����
     coral2_spawn_timer--;
@@ -382,7 +411,12 @@ void Stage2::Update() {
         coral3_visible = !coral3_visible; // coral2�� ���¸� �����Ͽ� ��Ÿ���ų� ��������� ����
         coral3_spawn_timer = CORAL3_SPAWN_TIME; // Ÿ�̸� �缳��
     }
-
+    // 토끼 스폰
+    if (rabbitSpawnTimer <= 0) {
+        rabbit->spawn();
+        rabbitSpawnTimer = RABBIT_SPAWN_TIME;
+    }
+    rabbitSpawnTimer--;
     if (!stop) {
         int x = turtle->getX();
         int y = turtle->getY();
@@ -441,10 +475,26 @@ void Stage2::Update() {
         }
     }
 
-    //�Ҷ�Կ� �浹Ȯ�� 
-    if (turtle->isCollision_Conch(conch1) || turtle->isCollision_Conch(conch2) || turtle->isCollision_Conch(conch3) || turtle->isCollision_Conch(conch4)) {
-        Mix_PlayChannel(-1, conch_sound, 0);
-        turtle->GetAttackted(1);
+    // conch 충돌
+    if (is_hard) {
+        if (turtle->isCollision_Conch(conch1) || turtle->isCollision_Conch(conch2) || turtle->isCollision_Conch(conch3) || turtle->isCollision_Conch(conch4) ||
+            turtle->isCollision_Conch2(conch5) || turtle->isCollision_Conch2(conch6) || turtle->isCollision_Conch2(conch7)) {
+
+            if (turtle->isCollision_Conch2(conch5) || turtle->isCollision_Conch2(conch6) || turtle->isCollision_Conch2(conch7)) {
+                Mix_PlayChannel(-1, conch_sound, 0);
+                turtle->GetAttackted(2);
+            }
+            else {
+                Mix_PlayChannel(-1, conch_sound, 0);
+                turtle->GetAttackted(1);
+            }
+        }
+    }
+    else {
+        if (turtle->isCollision_Conch(conch1) || turtle->isCollision_Conch(conch2) || turtle->isCollision_Conch(conch3) || turtle->isCollision_Conch(conch4)) {
+            Mix_PlayChannel(-1, conch_sound, 0);
+            turtle->GetAttackted(1);
+        }
     }
 
 
@@ -521,9 +571,9 @@ void Stage2::Render() {
     }
 
 
-    //�䳢���� �� �׸���
+    //토끼 간
     for (int i = 0; i < rabbit->getCount(); i++) {
-        gan_destination_rect.x = GRID_stage2 * 5 + i * GRID_stage2 + TILE_SIZE + 6;
+        gan_destination_rect.x = GRID_stage2 * 6 + i * GRID_stage2 + TILE_SIZE + 6;
         gan_destination_rect.y = TILE_SIZE + SCREEN_HEIGHT_STAGE2 * GRID_stage2 + 5;
         SDL_RenderCopy(g_renderer, gan_texture, NULL, &gan_destination_rect);
     }
@@ -532,17 +582,10 @@ void Stage2::Render() {
 
 
     //ĳ���ͱ׸���
-    // �䳢
-    if (rabbit->getX() != turtle->getX() || rabbit->getY() != turtle->getY()) {
-        rabbit_destination_rect.x = rabbit->getX() * GRID_stage2 + TILE_SIZE + 6;
-        rabbit_destination_rect.y = rabbit->getY() * GRID_stage2 + TILE_SIZE;
-        SDL_RenderCopy(g_renderer, rabbit_texture, NULL, &rabbit_destination_rect);
-    }
+    
 
-    //�ź��� �׸���
 
     if (!turtle->isInvincible()) {
-        // ���� ���°� �ƴϰų�, ���� ���������� 0.5�ʸ��� ��ڰŸ����� ��
         turtle_destination_rect.x = turtle->getX() * GRID_stage2 + TILE_SIZE + 6;
         turtle_destination_rect.y = turtle->getY() * GRID_stage2 + TILE_SIZE;
         SDL_RenderCopy(g_renderer, turtle_texture, NULL, &turtle_destination_rect);
@@ -553,8 +596,8 @@ void Stage2::Render() {
         SDL_RenderCopy(g_renderer, turtle2_texture, NULL, &turtle_destination_rect);
     }
 
-    //�ź��� ü�� �׸��� 
-    for (int i = 0; i < 3; i++) {
+    //거북이 목숨
+    for (int i = 0; i < 5; i++) {
         heart0_destination_rect.x = i * GRID_stage2 + TILE_SIZE + 6;
         heart0_destination_rect.y = TILE_SIZE + SCREEN_HEIGHT_STAGE2 * GRID_stage2 + 5;
         SDL_RenderCopy(g_renderer, heart0_texture, NULL, &heart0_destination_rect);
@@ -565,31 +608,52 @@ void Stage2::Render() {
         SDL_RenderCopy(g_renderer, heart2_texture, NULL, &heart2_destination_rect);
     }
 
+    // 토끼
+    if (rabbit->getX() != turtle->getX() || rabbit->getY() != turtle->getY()) {
+        rabbit_destination_rect.x = rabbit->getX() * GRID_stage2 + TILE_SIZE + 6;
+        rabbit_destination_rect.y = rabbit->getY() * GRID_stage2 + TILE_SIZE;
+        SDL_RenderCopy(g_renderer, rabbit_texture, NULL, &rabbit_destination_rect);
+    }
+    
 
-
-    //�Ҷ��1 �׸���
+    //conch1 
     conch_destination_rect.x = conch1->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch1->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //�Ҷ��2 �׸���
+    //conch2
     conch_destination_rect.x = conch2->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch2->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //�Ҷ��3 �׸���
+    //conch3
     conch_destination_rect.x = conch3->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch3->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //�Ҷ��4 �׸���
+    //conch4 
     conch_destination_rect.x = conch4->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch4->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
+    //conch5
+    conch_destination_rect2.x = conch5->getX() * GRID_stage2 + TILE_SIZE + 6;
+    conch_destination_rect2.y = conch5->getY() * GRID_stage2 + TILE_SIZE;
+    SDL_RenderCopy(g_renderer, conch_texture2, NULL, &conch_destination_rect2);
+    //conch6
+    conch_destination_rect2.x = conch6->getX() * GRID_stage2 + TILE_SIZE + 6;
+    conch_destination_rect2.y = conch6->getY() * GRID_stage2 + TILE_SIZE;
+    SDL_RenderCopy(g_renderer, conch_texture2, NULL, &conch_destination_rect2);
+    //conch7
+    conch_destination_rect2.x = conch7->getX() * GRID_stage2 + TILE_SIZE + 6;
+    conch_destination_rect2.y = conch7->getY() * GRID_stage2 + TILE_SIZE;
+    SDL_RenderCopy(g_renderer, conch_texture2, NULL, &conch_destination_rect2);
+
+
+
 
     SDL_RenderCopy(g_renderer, frame_texture, NULL, &frame_destination);
 
 
     SDL_RenderCopy(g_renderer, frame_texture, NULL, &frame_destination);
 
-    if (stage2_status != 1) {//�Ͻ����� ���� Ȥ�� ��� ����
+    if (stage2_status != 1) {//일시정지
         SDL_RenderCopy(g_renderer, wait_texture, NULL, &wait_destination_rect);
         switch (stage2_status)
         {
@@ -620,15 +684,42 @@ void Stage2::Reset() {//����۽� ����
     delete conch2;
     delete conch3;
     delete conch4;
+    delete conch5;
+    delete conch6;
+    delete conch7;
 
-    turtle = new Turtle(1, 1, 0, 3, 0);
-    rabbit = new Rabbit(18, 17, 1, 3);
-    coral = new Coral(0, 0, 0, 0, 1);
-    coral2 = new Coral2(0, 0, 0, 0, 1);
-    conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
-    conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
-    conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
-    conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
+    uniform_int_distribution<int> distributionX(0, SCREEN_WIDTH_STAGE2);
+    uniform_int_distribution<int> distributionY(0, SCREEN_HEIGHT_STAGE2);
+
+
+    if (is_hard) {
+
+        turtle = new Turtle(1, 1, 0, 5, 0);
+        coral = new Coral(0, 0, 0, 0, 1);
+        coral2 = new Coral2(0, 0, 0, 0, 1);
+        conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
+        conch2 = new Conch(10, 10, 0, 0, 2, 0, 0);
+        conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
+        conch4 = new Conch(25, 25, 0, 0, 2, 0, 0);
+        conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
+        conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
+        conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
+        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
+    }
+    else {
+
+        turtle = new Turtle(1, 1, 0, 5, 0);
+        coral = new Coral(0, 0, 0, 0, 1);
+        coral2 = new Coral2(0, 0, 0, 0, 1);
+        conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
+        conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
+        conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
+        conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
+        conch5 = nullptr;
+        conch6 = nullptr;
+        conch7 = nullptr;
+        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
+    }
 
     //��Ÿ
     stop = true; //���� ��Ȳ���� �ʱ�ȭ
@@ -667,10 +758,12 @@ Stage2::~Stage2() {
     SDL_DestroyTexture(heart0_texture);
     SDL_DestroyTexture(heart2_texture);
     SDL_DestroyTexture(conch_texture);
+    SDL_DestroyTexture(conch_texture2);
     SDL_DestroyTexture(wait_texture);
     SDL_DestroyTexture(button_continue);
     SDL_DestroyTexture(button_main);
     SDL_DestroyTexture(ready_texture);
+    
 
 
     delete turtle;
@@ -679,6 +772,11 @@ Stage2::~Stage2() {
     delete coral2;
     delete conch1;
     delete conch2;
+    delete conch3;
+    delete conch4;
+    delete conch5;
+    delete conch6;
+    delete conch7;
 
 
     Mix_FreeMusic(background_music);
