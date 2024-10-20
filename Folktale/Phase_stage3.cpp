@@ -575,54 +575,22 @@ void Stage3::Render() {
     int shiftX = 0, shiftY = 0;
 
     for (auto it = snakeList.begin(); it != snakeList.end(); ++it) {
-        snake_destination_rect.x = (*it)->sX * (GRID_STAGE3); // �׷��� ��ǥ ����
-        snake_destination_rect.y = (*it)->sY * (GRID_STAGE3);
-
-        //���� ����
-        switch ((*it)->dircetion) {
-        case LEFT://��
-            angle = -90;
-            break;
-        case RIGHT://��
-            angle = 90;
-            break;
-        case UP://��
-            angle = 0;
-            break;
-        case DOWN://�Ʒ�
-            angle = 180;
-            break;
-        default:
-            break;
-        }
-
-
-        // ���� ��� ����� ��쿡�� ��� �̹����� ����ϰ�, �׷��� ���� ��쿡�� ������ �� �̹����� ����մϴ�.
         if (it == snakeList.begin()) {
-            SDL_RenderCopyEx(g_renderer, snakeHead_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+            continue;
         }
         else if (it == last) {
-            switch (prevD) {
-            case LEFT://��
-                angle = -90;
-                break;
-            case RIGHT://��
-                angle = 90;
-                break;
-            case UP://��
-                angle = -0;
-                break;
-            case DOWN://�Ʒ�
-                angle = 180;
+            auto prev = std::prev(it); // 이전 노드
+            float midX = ((*it)->sX + (*prev)->sX) / 2.0; // 중간 위치 계산
+            float midY = ((*it)->sY + (*prev)->sY) / 2.0;
 
-                break;
-            default:
-                break;
-            }
-            SDL_RenderCopyEx(g_renderer, snakeTail_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+            // 현재 노드와 이전 노드 사이도 추가로 그려 연결 부드럽게
+            snake_destination_rect.x = midX * GRID_STAGE3;
+            snake_destination_rect.y = midY * GRID_STAGE3;
+            SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
 
         }
         else {
+            prevD = (*it)->dircetion;
             auto prev = std::prev(it); // 이전 노드
             float midX = ((*it)->sX + (*prev)->sX) / 2.0; // 중간 위치 계산
             float midY = ((*it)->sY + (*prev)->sY) / 2.0;
@@ -637,12 +605,54 @@ void Stage3::Render() {
             SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
 
         }
+    }
+    //머리랑 꼬리 덧그리기
+    //꼬리
+    switch (prevD) {
+    case LEFT://��
+        angle = -90;
+        break;
+    case RIGHT://��
+        angle = 90;
+        break;
+    case UP://��
+        angle = -0;
+        break;
+    case DOWN://�Ʒ�
+        angle = 180;
 
-        prevD = (*it)->dircetion;
+        break;
+    default:
+        break;
+    }
+    snake_destination_rect.x = snakeList.back()->sX * (GRID_STAGE3); // �׷��� ��ǥ ����
+    snake_destination_rect.y = snakeList.back()->sY * (GRID_STAGE3);
+    SDL_RenderCopyEx(g_renderer, snakeTail_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+
+    //머리]
+    auto it = snakeList.begin();
+    switch ((*it)->dircetion) {
+    case LEFT://��
+        angle = -90;
+        break;
+    case RIGHT://��
+        angle = 90;
+        break;
+    case UP://��
+        angle = 0;
+        break;
+    case DOWN://�Ʒ�
+        angle = 180;
+        break;
+    default:
+        break;
     }
 
+    snake_destination_rect.x = snakeList.front()->sX * (GRID_STAGE3); 
+    snake_destination_rect.y = snakeList.front()->sY * (GRID_STAGE3);
+    SDL_RenderCopyEx(g_renderer, snakeHead_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
 
-    // ��ġ �׸���
+    //까치 그리기
     magpie_destination_rect.x = magpie->getX() * GRID_STAGE3; //�׷��� ��ǥ ����
     magpie_destination_rect.y = magpie->getY() * GRID_STAGE3;
 
