@@ -565,7 +565,9 @@ void Stage3::Render() {
         }
     }
 
-    // ������ �׸���
+    //구렁이 그리기 => 머리, 몸통, 꼬리 순서대로 그림
+    //머리면 방향에 맞춰 그리고, 꼬리면 이전 방향에 맞춰 그림
+    //몸통일 경우 각 노드 사이에 한 번 더 그려주며 이어준다.
     auto snakeList = snake->getSnakeList();
     auto last = --snakeList.end();
     int angle = 0;
@@ -621,6 +623,17 @@ void Stage3::Render() {
 
         }
         else {
+            auto prev = std::prev(it); // 이전 노드
+            float midX = ((*it)->sX + (*prev)->sX) / 2.0; // 중간 위치 계산
+            float midY = ((*it)->sY + (*prev)->sY) / 2.0;
+
+            // 현재 노드와 이전 노드 사이도 추가로 그려 연결 부드럽게
+            snake_destination_rect.x = midX * GRID_STAGE3;
+            snake_destination_rect.y = midY * GRID_STAGE3;
+            SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+
+            snake_destination_rect.x = (*it)->sX * GRID_STAGE3;
+            snake_destination_rect.y = (*it)->sY * GRID_STAGE3;
             SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
 
         }
