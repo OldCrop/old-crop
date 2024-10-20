@@ -3,8 +3,6 @@
 #include "SDL.h"
 #include "STAGE.h"
 
-
-
 class Phase_Main_Intro : public PhaseInterface
 {
 public:
@@ -27,6 +25,7 @@ private:
 	SDL_Rect expression_rect_;
 
 	Mix_Music* bgm;
+	Mix_Chunk* button_sound;
 
 	//SDL_Texture* text_texture_;
 	//SDL_Rect text_rect_;
@@ -57,9 +56,17 @@ private:
 	SDL_Rect destination_rectangle_; // for destination
 
 	SDL_Texture* text_texture_;
-	SDL_Rect text_rect_;
+	SDL_Texture* text1_texture_;
+	SDL_Texture* text2_texture_;
+	SDL_Texture* text3_texture_;
 
-	SDL_Texture* human_texture_;
+	SDL_Rect text_rect_;
+	SDL_Rect text1_rect_;
+	SDL_Rect text2_rect_;
+	SDL_Rect text3_rect_;
+
+	SDL_Texture* human_left_texture_;
+	SDL_Texture* human_right_texture_;
 	SDL_Rect human_source_rectangle_;
 	SDL_Rect human_destination;
 
@@ -67,10 +74,44 @@ private:
 	SDL_Rect book_source_rectangle_;
 	SDL_Rect book_destination;
 
+	SDL_Texture* textBox_texture_;
+	SDL_Rect textBox_destination;
+	SDL_Rect textBox_rect_;
+
+	SDL_Texture* textBox_human_texture_;
+	SDL_Rect textBox_human_rect_;
+	SDL_Rect textBox_human_destination;
+
+	SDL_Texture* enter_texture_;
+	SDL_Rect enter_rect_;
+	SDL_Rect enter_destination;
+
+	SDL_Texture* book_animation_texture_;
+	SDL_Rect book_animation_source_rectangle_;
+	SDL_Rect book_animation_destination;
+
 	Mix_Music* bgm;
+	Mix_Chunk* book_sound;
+	Mix_Chunk* touch_sound;
+
+	int enter_press_count_;
 
 	int x;
 	int speed;
-	
+	int current_frame;
+	int current_frame_book;
+	int frame_time;
+	int frame_time_book;
+	int frame_delay;
+	int frame_delay_book;
+	int total_frame;
+	bool moving_left;
 
+	bool is_touching_book;
+
+	int bookAni_current_frame;
+	int bookAni_frame_time;
+	int bookAni_frame_delay;
+	int bookAni_total_frame;
+	bool book_animation_started;
 };
