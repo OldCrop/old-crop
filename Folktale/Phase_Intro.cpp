@@ -1,18 +1,19 @@
 #include "Game.h"
 #include "Phase_Main_Intro.h"
 
-Intro::Intro()
+Intro::Intro():enter_press_count_(0)
 {
 	x = 30;
 	speed = 0;
 	current_frame = 0;
-	current_frame_book = 0;
 	frame_time = 0;
-	frame_time_book = 0;
 	frame_delay = 10;
-	frame_delay_book = 20;
 	total_frame = 4;
 	moving_left = false;
+
+	current_frame_book = 0;
+	frame_time_book = 0;
+	frame_delay_book = 20;
 
 	is_touching_book = false;
 	bookAni_current_frame = 0;
@@ -75,7 +76,18 @@ Intro::Intro()
 	}
 	SDL_QueryTexture(textBox_texture_, NULL, NULL, &textBox_rect_.w, &textBox_rect_.h);
 	textBox_rect_ = { 0, 0, textBox_rect_.w, textBox_rect_.h };
-	textBox_destination = { 0, 0, textBox_rect_.w, textBox_rect_.h };
+	textBox_destination = { 0, 0, 1080, 720 };
+
+	SDL_Surface* textBox_human = IMG_Load("../../Resources/Intro/Main/TextBox_human.png");
+	textBox_human_texture_ = SDL_CreateTextureFromSurface(g_renderer, textBox_human);
+	SDL_FreeSurface(textBox_human);
+	if (textBox_human_texture_ == nullptr)
+	{
+		std::cout << "Failed to load texture: " << SDL_GetError() << std::endl;
+	}
+	SDL_QueryTexture(textBox_human_texture_, NULL, NULL, &textBox_human_rect_.w, &textBox_human_rect_.h);
+	textBox_human_rect_ = { 0, 0, textBox_human_rect_.w, textBox_human_rect_.h };
+	textBox_human_destination = { 0, 0, 1080, 720 };
 
 	SDL_QueryTexture(book_texture_, NULL, NULL, &book_source_rectangle_.w, &book_source_rectangle_.h);
 	book_source_rectangle_ = { 0, 0, book_source_rectangle_.w / 4, book_source_rectangle_.h };
@@ -103,7 +115,7 @@ Intro::Intro()
 	SDL_FreeSurface(textSurface);
 
 	// Set text position
-	text_rect_.x = 450; // X position
+	text_rect_.x = 500; // X position
 	text_rect_.y = 300; // Y position
 	SDL_QueryTexture(text_texture_, NULL, NULL, &text_rect_.w, &text_rect_.h);
 
@@ -120,6 +132,7 @@ Intro::Intro()
 	{
 		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
 	}
+	Mix_VolumeChunk(book_sound, MIX_MAX_VOLUME / 4);
 
 }
 
@@ -128,6 +141,8 @@ Intro::~Intro()
 	SDL_DestroyTexture(texture_);
 	SDL_DestroyTexture(human_left_texture_);
 	SDL_DestroyTexture(human_right_texture_);
+	SDL_DestroyTexture(textBox_texture_);
+	SDL_DestroyTexture(textBox_human_texture_);
 	SDL_DestroyTexture(book_texture_);
 	SDL_DestroyTexture(book_animation_texture_);
 	SDL_DestroyTexture(text_texture_);
@@ -155,15 +170,22 @@ void Intro::HandleEvents()
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym)
 			{
+			case SDLK_RETURN:
+				enter_press_count_++;
+				break;
 			case SDLK_LEFT:
-				//x -= 10;
-				speed = -5;
-				moving_left = true;
+				if (enter_press_count_ == 2)
+				{
+					speed = -5;
+					moving_left = true;
+				}
 				break;
 			case SDLK_RIGHT:
-				//x += 10;
-				speed = 5;
-				moving_left = false;
+				if (enter_press_count_ == 2)
+				{
+					speed = 5;
+					moving_left = false;
+				}
 				break;
 			}
 			break;
@@ -172,7 +194,10 @@ void Intro::HandleEvents()
 			{
 			case SDLK_LEFT:
 			case SDLK_RIGHT:
-				speed = 0;
+				if (enter_press_count_ == 2)
+				{
+					speed = 0;
+				}
 				break;
 			}
 			break;
@@ -276,6 +301,14 @@ void Intro::Render()
 		else
 		{
 			SDL_RenderCopy(g_renderer, human_right_texture_, &human_source_rectangle_, &human_destination);
+		}
+		if (enter_press_count_ == 0)
+		{
+			SDL_RenderCopy(g_renderer, textBox_texture_, NULL, &textBox_destination);
+		}
+		else if (enter_press_count_ == 1)
+		{
+			SDL_RenderCopy(g_renderer, textBox_human_texture_, NULL, &textBox_human_destination);
 		}
 	}
 	SDL_RenderPresent(g_renderer); // 렌더러에 그려진 내용을 화면에 출력

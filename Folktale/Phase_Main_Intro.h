@@ -3,8 +3,6 @@
 #include "SDL.h"
 #include "STAGE.h"
 
-
-
 class Phase_Main_Intro : public PhaseInterface
 {
 public:
@@ -73,12 +71,18 @@ private:
 	SDL_Rect textBox_destination;
 	SDL_Rect textBox_rect_;
 
+	SDL_Texture* textBox_human_texture_;
+	SDL_Rect textBox_human_rect_;
+	SDL_Rect textBox_human_destination;
+
 	SDL_Texture* book_animation_texture_;
 	SDL_Rect book_animation_source_rectangle_;
 	SDL_Rect book_animation_destination;
 
 	Mix_Music* bgm;
 	Mix_Chunk* book_sound;
+
+	int enter_press_count_;
 
 	int x;
 	int speed;
