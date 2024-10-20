@@ -27,6 +27,7 @@ private:
 	SDL_Rect expression_rect_;
 
 	Mix_Music* bgm;
+	Mix_Chunk* button_sound;
 
 	//SDL_Texture* text_texture_;
 	//SDL_Rect text_rect_;
@@ -59,7 +60,8 @@ private:
 	SDL_Texture* text_texture_;
 	SDL_Rect text_rect_;
 
-	SDL_Texture* human_texture_;
+	SDL_Texture* human_left_texture_;
+	SDL_Texture* human_right_texture_;
 	SDL_Rect human_source_rectangle_;
 	SDL_Rect human_destination;
 
@@ -67,10 +69,33 @@ private:
 	SDL_Rect book_source_rectangle_;
 	SDL_Rect book_destination;
 
+	SDL_Texture* textBox_texture_;
+	SDL_Rect textBox_destination;
+	SDL_Rect textBox_rect_;
+
+	SDL_Texture* book_animation_texture_;
+	SDL_Rect book_animation_source_rectangle_;
+	SDL_Rect book_animation_destination;
+
 	Mix_Music* bgm;
+	Mix_Chunk* book_sound;
 
 	int x;
 	int speed;
-	
+	int current_frame;
+	int current_frame_book;
+	int frame_time;
+	int frame_time_book;
+	int frame_delay;
+	int frame_delay_book;
+	int total_frame;
+	bool moving_left;
 
+	bool is_touching_book;
+
+	int bookAni_current_frame;
+	int bookAni_frame_time;
+	int bookAni_frame_delay;
+	int bookAni_total_frame;
+	bool book_animation_started;
 };
