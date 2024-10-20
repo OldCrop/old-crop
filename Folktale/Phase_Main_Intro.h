@@ -56,7 +56,14 @@ private:
 	SDL_Rect destination_rectangle_; // for destination
 
 	SDL_Texture* text_texture_;
+	SDL_Texture* text1_texture_;
+	SDL_Texture* text2_texture_;
+	SDL_Texture* text3_texture_;
+
 	SDL_Rect text_rect_;
+	SDL_Rect text1_rect_;
+	SDL_Rect text2_rect_;
+	SDL_Rect text3_rect_;
 
 	SDL_Texture* human_left_texture_;
 	SDL_Texture* human_right_texture_;
@@ -75,12 +82,17 @@ private:
 	SDL_Rect textBox_human_rect_;
 	SDL_Rect textBox_human_destination;
 
+	SDL_Texture* enter_texture_;
+	SDL_Rect enter_rect_;
+	SDL_Rect enter_destination;
+
 	SDL_Texture* book_animation_texture_;
 	SDL_Rect book_animation_source_rectangle_;
 	SDL_Rect book_animation_destination;
 
 	Mix_Music* bgm;
 	Mix_Chunk* book_sound;
+	Mix_Chunk* touch_sound;
 
 	int enter_press_count_;
 

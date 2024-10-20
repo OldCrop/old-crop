@@ -89,6 +89,17 @@ Intro::Intro():enter_press_count_(0)
 	textBox_human_rect_ = { 0, 0, textBox_human_rect_.w, textBox_human_rect_.h };
 	textBox_human_destination = { 0, 0, 1080, 720 };
 
+	SDL_Surface* enter_surface = IMG_Load("../../Resources/Intro/Main/enter.png");
+	enter_texture_ = SDL_CreateTextureFromSurface(g_renderer, enter_surface);
+	SDL_FreeSurface(enter_surface);
+	if (enter_texture_ == nullptr)
+	{
+		std::cout << "Failed to load texture: " << SDL_GetError() << std::endl;
+	}
+	SDL_QueryTexture(enter_texture_, NULL, NULL, &enter_rect_.w, &enter_rect_.h);
+	enter_rect_ = { 0, 0, enter_rect_.w, enter_rect_.h };
+	enter_destination = { 880, 585, enter_rect_.w, enter_rect_.h };
+
 	SDL_QueryTexture(book_texture_, NULL, NULL, &book_source_rectangle_.w, &book_source_rectangle_.h);
 	book_source_rectangle_ = { 0, 0, book_source_rectangle_.w / 4, book_source_rectangle_.h };
 	book_destination = { 935, 295, book_source_rectangle_.w / 2, book_source_rectangle_.h / 2 };
@@ -112,12 +123,31 @@ Intro::Intro():enter_press_count_(0)
 	SDL_Color textColor = { 255, 255, 255, 255 }; // White color
 	SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, "방향키 좌우", textColor);
 	text_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+	textSurface = TTF_RenderUTF8_Blended(font, "길 끝에 무언가 보인다.", textColor);
+	text1_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+	textSurface = TTF_RenderUTF8_Blended(font, "???", textColor);
+	text2_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+	textSurface = TTF_RenderUTF8_Blended(font, "이런 숲길에 웬 책이지?", textColor);
+	text3_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+
 	SDL_FreeSurface(textSurface);
 
 	// Set text position
-	text_rect_.x = 500; // X position
+	text_rect_.x = 480; // X position
 	text_rect_.y = 300; // Y position
 	SDL_QueryTexture(text_texture_, NULL, NULL, &text_rect_.w, &text_rect_.h);
+
+	text1_rect_.x = 90; // X position
+	text1_rect_.y = 515; // Y position
+	SDL_QueryTexture(text1_texture_, NULL, NULL, &text1_rect_.w, &text1_rect_.h);
+
+	text2_rect_.x = 220; // X position
+	text2_rect_.y = 530; // Y position
+	SDL_QueryTexture(text2_texture_, NULL, NULL, &text2_rect_.w, &text2_rect_.h);
+
+	text3_rect_.x = 220; // X position
+	text3_rect_.y = 570; // Y position
+	SDL_QueryTexture(text3_texture_, NULL, NULL, &text3_rect_.w, &text3_rect_.h);
 
 	// Load the background music
 	bgm = Mix_LoadMUS("../../Resources/Intro/Main/treeRoad.mp3");
@@ -127,12 +157,19 @@ Intro::Intro():enter_press_count_(0)
 	}
 	
 	//Load the book flipping sound
-	book_sound = Mix_LoadWAV("../../Resources/Intro/Main/Sound_02.wav");
+	book_sound = Mix_LoadWAV("../../Resources/Intro/Main/Book_finger_slide.wav");
 	if (book_sound == nullptr)
 	{
 		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
 	}
-	Mix_VolumeChunk(book_sound, MIX_MAX_VOLUME / 4);
+
+	//Load the book touch sound
+	touch_sound = Mix_LoadWAV("../../Resources/Intro/Main/Sound_02.wav");
+	if (touch_sound == nullptr)
+	{
+		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
+	}
+	Mix_VolumeChunk(touch_sound, MIX_MAX_VOLUME / 4);
 
 }
 
@@ -143,11 +180,16 @@ Intro::~Intro()
 	SDL_DestroyTexture(human_right_texture_);
 	SDL_DestroyTexture(textBox_texture_);
 	SDL_DestroyTexture(textBox_human_texture_);
+	SDL_DestroyTexture(enter_texture_);
 	SDL_DestroyTexture(book_texture_);
 	SDL_DestroyTexture(book_animation_texture_);
 	SDL_DestroyTexture(text_texture_);
+	SDL_DestroyTexture(text1_texture_);
+	SDL_DestroyTexture(text2_texture_);
+	SDL_DestroyTexture(text3_texture_);
 	Mix_FreeMusic(bgm);
 	Mix_FreeChunk(book_sound);
+	Mix_FreeChunk(touch_sound);
 	if (font != nullptr)
 		TTF_CloseFont(font);
 	TTF_Quit();
@@ -211,7 +253,7 @@ void Intro::Update()
 
 	if (is_touching_book)
 	{
-		Mix_PlayChannel(-1, book_sound, 0);
+		Mix_PlayChannel(-1, book_sound, -1);
 		bookAni_frame_time += 1; // Increment frame time (you may want to use SDL_GetTicks() for more accurate timing)
 		if (bookAni_frame_time >= bookAni_frame_delay)
 		{
@@ -275,6 +317,7 @@ void Intro::Update()
 		// Change the phase if the human meets the book
 		if (human_destination.x + human_destination.w - 50 >= book_destination.x)
 		{
+			Mix_PlayChannel(-1, touch_sound, 0);
 			Mix_FadeOutMusic(2000);
 			SDL_Delay(2500);
 			is_touching_book = true;
@@ -305,10 +348,15 @@ void Intro::Render()
 		if (enter_press_count_ == 0)
 		{
 			SDL_RenderCopy(g_renderer, textBox_texture_, NULL, &textBox_destination);
+			SDL_RenderCopy(g_renderer, text1_texture_, NULL, &text1_rect_);
+			SDL_RenderCopy(g_renderer, enter_texture_, NULL, &enter_destination);
 		}
 		else if (enter_press_count_ == 1)
 		{
 			SDL_RenderCopy(g_renderer, textBox_human_texture_, NULL, &textBox_human_destination);
+			SDL_RenderCopy(g_renderer, text2_texture_, NULL, &text2_rect_);
+			SDL_RenderCopy(g_renderer, text3_texture_, NULL, &text3_rect_);
+			SDL_RenderCopy(g_renderer, enter_texture_, NULL, &enter_destination);
 		}
 	}
 	SDL_RenderPresent(g_renderer); // 렌더러에 그려진 내용을 화면에 출력
