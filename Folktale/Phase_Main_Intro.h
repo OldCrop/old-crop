@@ -97,6 +97,7 @@ private:
 	Mix_Chunk* touch_sound;
 
 	int enter_press_count_;
+	bool moving_allow_;
 
 	int x;
 	int speed;

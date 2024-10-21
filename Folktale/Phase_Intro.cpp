@@ -3,6 +3,8 @@
 
 Intro::Intro():enter_press_count_(0)
 {
+	moving_allow_ = false;
+
 	x = 30;
 	speed = 0;
 	current_frame = 0;
@@ -125,7 +127,7 @@ Intro::Intro():enter_press_count_(0)
 	}
 	SDL_QueryTexture(text_texture_, NULL, NULL, &text_rect_.w, &text_rect_.h);
 	text_rect_ = { 0, 0, text_rect_.w, text_rect_.h };
-	text_destination_ = { 493, 305, text_rect_.w, text_rect_.h };
+	text_destination_ = { 430, 305, text_rect_.w, text_rect_.h };
 
 	textSurface = IMG_Load("../../Resources/Intro/Main/text1.png");
 	text1_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
@@ -216,14 +218,14 @@ void Intro::HandleEvents()
 				enter_press_count_++;
 				break;
 			case SDLK_LEFT:
-				if (enter_press_count_ == 2)
+				if (moving_allow_)
 				{
 					speed = -5;
 					moving_left = true;
 				}
 				break;
 			case SDLK_RIGHT:
-				if (enter_press_count_ == 2)
+				if (moving_allow_)
 				{
 					speed = 5;
 					moving_left = false;
@@ -236,7 +238,7 @@ void Intro::HandleEvents()
 			{
 			case SDLK_LEFT:
 			case SDLK_RIGHT:
-				if (enter_press_count_ == 2)
+				if (enter_press_count_ >= 2)
 				{
 					speed = 0;
 				}
@@ -250,6 +252,10 @@ void Intro::HandleEvents()
 void Intro::Update()
 {
 	static int bookAni_repeat_count = 0;
+	if (enter_press_count_>=2)
+	{
+		moving_allow_ = true;
+	}
 
 	if (is_touching_book)
 	{
