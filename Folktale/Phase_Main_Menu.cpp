@@ -45,7 +45,7 @@ MainMenu::MainMenu()
 
 	SDL_QueryTexture(explain_to_start_texture_, NULL, NULL, &explain_to_start_source_rectangle_.w, &explain_to_start_source_rectangle_.h);
 	explain_to_start_source_rectangle_ = { 0, 0, explain_to_start_source_rectangle_.w, explain_to_start_source_rectangle_.h };
-	explain_to_start_destination_rectangle_ = { 0, 0, explain_to_start_source_rectangle_.w, explain_to_start_source_rectangle_.h };
+	explain_to_start_destination_rectangle_ = { 0, 5, explain_to_start_source_rectangle_.w, explain_to_start_source_rectangle_.h };
 
     //Gallery��ư
     SDL_Surface* gallery_button_surface = IMG_Load("../../Resources/Intro/gallery_button.png");

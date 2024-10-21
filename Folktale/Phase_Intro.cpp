@@ -116,13 +116,34 @@ Intro::Intro():enter_press_count_(0)
 	book_animation_source_rectangle_ = { 0, 0, book_animation_source_rectangle_.w / 8, book_animation_source_rectangle_.h };
 	book_animation_destination = { 0, 0, book_animation_source_rectangle_.w, book_animation_source_rectangle_.h };
 
+	if (TTF_Init() == -1) {
+		std::cout << "Failed to initialize TTF: " << TTF_GetError() << std::endl;
+		return;
+	}
 
 	// Load font
-	font = TTF_OpenFont("../../Resources/PF.ttf", 30);
+	TTF_Font* font = TTF_OpenFont("../../Resources/PF.ttf", 30);
 	// Render text
+	if (font == nullptr) {
+		std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
+		return;
+	}
+
 	SDL_Color textColor = { 255, 255, 255, 255 }; // White color
 	SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, "방향키 좌우", textColor);
+	if (textSurface == nullptr) {
+		std::cout << "Failed to render text surface: " << TTF_GetError() << std::endl;
+		TTF_CloseFont(font);
+		return;
+	}
+
 	text_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+	SDL_FreeSurface(textSurface);
+	if (text_texture_ == nullptr) {
+		std::cout << "Failed to create texture from surface: " << SDL_GetError() << std::endl;
+		TTF_CloseFont(font);
+		return;
+	}
 	textSurface = TTF_RenderUTF8_Blended(font, "길 끝에 무언가 보인다.", textColor);
 	text1_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
 	textSurface = TTF_RenderUTF8_Blended(font, "???", textColor);
@@ -131,6 +152,7 @@ Intro::Intro():enter_press_count_(0)
 	text3_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
 
 	SDL_FreeSurface(textSurface);
+	TTF_CloseFont(font);
 
 	// Set text position
 	text_rect_.x = 480; // X position
