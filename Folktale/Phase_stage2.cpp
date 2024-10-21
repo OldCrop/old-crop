@@ -21,35 +21,36 @@ Stage2::Stage2() {
     coral3_spawn_timer = CORAL2_SPAWN_TIME; 
     coral3_visible = true; //=>�߰�
 
+    turtle = new Turtle(1, 1, 0, 5, 0);
+    coral = new Coral(0, 0, 0, 0, 1);
+    coral2 = new Coral2(0, 0, 0, 0, 1);
+    conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
+    conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
+    conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
+    conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
 
-    if (is_hard) {
-        
-        turtle = new Turtle(1, 1, 0, 5, 0);
-        coral = new Coral(0, 0, 0, 0, 1);
-        coral2 = new Coral2(0, 0, 0, 0, 1);
-        conch1 = new Conch(15, 15, 0, 0, 2, 0, 0);
-        conch2 = new Conch(10, 10, 0, 0, 2, 0, 0);
-        conch3 = new Conch(20, 3, 0, 0, 2, 0, 0);
-        conch4 = new Conch(25, 23, 0, 0, 2, 0, 0);
-        conch5 = nullptr; 
-        conch6 = nullptr; 
-        conch7 = nullptr; 
-        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
-    }
-    else {
-        
-        turtle = new Turtle(1, 1, 0, 5, 0);
-        coral = new Coral(0, 0, 0, 0, 1);
-        coral2 = new Coral2(0, 0, 0, 0, 1);
-        conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
-        conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
-        conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
-        conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
-        conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
-        conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
-        conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
-        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
-    }
+    rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
+    conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
+    conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
+    conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
+    // 하드 모드 객체 초기화 부분
+    //if (is_hard) {
+    //    conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
+    //    conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
+    //    conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
+
+    //    // 객체가 제대로 생성되었는지 확인
+    //    if (!conch5 || !conch6 || !conch7) {
+    //        cerr << "Error: Failed to initialize conch objects for hard mode." << endl;
+    //        exit(1);
+    //    }
+    //}
+    //else {
+    //    conch5 = nullptr;
+    //    conch6 = nullptr;
+    //    conch7 = nullptr;
+    //}
+   
 
     // ��� �ؽ��� �ε�
     SDL_Surface* stage2_bg_surface = IMG_Load("../../Resources/stage2/stage2/stage2_bg.png");
@@ -380,9 +381,15 @@ void Stage2::Update() {
     conch2->move(0, 0);
     conch3->move(0, 0);
     conch4->move(0, 0);
-    conch5->move(0, 0);
-    conch6->move(0, 0);
-    conch7->move(0, 0); 
+    if (is_hard) {
+        conch5->move(0, 0);
+		conch6->move(0, 0);
+		conch7->move(0, 0);
+    }
+    else {
+		
+	}
+ 
 
     if (turtle->isInvincible()) {
         int timer = turtle->getInvincibleTimer();
@@ -631,7 +638,8 @@ void Stage2::Render() {
     conch_destination_rect.x = conch4->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect.y = conch4->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture, NULL, &conch_destination_rect);
-    //conch5
+    if (is_hard) {
+        //conch5
     conch_destination_rect2.x = conch5->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect2.y = conch5->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture2, NULL, &conch_destination_rect2);
@@ -643,6 +651,7 @@ void Stage2::Render() {
     conch_destination_rect2.x = conch7->getX() * GRID_stage2 + TILE_SIZE + 6;
     conch_destination_rect2.y = conch7->getY() * GRID_stage2 + TILE_SIZE;
     SDL_RenderCopy(g_renderer, conch_texture2, NULL, &conch_destination_rect2);
+    }
 
 
 
@@ -695,39 +704,43 @@ void Stage2::Reset() {//����۽� ����
     delete conch5;
     delete conch6;
     delete conch7;
+    
+    
 
     uniform_int_distribution<int> distributionX(0, SCREEN_WIDTH_STAGE2);
     uniform_int_distribution<int> distributionY(0, SCREEN_HEIGHT_STAGE2);
 
 
-    if (is_hard) {
 
-        turtle = new Turtle(1, 1, 0, 5, 0);
-        coral = new Coral(0, 0, 0, 0, 1);
-        coral2 = new Coral2(0, 0, 0, 0, 1);
-        conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
-        conch2 = new Conch(10, 10, 0, 0, 2, 0, 0);
-        conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
-        conch4 = new Conch(25, 25, 0, 0, 2, 0, 0);
-        conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
-        conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
-        conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
-        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
-    }
-    else {
+    turtle = new Turtle(1, 1, 0, 5, 0);
+    coral = new Coral(0, 0, 0, 0, 1);
+    coral2 = new Coral2(0, 0, 0, 0, 1);
+    conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
+    conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
+    conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
+    conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
 
-        turtle = new Turtle(1, 1, 0, 5, 0);
-        coral = new Coral(0, 0, 0, 0, 1);
-        coral2 = new Coral2(0, 0, 0, 0, 1);
-        conch1 = new Conch(15, 15, 0, 0, 1, 0, 0);
-        conch2 = new Conch(10, 10, 0, 0, 1, 0, 0);
-        conch3 = new Conch(20, 3, 0, 0, 1, 0, 0);
-        conch4 = new Conch(25, 25, 0, 0, 1, 0, 0);
-        conch5 = nullptr;
-        conch6 = nullptr;
-        conch7 = nullptr;
-        rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
-    }
+    rabbit = new Rabbit(distributionX(generator), distributionY(generator), 1, 3);
+    conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
+    conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
+    conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
+    // 하드 모드 객체 초기화 부분
+    //if (is_hard) {
+    //    conch5 = new Conch(25, 5, 0, 0, 2, 0, 0);
+    //    conch6 = new Conch(5, 5, 0, 0, 2, 0, 0);
+    //    conch7 = new Conch(15, 19, 0, 0, 2, 0, 0);
+
+    //    // 객체가 제대로 생성되었는지 확인
+    //    if (!conch5 || !conch6 || !conch7) {
+    //        cerr << "Error: Failed to initialize conch objects for hard mode." << endl;
+    //        exit(1);
+    //    }
+    //}
+    //else {
+    //    conch5 = nullptr;
+    //    conch6 = nullptr;
+    //    conch7 = nullptr;
+    //}
 
     //��Ÿ
     stop = true; //���� ��Ȳ���� �ʱ�ȭ
