@@ -126,7 +126,7 @@ void Phase_stage2Ending::Update() {
 
     if (buttonPushed == 1) {
         Mix_PlayChannel(-1, button_sound, 0);//ȿ���� ���
-        g_current_game_phase = PHASE_STAGE2_GAME;
+        g_current_game_phase = PHASE_STAGE1_GAME;
     }
     else if (buttonPushed == 2) {
         Mix_PlayChannel(-1, button_sound, 0);//ȿ���� ���

@@ -1,7 +1,7 @@
 #include "Phase_Stage1Intro.h"
 
 Phase_stage1Intro::Phase_stage1Intro() {
-    // ¹è°æ ÅØ½ºÃÄ
+    // ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface;
 
     bg_destination.x = 40;
@@ -48,7 +48,7 @@ Phase_stage1Intro::Phase_stage1Intro() {
     }
     fifth_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
 
-    // ÇÁ·¹ÀÓ ·Îµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     temp_sheet_surface = IMG_Load("../../Resources/frame.png");
     if (temp_sheet_surface == nullptr) {
         std::cout << "Failed to load photoframe.png: " << IMG_GetError() << std::endl;
@@ -57,7 +57,7 @@ Phase_stage1Intro::Phase_stage1Intro() {
     frame_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
     SDL_FreeSurface(temp_sheet_surface);
 
-    // ÀÎÆ®·Î ¹è°æÀ½ ·Îµå
+    // ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½
     intro_music = Mix_LoadMUS("../../Resources/stage1/sounds/introCartoonbgm.mp3");
     if (intro_music == NULL) {
         std::cout << "intro_music load fail: " << Mix_GetError() << std::endl;
@@ -69,7 +69,7 @@ Phase_stage1Intro::Phase_stage1Intro() {
     frame_destination.h = screenHeight;
 
     bg_texture = first_intro_texture;
-    count = 0; // 0,1,2 ¹è°æ ÀÌ¹ÌÁö Ãâ·ÂÇÒ °Í
+    count = 0; // 0,1,2 ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 }
 
 void Phase_stage1Intro::HandleEvents() {
@@ -88,8 +88,8 @@ void Phase_stage1Intro::HandleEvents() {
 }
 
 void Phase_stage1Intro::Update() {
-    if (count == 5) { // 4°³ ´Ù ºÃÀ¸¸é ½ºÅ×ÀÌÁö·Î ÀüÈ¯
-        g_current_game_phase = PHASE_STAGE1_GAME;
+    if (count == 5) { // 4ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+        g_current_game_phase = PHASE_STAGE3_GAME;
     }
 }
 

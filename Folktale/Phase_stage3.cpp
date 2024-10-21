@@ -492,14 +492,14 @@ void Stage3::Update() {
     //��ġ�� ���� ���ο��� prev�� current ���ؼ� �ؾ� �� �ڿ������� ��
     if (bell->getCount() == 5) {//�� 5�� ������� 
         game_result = 1; //�¸�
-        g_current_game_phase = PHASE_STAGE3_ENDING;
+        g_current_game_phase = PHASE_STAGE2_ENDING;
         viewedEndings[2][1] = true;
         SDL_Delay(1000);
     }
 
     if (magpie->getHealth() <= 0) {
         game_result = 2; //����
-        g_current_game_phase = PHASE_STAGE3_ENDING;
+        g_current_game_phase = PHASE_STAGE2_ENDING;
         viewedEndings[2][0] = true;
         SDL_Delay(1000);
     }
@@ -739,6 +739,16 @@ void Stage3::Render() {
 
 
 void Stage3::Reset() {
+    
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
+
     //��ü �ʱ�ȭ
     delete bell;
     delete magpie;

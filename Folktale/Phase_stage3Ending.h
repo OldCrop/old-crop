@@ -7,27 +7,27 @@
 
 class Phase_stage3Ending : public PhaseInterface {
 private:
-    //¿£µù ÅØ½ºÃÄ
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* winEnding_texture;
     SDL_Texture* loseEnding_texture1;
     SDL_Texture* loseEnding_texture2;
     SDL_Texture* loseEnding_texture3;
     SDL_Texture* loseEnding_texture_gameover;
     SDL_Rect ending_destination;
-    //¹öÆ° ÅØ½ºÆ® ÅØ½ºÃÄ
+    //ï¿½ï¿½Æ° ï¿½Ø½ï¿½Æ® ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Texture* retry_button_texture;
     SDL_Texture* main_button_texture;
     SDL_Rect retry_button_destination;
     SDL_Rect main_button_destination;
 
-    // ¿£µù ÆäÀÌÁî·Î ³Ñ¾î¿Â ½Ã°£À» ÀúÀåÇÏ´Â º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     int endingPhaseStartTime;
-    int buttonToTime;//¹öÆ°À» À§ÇÑ º¯¼ö·Î pageCheck°¡ 4°¡ µÇ¸é ±× ½Ã°£ ÀúÀå
-    bool button; //¹öÆ° »ý¼º ¿©ºÎ
+    int buttonToTime;//ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ pageCheckï¿½ï¿½ 4ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
+    bool button; //ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     int flag = false;
 
-    int buttonPushed;//1ÀÌ¸é retry¹öÆ° =>intro·Î ÀÌµ¿ , 2¸é home ¹öÆ° mainÀ¸·Î ÀÌµ¿
+    int buttonPushed;//1ï¿½Ì¸ï¿½ retryï¿½ï¿½Æ° =>introï¿½ï¿½ ï¿½Ìµï¿½ , 2ï¿½ï¿½ home ï¿½ï¿½Æ° mainï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
 
     int pageCheck;

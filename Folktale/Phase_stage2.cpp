@@ -14,7 +14,6 @@ Stage2::Stage2() {
 
     uniform_int_distribution<int> distributionX(0, SCREEN_WIDTH_STAGE2);
     uniform_int_distribution<int> distributionY(0, SCREEN_HEIGHT_STAGE2);
-   
 
     rabbitSpawnTimer = RABBIT_SPAWN_TIME;
     coral2_spawn_timer = CORAL2_SPAWN_TIME; 
@@ -508,13 +507,13 @@ void Stage2::Update() {
     //��������
     if (rabbit->getCount() == 5) {
         game_result = 1; //�¸�
-        g_current_game_phase = PHASE_STAGE2_ENDING;
+        g_current_game_phase = PHASE_STAGE1_ENDING;
         viewedEndings[1][1] = true;
         SDL_Delay(1000);
     }
     if (turtle->getHealth() <= 0) {
         game_result = 2; //����
-        g_current_game_phase = PHASE_STAGE2_ENDING;
+        g_current_game_phase = PHASE_STAGE1_ENDING;
         viewedEndings[1][0] = true;
         SDL_Delay(1000);
     }
@@ -676,6 +675,15 @@ void Stage2::Render() {
 }
 void Stage2::Reset() {//����۽� ����
     //��ü �ʱ�ȭ
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
+
     delete turtle;
     delete rabbit;
     delete coral;

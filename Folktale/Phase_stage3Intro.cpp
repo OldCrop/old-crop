@@ -4,7 +4,7 @@
 
 
 Phase_stage3Intro::Phase_stage3Intro() {
-    // ¹è°æ ÅØ½ºÃÄ
+    // ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface;
 
     bg_destination.x = 40;
@@ -18,26 +18,26 @@ Phase_stage3Intro::Phase_stage3Intro() {
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/intro1.png");
     first_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/intro2.png");
     second_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/intro3.png");
     third_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/intro4.png");
     fourth_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage3/intro5.png");
     fifth_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     bg_texture = first_intro_texture;
-    count = 0; //0,1,2 ¹è°æ ÀÌ¹ÌÁö Ãâ·ÂÇÒ °Í
+    count = 0; //0,1,2 ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
 }
 
@@ -60,8 +60,8 @@ void Phase_stage3Intro::HandleEvents() {
 }
 
 void Phase_stage3Intro::Update() {
-    if (count == 5) //n°³ ´Ù ºÃÀ¸¸é ½ºÅ×ÀÌÁö·Î ÀüÈ¯
-        g_current_game_phase = PHASE_STAGE3_GAME;
+    if (count == 5) //nï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+        g_current_game_phase = PHASE_STAGE2_GAME;
 }
 
 void Phase_stage3Intro::Render() {

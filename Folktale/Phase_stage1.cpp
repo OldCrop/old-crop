@@ -13,7 +13,6 @@ bool g_key_left = false;
 bool g_key_right = false;
 bool g_key_space = false;
 bool is_rock = false;
-bool is_hard;
 
 Direction g_direction = DOWN_;
 Uint32 FIRE_COOLDOWN = 500;  // ����ü �߻� ��Ÿ��
@@ -26,6 +25,15 @@ double g_elapsed_time_ms;
 
 Stage1::Stage1() {
     //g_elapsed_time_ms = 0;
+
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
 
     g_key_up = false;
     g_key_down = false;
@@ -426,7 +434,7 @@ void Stage1::Update() {
     dogPoop->moveProjectiles();
 
     if (dogPoop->getKillcount() > monsterCount) {
-        g_current_game_phase = PHASE_STAGE1_ENDING;
+        g_current_game_phase = PHASE_STAGE3_ENDING;
         game_result = 3;
         viewedEndings[0][2] = true;
     }
@@ -718,6 +726,15 @@ void Stage1::Render() {
 
 
 void Stage1::Reset() {
+
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
 
     g_key_up = false;
     g_key_down = false;
