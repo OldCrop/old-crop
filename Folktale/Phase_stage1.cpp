@@ -727,6 +727,15 @@ void Stage1::Render() {
 
 void Stage1::Reset() {
 
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
+
     g_key_up = false;
     g_key_down = false;
     g_key_left = false;

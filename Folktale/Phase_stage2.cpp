@@ -14,15 +14,6 @@ Stage2::Stage2() {
 
     uniform_int_distribution<int> distributionX(0, SCREEN_WIDTH_STAGE2);
     uniform_int_distribution<int> distributionY(0, SCREEN_HEIGHT_STAGE2);
-   
-    if (is_hard) {
-        std::cout << "is_hard set to true" << std::endl;
-        // Initialize hard mode objects
-    }
-    else {
-        std::cout << "is_hard set to false" << std::endl;
-        // Initialize normal mode objects
-    }
 
     rabbitSpawnTimer = RABBIT_SPAWN_TIME;
     coral2_spawn_timer = CORAL2_SPAWN_TIME; 
@@ -684,6 +675,15 @@ void Stage2::Render() {
 }
 void Stage2::Reset() {//����۽� ����
     //��ü �ʱ�ȭ
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
+
     delete turtle;
     delete rabbit;
     delete coral;

@@ -23,16 +23,6 @@ void Stage3::UpdateScoreTexture()
 Stage3::Stage3() {
     //1. ��ü ����
     //a. �� ����
-    
-    if (is_hard) {
-        std::cout << "is_hard set to true" << std::endl;
-        // Initialize hard mode objects
-    }
-    else {
-        std::cout << "is_hard set to false" << std::endl;
-        // Initialize normal mode objects
-    }
-    
     uniform_int_distribution<int> distributionX(1, screenWidth / GRID_STAGE3 - 2);
     uniform_int_distribution<int> distributionY(1, screenHeight / GRID_STAGE3 - 2);
 
@@ -726,6 +716,16 @@ void Stage3::Render() {
 
 
 void Stage3::Reset() {
+    
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
+
     //��ü �ʱ�ȭ
     delete bell;
     delete magpie;
