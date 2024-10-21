@@ -58,12 +58,14 @@ private:
 	SDL_Texture* text_texture_;
 	SDL_Texture* text1_texture_;
 	SDL_Texture* text2_texture_;
-	SDL_Texture* text3_texture_;
 
 	SDL_Rect text_rect_;
 	SDL_Rect text1_rect_;
 	SDL_Rect text2_rect_;
-	SDL_Rect text3_rect_;
+
+	SDL_Rect text_destination_;
+	SDL_Rect text1_destination_;
+	SDL_Rect text2_destination_;
 
 	SDL_Texture* human_left_texture_;
 	SDL_Texture* human_right_texture_;

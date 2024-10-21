@@ -116,60 +116,38 @@ Intro::Intro():enter_press_count_(0)
 	book_animation_source_rectangle_ = { 0, 0, book_animation_source_rectangle_.w / 8, book_animation_source_rectangle_.h };
 	book_animation_destination = { 0, 0, book_animation_source_rectangle_.w, book_animation_source_rectangle_.h };
 
-	if (TTF_Init() == -1) {
-		std::cout << "Failed to initialize TTF: " << TTF_GetError() << std::endl;
-		return;
-	}
-
-	// Load font
-	TTF_Font* font = TTF_OpenFont("../../Resources/PF.ttf", 30);
-	// Render text
-	if (font == nullptr) {
-		std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
-		return;
-	}
-
-	SDL_Color textColor = { 255, 255, 255, 255 }; // White color
-	SDL_Surface* textSurface = TTF_RenderUTF8_Blended(font, "방향키 좌우", textColor);
-	if (textSurface == nullptr) {
-		std::cout << "Failed to render text surface: " << TTF_GetError() << std::endl;
-		TTF_CloseFont(font);
-		return;
-	}
-
+	SDL_Surface* textSurface = IMG_Load("../../Resources/Intro/Main/explain_to_move.png");
 	text_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
 	SDL_FreeSurface(textSurface);
-	if (text_texture_ == nullptr) {
-		std::cout << "Failed to create texture from surface: " << SDL_GetError() << std::endl;
-		TTF_CloseFont(font);
-		return;
+	if (text_texture_ == nullptr)
+	{
+		std::cout << "Failed to load texture: " << SDL_GetError() << std::endl;
 	}
-	textSurface = TTF_RenderUTF8_Blended(font, "길 끝에 무언가 보인다.", textColor);
-	text1_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
-	textSurface = TTF_RenderUTF8_Blended(font, "???", textColor);
-	text2_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
-	textSurface = TTF_RenderUTF8_Blended(font, "이런 숲길에 웬 책이지?", textColor);
-	text3_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
-
-	SDL_FreeSurface(textSurface);
-	TTF_CloseFont(font);
-
-	// Set text position
-	text_rect_.x = 480; // X position
-	text_rect_.y = 300; // Y position
 	SDL_QueryTexture(text_texture_, NULL, NULL, &text_rect_.w, &text_rect_.h);
+	text_rect_ = { 0, 0, text_rect_.w, text_rect_.h };
+	text_destination_ = { 493, 305, text_rect_.w, text_rect_.h };
 
-	text1_rect_.x = 90; // X position
-	text1_rect_.y = 515; // Y position
+	textSurface = IMG_Load("../../Resources/Intro/Main/text1.png");
+	text1_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+	SDL_FreeSurface(textSurface);
+	if (text1_texture_ == nullptr)
+	{
+		std::cout << "Failed to load texture: " << SDL_GetError() << std::endl;
+	}
 	SDL_QueryTexture(text1_texture_, NULL, NULL, &text1_rect_.w, &text1_rect_.h);
+	text1_rect_ = { 0, 0, text1_rect_.w, text1_rect_.h };
+	text1_destination_ = { 85, 510, text1_rect_.w, text1_rect_.h };
 
-	text2_rect_.x = 220; // X position
-	text2_rect_.y = 530; // Y position
+	textSurface = IMG_Load("../../Resources/Intro/Main/text2.png");
+	text2_texture_ = SDL_CreateTextureFromSurface(g_renderer, textSurface);
+	SDL_FreeSurface(textSurface);
+	if (text2_texture_ == nullptr)
+	{
+		std::cout << "Failed to load texture: " << SDL_GetError() << std::endl;
+	}
 	SDL_QueryTexture(text2_texture_, NULL, NULL, &text2_rect_.w, &text2_rect_.h);
-
-	text3_rect_.x = 220; // X position
-	text3_rect_.y = 570; // Y position
-	SDL_QueryTexture(text3_texture_, NULL, NULL, &text3_rect_.w, &text3_rect_.h);
+	text2_rect_ = { 0, 0, text2_rect_.w, text2_rect_.h };
+	text2_destination_ = { 211, 527, text2_rect_.w, text2_rect_.h };
 
 	// Load the background music
 	bgm = Mix_LoadMUS("../../Resources/Intro/Main/treeRoad.mp3");
@@ -208,7 +186,7 @@ Intro::~Intro()
 	SDL_DestroyTexture(text_texture_);
 	SDL_DestroyTexture(text1_texture_);
 	SDL_DestroyTexture(text2_texture_);
-	SDL_DestroyTexture(text3_texture_);
+
 	Mix_FreeMusic(bgm);
 	Mix_FreeChunk(book_sound);
 	Mix_FreeChunk(touch_sound);
@@ -357,7 +335,7 @@ void Intro::Render()
 	}
 	else {
 		SDL_RenderCopy(g_renderer, texture_, &source_rectangle_, &destination_rectangle_);
-		SDL_RenderCopy(g_renderer, text_texture_, NULL, &text_rect_);
+		SDL_RenderCopy(g_renderer, text_texture_, NULL, &text_destination_);
 		SDL_RenderCopy(g_renderer, book_texture_, &book_source_rectangle_, &book_destination);
 		if (moving_left)
 		{
@@ -370,14 +348,13 @@ void Intro::Render()
 		if (enter_press_count_ == 0)
 		{
 			SDL_RenderCopy(g_renderer, textBox_texture_, NULL, &textBox_destination);
-			SDL_RenderCopy(g_renderer, text1_texture_, NULL, &text1_rect_);
+			SDL_RenderCopy(g_renderer, text1_texture_, NULL, &text1_destination_);
 			SDL_RenderCopy(g_renderer, enter_texture_, NULL, &enter_destination);
 		}
 		else if (enter_press_count_ == 1)
 		{
 			SDL_RenderCopy(g_renderer, textBox_human_texture_, NULL, &textBox_human_destination);
-			SDL_RenderCopy(g_renderer, text2_texture_, NULL, &text2_rect_);
-			SDL_RenderCopy(g_renderer, text3_texture_, NULL, &text3_rect_);
+			SDL_RenderCopy(g_renderer, text2_texture_, NULL, &text2_destination_);
 			SDL_RenderCopy(g_renderer, enter_texture_, NULL, &enter_destination);
 		}
 	}
