@@ -4,7 +4,7 @@
 SDL_Rect stage2_intro_source_rect;
 
 Phase_stage2Intro::Phase_stage2Intro() {
-    // ¹è°æ ÅØ½ºÃÄ
+    // ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½ï¿½ï¿½
     SDL_Surface* temp_sheet_surface;
 
     bg_destination.x = 40;
@@ -17,15 +17,15 @@ Phase_stage2Intro::Phase_stage2Intro() {
 
     temp_sheet_surface = IMG_Load("../../Resources/stage2/stage2/stage2_intro1.png");
     first_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage2/stage2/stage2_intro2.png");
     second_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     temp_sheet_surface = IMG_Load("../../Resources/stage2/stage2/stage2_intro3.png");
     third_intro_texture = SDL_CreateTextureFromSurface(g_renderer, temp_sheet_surface);
-    SDL_FreeSurface(temp_sheet_surface);//ÇØÁ¦ ÇÊ¼ö
+    SDL_FreeSurface(temp_sheet_surface);//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1) {
         std::cerr << "Mix_OpenAudio: " << Mix_GetError() << std::endl;
@@ -33,7 +33,7 @@ Phase_stage2Intro::Phase_stage2Intro() {
     }
 
     bg_texture = first_intro_texture;
-    count = 0; //0,1,2 ¹è°æ ÀÌ¹ÌÁö Ãâ·ÂÇÒ °Í
+    count = 0; //0,1,2 ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 }
 
 void Phase_stage2Intro::HandleEvents() {
@@ -56,12 +56,12 @@ void Phase_stage2Intro::HandleEvents() {
 }
 
 void Phase_stage2Intro::Update() {
-    if (count == 3) // 3°³ ´Ù ºÃÀ¸¸é ½ºÅ×ÀÌÁö·Î ÀüÈ¯
-        g_current_game_phase = PHASE_STAGE2_GAME;
+    if (count == 3) // 3ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+        g_current_game_phase = PHASE_STAGE1_GAME;
 }
 
 void Phase_stage2Intro::Render() {
-    SDL_RenderClear(g_renderer); // ·»´õ·¯ ÃÊ±âÈ­
+    SDL_RenderClear(g_renderer); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 
     if (count == 0) {
         bg_texture = first_intro_texture;

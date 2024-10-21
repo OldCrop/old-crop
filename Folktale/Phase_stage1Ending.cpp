@@ -122,7 +122,7 @@ void Phase_stage1Ending::Update() {
 
     //retry ��ư ������ ��������
     if (stg1_buttonPushed == 1) {
-        g_current_game_phase = PHASE_STAGE1_GAME;
+        g_current_game_phase = PHASE_STAGE3_GAME;
     } //main ��ư ������ ��Ʈ��
     else if (stg1_buttonPushed == 2) {
         g_current_game_phase = PHASE_MAIN_MENU;

@@ -40,6 +40,7 @@ const int FPS = 60; // desired frame rate
 const int frameDelay = 1000 / FPS; // delay in ms for each frame
 
 bool viewedEndings[NUMBER_OF_STAGES][ENDINGS_PER_STAGE] = { {false, false, false}, {false, false, false}, {false, false, false} };
+bool is_hard = false;
 
 int main(int argc, char* argv[])
 {
@@ -65,15 +66,15 @@ int main(int argc, char* argv[])
 	game_phase[PHASE_MAIN_INTRO] = new Phase_Main_Intro();
     game_phase[PHASE_INTRO] = new Intro();
     game_phase[PHASE_MAIN_MENU] = new MainMenu();
-    game_phase[PHASE_STAGE1_INTRO] = new Phase_stage1Intro();
-    game_phase[PHASE_STAGE1_GAME] = new Stage1();
-    game_phase[PHASE_STAGE1_ENDING] = new Phase_stage1Ending();
-    game_phase[PHASE_STAGE2_INTRO] = new Phase_stage2Intro();
-    game_phase[PHASE_STAGE2_GAME] = new Stage2();
-    game_phase[PHASE_STAGE2_ENDING] = new Phase_stage2Ending();
-    game_phase[PHASE_STAGE3_INTRO] = new Phase_stage3Intro();
-    game_phase[PHASE_STAGE3_GAME] = new Stage3();
-    game_phase[PHASE_STAGE3_ENDING] = new Phase_stage3Ending();
+    game_phase[PHASE_STAGE1_INTRO] = new Phase_stage2Intro();
+    game_phase[PHASE_STAGE1_GAME] = new Stage2();
+    game_phase[PHASE_STAGE1_ENDING] = new Phase_stage2Ending();
+    game_phase[PHASE_STAGE2_INTRO] = new Phase_stage3Intro();
+    game_phase[PHASE_STAGE2_GAME] = new Stage3();
+    game_phase[PHASE_STAGE2_ENDING] = new Phase_stage3Ending();
+    game_phase[PHASE_STAGE3_INTRO] = new Phase_stage1Intro();
+    game_phase[PHASE_STAGE3_GAME] = new Stage1();
+    game_phase[PHASE_STAGE3_ENDING] = new Phase_stage1Ending();
     game_phase[PHASE_GALLERY] = new Gallery();
     game_phase[PHASE_ENDING] = new Ending();
 

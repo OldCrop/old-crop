@@ -44,6 +44,13 @@ Phase_Main_Intro::Phase_Main_Intro() : click_count_(0), last_click_time_(0), sho
 	{
 		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
 	}
+
+	// Load the button sound
+	button_sound = Mix_LoadWAV("../../Resources/Intro/Main/90s_game_start.wav");
+	if (button_sound == nullptr)
+	{
+		std::cout << "Failed to load music: " << Mix_GetError() << std::endl;
+	}
 }
 
 Phase_Main_Intro::~Phase_Main_Intro()
@@ -52,6 +59,7 @@ Phase_Main_Intro::~Phase_Main_Intro()
 	SDL_DestroyTexture(face_texture_);
 	SDL_DestroyTexture(expression_texture_);
 	Mix_FreeMusic(bgm);
+	Mix_FreeChunk(button_sound);
 	Mix_HaltMusic();
 }
 
@@ -91,6 +99,7 @@ void Phase_Main_Intro::HandleEvents()
 				{
 					if (is_first_click_)
 					{
+						Mix_PlayChannel(-1, button_sound, 0);
 						Mix_FadeOutMusic(2000);
 						SDL_Delay(2500);
 						g_current_game_phase = PHASE_INTRO;

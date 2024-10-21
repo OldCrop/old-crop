@@ -492,14 +492,14 @@ void Stage3::Update() {
     //��ġ�� ���� ���ο��� prev�� current ���ؼ� �ؾ� �� �ڿ������� ��
     if (bell->getCount() == 5) {//�� 5�� ������� 
         game_result = 1; //�¸�
-        g_current_game_phase = PHASE_STAGE3_ENDING;
+        g_current_game_phase = PHASE_STAGE2_ENDING;
         viewedEndings[2][1] = true;
         SDL_Delay(1000);
     }
 
     if (magpie->getHealth() <= 0) {
         game_result = 2; //����
-        g_current_game_phase = PHASE_STAGE3_ENDING;
+        g_current_game_phase = PHASE_STAGE2_ENDING;
         viewedEndings[2][0] = true;
         SDL_Delay(1000);
     }
@@ -565,7 +565,9 @@ void Stage3::Render() {
         }
     }
 
-    // ������ �׸���
+    //구렁이 그리기 => 머리, 몸통, 꼬리 순서대로 그림
+    //머리면 방향에 맞춰 그리고, 꼬리면 이전 방향에 맞춰 그림
+    //몸통일 경우 각 노드 사이에 한 번 더 그려주며 이어준다.
     auto snakeList = snake->getSnakeList();
     auto last = --snakeList.end();
     int angle = 0;
@@ -573,63 +575,84 @@ void Stage3::Render() {
     int shiftX = 0, shiftY = 0;
 
     for (auto it = snakeList.begin(); it != snakeList.end(); ++it) {
-        snake_destination_rect.x = (*it)->sX * (GRID_STAGE3); // �׷��� ��ǥ ����
-        snake_destination_rect.y = (*it)->sY * (GRID_STAGE3);
-
-        //���� ����
-        switch ((*it)->dircetion) {
-        case LEFT://��
-            angle = -90;
-            break;
-        case RIGHT://��
-            angle = 90;
-            break;
-        case UP://��
-            angle = 0;
-            break;
-        case DOWN://�Ʒ�
-            angle = 180;
-            break;
-        default:
-            break;
-        }
-
-
-        // ���� ��� ����� ��쿡�� ��� �̹����� ����ϰ�, �׷��� ���� ��쿡�� ������ �� �̹����� ����մϴ�.
         if (it == snakeList.begin()) {
-            SDL_RenderCopyEx(g_renderer, snakeHead_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+            continue;
         }
         else if (it == last) {
-            switch (prevD) {
-            case LEFT://��
-                angle = -90;
-                break;
-            case RIGHT://��
-                angle = 90;
-                break;
-            case UP://��
-                angle = -0;
-                break;
-            case DOWN://�Ʒ�
-                angle = 180;
+            auto prev = std::prev(it); // 이전 노드
+            float midX = ((*it)->sX + (*prev)->sX) / 2.0; // 중간 위치 계산
+            float midY = ((*it)->sY + (*prev)->sY) / 2.0;
 
-                break;
-            default:
-                break;
-            }
-            SDL_RenderCopyEx(g_renderer, snakeTail_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
-
-        }
-        else {
+            // 현재 노드와 이전 노드 사이도 추가로 그려 연결 부드럽게
+            snake_destination_rect.x = midX * GRID_STAGE3;
+            snake_destination_rect.y = midY * GRID_STAGE3;
             SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
 
         }
+        else {
+            prevD = (*it)->dircetion;
+            auto prev = std::prev(it); // 이전 노드
+            float midX = ((*it)->sX + (*prev)->sX) / 2.0; // 중간 위치 계산
+            float midY = ((*it)->sY + (*prev)->sY) / 2.0;
 
-        prevD = (*it)->dircetion;
+            // 현재 노드와 이전 노드 사이도 추가로 그려 연결 부드럽게
+            snake_destination_rect.x = midX * GRID_STAGE3;
+            snake_destination_rect.y = midY * GRID_STAGE3;
+            SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+
+            snake_destination_rect.x = (*it)->sX * GRID_STAGE3;
+            snake_destination_rect.y = (*it)->sY * GRID_STAGE3;
+            SDL_RenderCopyEx(g_renderer, snakeBody_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+
+        }
+    }
+    //머리랑 꼬리 덧그리기
+    //꼬리
+    switch (prevD) {
+    case LEFT://��
+        angle = -90;
+        break;
+    case RIGHT://��
+        angle = 90;
+        break;
+    case UP://��
+        angle = -0;
+        break;
+    case DOWN://�Ʒ�
+        angle = 180;
+
+        break;
+    default:
+        break;
+    }
+    snake_destination_rect.x = snakeList.back()->sX * (GRID_STAGE3); // �׷��� ��ǥ ����
+    snake_destination_rect.y = snakeList.back()->sY * (GRID_STAGE3);
+    SDL_RenderCopyEx(g_renderer, snakeTail_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
+
+    //머리]
+    auto it = snakeList.begin();
+    switch ((*it)->dircetion) {
+    case LEFT://��
+        angle = -90;
+        break;
+    case RIGHT://��
+        angle = 90;
+        break;
+    case UP://��
+        angle = 0;
+        break;
+    case DOWN://�Ʒ�
+        angle = 180;
+        break;
+    default:
+        break;
     }
 
+    snake_destination_rect.x = snakeList.front()->sX * (GRID_STAGE3); 
+    snake_destination_rect.y = snakeList.front()->sY * (GRID_STAGE3);
+    SDL_RenderCopyEx(g_renderer, snakeHead_texture, NULL, &snake_destination_rect, angle, NULL, SDL_FLIP_NONE);
 
-    // ��ġ �׸���
+    //까치 그리기
     magpie_destination_rect.x = magpie->getX() * GRID_STAGE3; //�׷��� ��ǥ ����
     magpie_destination_rect.y = magpie->getY() * GRID_STAGE3;
 
@@ -716,6 +739,16 @@ void Stage3::Render() {
 
 
 void Stage3::Reset() {
+    
+    if (is_hard) {
+        std::cout << "is_hard set to true" << std::endl;
+        // Initialize hard mode objects
+    }
+    else {
+        std::cout << "is_hard set to false" << std::endl;
+        // Initialize normal mode objects
+    }
+
     //��ü �ʱ�ȭ
     delete bell;
     delete magpie;
