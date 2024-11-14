@@ -804,7 +804,7 @@ void Stage1::Reset() {
     // projectiles ���͸� ���ϴ�.
     dogPoop->projectiles.clear();
 
-    if (g_current_game_phase == PHASE_STAGE1_GAME) {
+    if (g_current_game_phase == PHASE_STAGE3_GAME) {
         //���� ���
         Mix_PlayMusic(stg1_music, -1);
     }

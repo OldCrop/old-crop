@@ -117,7 +117,7 @@ void Phase_stage1Intro::Render() {
 }
 
 void Phase_stage1Intro::Reset() {
-    if (g_current_game_phase == PHASE_STAGE1_INTRO) {
+    if (g_current_game_phase == PHASE_STAGE3_INTRO) {
         Mix_PlayMusic(intro_music, -1);
     }
     else {
