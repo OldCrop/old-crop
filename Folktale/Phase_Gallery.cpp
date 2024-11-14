@@ -323,7 +323,7 @@ void Gallery::HandleEvents()
                         game_result = 1;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE1_ENDING;
+                        g_current_game_phase = PHASE_STAGE3_ENDING;
                     }
                 }
                 //ending12
@@ -334,7 +334,7 @@ void Gallery::HandleEvents()
                         game_result = 2;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE1_ENDING;
+                        g_current_game_phase = PHASE_STAGE3_ENDING;
                     }
                 }
                 //ending13
@@ -345,7 +345,7 @@ void Gallery::HandleEvents()
                         game_result = 3;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE1_ENDING;
+                        g_current_game_phase = PHASE_STAGE3_ENDING;
                     }
                 }
                 //ending21
@@ -356,7 +356,7 @@ void Gallery::HandleEvents()
                         game_result = 2;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE2_ENDING;
+                        g_current_game_phase = PHASE_STAGE1_ENDING;
                     }
                 }
                 //ending22
@@ -367,7 +367,7 @@ void Gallery::HandleEvents()
                         game_result = 1;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE2_ENDING;
+                        g_current_game_phase = PHASE_STAGE1_ENDING;
                     }
                 }
                 //ending31
@@ -378,7 +378,7 @@ void Gallery::HandleEvents()
                         game_result = 2;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE3_ENDING;
+                        g_current_game_phase = PHASE_STAGE2_ENDING;
                     }
                 }
                 //ending32
@@ -389,7 +389,7 @@ void Gallery::HandleEvents()
                         game_result = 1;
                         Mix_PlayMusic(click_sound, 0);
                         SDL_Delay(1000);
-                        g_current_game_phase = PHASE_STAGE3_ENDING;
+                        g_current_game_phase = PHASE_STAGE2_ENDING;
                     }
                 }
             }

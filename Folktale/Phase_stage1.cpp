@@ -559,13 +559,13 @@ void Stage1::Update() {
     }
     //����� ü���� 0���Ϸ� �������� ����
     if (dogPoop->getHealth() <= 0) {
-        g_current_game_phase = PHASE_STAGE1_ENDING;
+        g_current_game_phase = PHASE_STAGE3_ENDING;
         game_result = 2;
         viewedEndings[0][1] = true;
     }
     //�ε鷹 ü���� 0���Ϸ� �������� ����
     if (dandelion->getHealth() <= 0) {
-        g_current_game_phase = PHASE_STAGE1_ENDING;
+        g_current_game_phase = PHASE_STAGE3_ENDING;
         game_result = 1;
         viewedEndings[0][0] = true;
     }
